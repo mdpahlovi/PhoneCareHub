@@ -1,0 +1,11 @@
+{
+    "files.exclude": {
+        ".next": true,
+        "node_modules": true,
+        ".gitignore": true,
+        "next-env.d.ts": true,
+        "README.md": true,
+        "tsconfig.json": true,
+        "yarn.lock": true
+    }
+}
