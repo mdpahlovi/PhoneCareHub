@@ -1,5 +1,10 @@
+import { SessionProvider } from "@/exports";
 import ThemeRegistry from "./ThemeRegistry/ThemeRegistry";
 
 export default function Provider({ children }: React.PropsWithChildren) {
-    return <ThemeRegistry>{children}</ThemeRegistry>;
+    return (
+        <SessionProvider>
+            <ThemeRegistry>{children}</ThemeRegistry>
+        </SessionProvider>
+    );
 }

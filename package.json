@@ -16,8 +16,10 @@
         "@mui/icons-material": "latest",
         "@mui/material": "latest",
         "next": "latest",
+        "next-auth": "latest",
         "react": "latest",
-        "react-dom": "latest"
+        "react-dom": "latest",
+        "zustand": "^4.4.2"
     },
     "devDependencies": {
         "@types/node": "latest",
