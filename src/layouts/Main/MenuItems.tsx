@@ -1,9 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { Fragment } from "react";
 import { Button } from "@mui/material";
 import { usePathname } from "next/navigation";
 import { styled } from "@mui/material/styles";
-import type { NavLink, NavLinkButton } from "@/types/global";
+import { NavLink } from "@/exports/component";
+import type { NavLinkButtonProps } from "@/types/global";
 
 const routes = [
     { href: "/", text: "Home" },
@@ -17,17 +20,7 @@ const routes = [
 export default function MenuItems() {
     const pathname = usePathname();
 
-    const NavLink = styled((props: NavLink) => {
-        const { selected, ...other } = props;
-        return <Link {...other} />;
-    })(({ theme, selected }) => ({
-        fontWeight: "500",
-        textDecoration: selected ? "underline" : "none",
-        color: selected ? theme.palette.text.primary : theme.palette.text.secondary,
-        "&:hover": { textDecoration: "underline" },
-    }));
-
-    const NavLinkButton = styled((props: NavLinkButton) => {
+    const NavLinkButton = styled((props: NavLinkButtonProps) => {
         return <Button component={Link} {...props} />;
     })(({ theme }) => ({
         [theme.breakpoints.down("md")]: {

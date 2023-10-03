@@ -1,3 +1,6 @@
+"use client";
+
+import Image from "next/image";
 import { IconButton } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -17,4 +20,8 @@ export function MenuButton() {
     }));
 
     return <StyledIconButton onClick={setToggleMenu}>{toggleMenu ? <CloseIcon /> : <MenuIcon />}</StyledIconButton>;
+}
+
+export function ThemedLogo() {
+    return <Image src="/mui.png" alt="logo" width={65} height={30} />;
 }

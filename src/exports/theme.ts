@@ -26,7 +26,7 @@ const theme = createTheme({
             defaultProps: { color: "primary" },
             styleOverrides: {
                 root: { borderRadius: "16px" },
-                sizeMedium: { padding: "6px" },
+                sizeMedium: { padding: "5.5px" },
                 colorPrimary: ({ theme }) => ({ border: `1px solid ${theme.palette.primary.main}` }),
             },
         },
