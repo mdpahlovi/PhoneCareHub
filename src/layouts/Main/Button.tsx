@@ -6,6 +6,9 @@ import { styled } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import useStateStore from "@/hooks/useStateStore";
+import useThemeStore from "@/hooks/useThemeStore";
+import DarkModeIcon from "@mui/icons-material/Brightness7";
+import LightModeIcon from "@mui/icons-material/Brightness4";
 
 export function MenuButton() {
     const { toggleMenu, setToggleMenu } = useStateStore();
@@ -20,6 +23,16 @@ export function MenuButton() {
     }));
 
     return <StyledIconButton onClick={setToggleMenu}>{toggleMenu ? <CloseIcon /> : <MenuIcon />}</StyledIconButton>;
+}
+
+export function ModeToggle() {
+    const { mode, setMode } = useThemeStore();
+
+    return (
+        <IconButton onClick={() => setMode(mode === "light" ? "dark" : "light")}>
+            {mode === "light" ? <LightModeIcon /> : <DarkModeIcon />}
+        </IconButton>
+    );
 }
 
 export function ThemedLogo() {
