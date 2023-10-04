@@ -1,10 +1,9 @@
 import { createElement } from "react";
-import { ThemedLogo } from "./Button";
 import convertToSlug from "@/libs/convertToSlug";
 import { StyledFooter } from "./StyledComponent";
 import { StyledLink } from "@/exports/StyledComponent";
 import { footer_links, footer_social } from "@/exports/data";
-import { Container, Stack, Typography, Divider } from "@/exports/mui";
+import { Container, Stack, Typography, Divider, Copyright, ThemedLogo } from "@/exports/mui";
 
 export default function Footer() {
     return (
@@ -31,7 +30,7 @@ export default function Footer() {
                 </Stack>
                 <Divider style={{ margin: "24px 0" }} />
                 <Stack direction={{ xs: "column", sm: "row" }} alignItems="center" justifyContent="space-between" gap={1.5}>
-                    <Typography align="center">&copy; {new Date().getFullYear()} eGroupLearn, All Rights Reserved.</Typography>
+                    <Copyright />
                     <Stack direction="row" gap={2}>
                         {footer_social.map(({ link, icon }, idx) => createElement(icon, { key: idx }))}
                     </Stack>

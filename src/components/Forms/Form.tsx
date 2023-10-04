@@ -12,9 +12,9 @@ export default function Form({ schema, children, submitHandler }: FormProps) {
 
     return (
         <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Stack gap={3}>{children}</Stack>
-            </form>
+            <Stack gap={3} component="form" onSubmit={handleSubmit(onSubmit)}>
+                {children}
+            </Stack>
         </FormProvider>
     );
 }
