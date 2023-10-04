@@ -13,13 +13,16 @@
         "@emotion/cache": "latest",
         "@emotion/react": "latest",
         "@emotion/styled": "latest",
+        "@hookform/resolvers": "latest",
         "@mui/icons-material": "latest",
         "@mui/material": "latest",
         "next": "latest",
         "next-auth": "latest",
         "react": "latest",
         "react-dom": "latest",
-        "zustand": "^4.4.2"
+        "react-hook-form": "latest",
+        "yup": "latest",
+        "zustand": "latest"
     },
     "devDependencies": {
         "@types/node": "latest",

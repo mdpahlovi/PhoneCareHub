@@ -32,9 +32,10 @@ const setTheme = (mode: PaletteMode) => {
             MuiIconButton: {
                 defaultProps: { color: "primary" },
                 styleOverrides: {
-                    root: { borderRadius: "16px" },
-                    sizeMedium: { padding: "5.5px" },
+                    root: { borderRadius: "12px" },
+                    sizeMedium: { padding: "6px" },
                     colorPrimary: {
+                        transition: "all 250ms",
                         backgroundColor: mode === "light" ? PRIMARY.lighter : PRIMARY.darker,
                         "&:hover": {
                             color: "#FFFFFF",
@@ -42,6 +43,9 @@ const setTheme = (mode: PaletteMode) => {
                         },
                     },
                 },
+            },
+            MuiTextField: {
+                defaultProps: { fullWidth: true, variant: "filled" },
             },
         },
     });
