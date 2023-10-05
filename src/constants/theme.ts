@@ -1,7 +1,8 @@
 import { Inter } from "next/font/google";
-import { createTheme } from "@mui/material/styles";
-import type { PaletteMode } from "@mui/material";
 import { PRIMARY, SECONDARY } from "./colors";
+import type { PaletteMode } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
+import { filledInputClasses } from "@mui/material/FilledInput";
 
 const inter = Inter({ weight: ["300", "400", "500", "700"], subsets: ["latin"], display: "swap" });
 
@@ -16,10 +17,7 @@ const setTheme = (mode: PaletteMode) => {
         typography: { fontFamily: inter.style.fontFamily },
         components: {
             MuiButton: {
-                defaultProps: {
-                    color: "primary",
-                    variant: "contained",
-                },
+                defaultProps: { color: "primary", variant: "contained" },
                 styleOverrides: {
                     root: {
                         boxShadow: "none",
@@ -44,9 +42,28 @@ const setTheme = (mode: PaletteMode) => {
                     },
                 },
             },
-            MuiTextField: {
-                defaultProps: { fullWidth: true, variant: "filled" },
+            MuiTextField: { defaultProps: { fullWidth: true, variant: "filled" } },
+            MuiFilledInput: {
+                styleOverrides: {
+                    root: ({ theme }) => ({
+                        overflow: "hidden",
+                        backgroundColor: "transparent",
+                        borderRadius: "12px",
+                        border: `1px solid ${theme.palette.divider}`,
+                        transition: theme.transitions.create(["border-color", "box-shadow"]),
+                        "&:hover": { backgroundColor: theme.palette.action.hover },
+                        "&:before": { display: "none" },
+                        "&:after": { display: "none" },
+                        [`&.${filledInputClasses.disabled}`]: { backgroundColor: "transparent" },
+                        [`&.${filledInputClasses.focused}`]: {
+                            backgroundColor: "transparent",
+                            borderColor: theme.palette.primary.main,
+                        },
+                        [`&.${filledInputClasses.error}`]: { borderColor: theme.palette.error.main },
+                    }),
+                },
             },
+            MuiFormLabel: { styleOverrides: { root: { marginTop: "2px" } } },
         },
     });
 };
