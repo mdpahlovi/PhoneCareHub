@@ -31,3 +31,16 @@ export interface FromInputProps {
     name: string;
     label: React.ReactNode;
 }
+
+export interface LoginFormInput {
+    email: string;
+    password: string;
+}
+
+export interface RegisterFormInput {
+    first_name: string;
+    last_name: string;
+    email: string;
+    password: string;
+    c_password: string;
+}

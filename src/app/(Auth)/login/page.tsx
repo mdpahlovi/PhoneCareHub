@@ -1,55 +1,32 @@
-"use client";
+import Link from "next/link";
+import LoginForm from "@/components/Auth/LoginForm";
+import GoogleIcon from "@mui/icons-material/Google";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import AuthButton from "@/components/Auth/AuthButton";
+import { Stack, Grid, Typography } from "@mui/material";
 
-import { Avatar, Button, TextField, FormControlLabel, Checkbox, Link, Box, Grid, Typography } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+export const metadata = { title: "Login" };
 
 export default function Login() {
     return (
         <>
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-                Sign in
-            </Typography>
-            <Box component="form" noValidate sx={{ mt: 1 }}>
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
-                    autoFocus
-                />
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                />
-                <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-                <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-                    Sign In
-                </Button>
-                <Grid container>
-                    <Grid item xs>
-                        <Link href="#" variant="body2">
-                            Forgot password?
-                        </Link>
-                    </Grid>
-                    <Grid item>
-                        <Link href="#" variant="body2">
-                            {"Don't have an account? Sign Up"}
-                        </Link>
-                    </Grid>
+            <Stack gap={1}>
+                <Typography variant="h4" fontWeight={800}>
+                    Login
+                </Typography>
+                <Typography color="text.secondary">
+                    Don&apos;t have an account? <Link href="/register">Register</Link>
+                </Typography>
+            </Stack>
+            <Grid container flexWrap={{ sm: "nowrap" }} gap={3}>
+                <Grid xs={12} sm={6} component={AuthButton} provider="google" startIcon={<GoogleIcon />} whiteSpace="nowrap">
+                    Login With Google
                 </Grid>
-            </Box>
+                <Grid xs={12} sm={6} component={AuthButton} provider="github" startIcon={<GitHubIcon />} whiteSpace="nowrap">
+                    Login With Github
+                </Grid>
+            </Grid>
+            <LoginForm />
         </>
     );
 }

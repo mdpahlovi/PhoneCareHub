@@ -12,7 +12,7 @@ export default function Form({ schema, children, submitHandler }: FormProps) {
 
     return (
         <FormProvider {...methods}>
-            <Stack gap={3} component="form" onSubmit={handleSubmit(onSubmit)}>
+            <Stack width="100%" gap={3} component="form" onSubmit={handleSubmit(onSubmit)}>
                 {children}
             </Stack>
         </FormProvider>
