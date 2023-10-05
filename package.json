@@ -6,21 +6,19 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint",
-        "post-update": "yarn upgrade --latest"
+        "lint": "next lint"
     },
     "dependencies": {
         "@emotion/cache": "latest",
         "@emotion/react": "latest",
         "@emotion/styled": "latest",
-        "@hookform/resolvers": "latest",
         "@mui/icons-material": "latest",
         "@mui/material": "latest",
+        "formik": "^2.4.5",
         "next": "latest",
         "next-auth": "latest",
         "react": "latest",
         "react-dom": "latest",
-        "react-hook-form": "latest",
         "yup": "latest",
         "zustand": "latest"
     },

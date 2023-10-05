@@ -6,13 +6,15 @@ import FormInput from "@/components/Forms/FormInput";
 import type { RegisterFormInput } from "@/types/global";
 import registerSchema from "@/validations/registerSchema";
 
+const initialValues = { first_name: "", last_name: "", email: "", password: "", c_password: "" };
+
 export default function RegisterForm() {
     const onSubmit = (data: RegisterFormInput) => {
         console.log(data);
     };
 
     return (
-        <Form submitHandler={onSubmit} schema={registerSchema}>
+        <Form initialValues={initialValues} validationSchema={registerSchema} onSubmit={onSubmit}>
             <Grid container flexWrap={{ sm: "nowrap" }} gap={3}>
                 <Grid xs={12} sm={6} component={FormInput} name="first_name" label="First Name" />
                 <Grid xs={12} sm={6} component={FormInput} name="last_name" label="Last Name" />

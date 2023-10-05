@@ -1,7 +1,7 @@
 import type { LinkProps } from "next/link";
+import type { FormikHelpers } from "formik";
 import type { ButtonProps } from "@mui/material";
 import type { HTMLInputTypeAttribute } from "react";
-import type { SubmitHandler } from "react-hook-form";
 import type { EmotionCache, Options } from "@emotion/cache";
 
 export type NextEmotionCacheProviderProps = {
@@ -21,10 +21,10 @@ export interface StyledLinkButtonProps extends ButtonProps {
 }
 
 export type FormProps = {
-    children?: React.ReactNode;
-    submitHandler: SubmitHandler<any>;
-    schema?: any;
-};
+    initialValues: any;
+    validationSchema: any;
+    onSubmit: (values: any, formikHelpers: FormikHelpers<any>) => void | Promise<any>;
+} & React.PropsWithChildren;
 
 export interface FromInputProps {
     type?: HTMLInputTypeAttribute;

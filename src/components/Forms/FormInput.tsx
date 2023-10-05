@@ -1,48 +1,39 @@
 "use client";
 
 import { useState } from "react";
+import { useField } from "formik";
 import type { FromInputProps } from "@/types/global";
-import { TextField, InputAdornment } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { Controller, useFormContext } from "react-hook-form";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { InputAdornment, TextField, type TextFieldProps } from "@mui/material";
 
-export default function FormInput({ type = "text", name, label }: FromInputProps) {
-    const { control } = useFormContext();
+const FormInput = ({ type = "text", name, label }: FromInputProps) => {
+    const [field, meta] = useField(name);
     const [show, setShow] = useState(false);
 
-    return (
-        <Controller
-            name={name}
-            control={control}
-            render={({ field: { onChange, value }, fieldState: { error } }) =>
-                type !== "password" ? (
-                    <TextField
-                        type={type}
-                        label={label}
-                        value={value}
-                        error={!!error}
-                        onChange={onChange}
-                        helperText={error ? error.message : null}
-                    />
-                ) : (
-                    <TextField
-                        type={show ? "text" : "password"}
-                        label={label}
-                        value={value}
-                        error={!!error}
-                        onChange={onChange}
-                        helperText={error ? error.message : null}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end" onClick={() => setShow(!show)}>
-                                    {show ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                )
-            }
-        />
-    );
-}
+    const configTextfield: TextFieldProps = { type, label, ...field };
+
+    if (meta && meta.touched && meta.error) {
+        configTextfield.error = true;
+        configTextfield.helperText = meta.error;
+    }
+
+    if (type === "password") {
+        return (
+            <TextField
+                {...configTextfield}
+                InputProps={{
+                    endAdornment: (
+                        <InputAdornment position="end" onClick={() => setShow(!show)}>
+                            {show ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                        </InputAdornment>
+                    ),
+                }}
+            />
+        );
+    } else {
+        return <TextField {...configTextfield} />;
+    }
+};
+
+export default FormInput;

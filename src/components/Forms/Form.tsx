@@ -1,20 +1,17 @@
 "use client";
 
 import { Stack } from "@mui/material";
-import type { FormProps } from "@/types/global";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProps } from "@/types/global";
+import { Formik, Form as FormikForm } from "formik";
 
-export default function Form({ schema, children, submitHandler }: FormProps) {
-    const methods = useForm({ resolver: yupResolver(schema) });
-    const { handleSubmit } = methods;
-    const onSubmit = (data: any) => submitHandler(data);
+export default function Form({ children, onSubmit, initialValues, validationSchema }: FormProps) {
+    const configFormik = { onSubmit, initialValues, validationSchema, validateOnBlur: true, validateOnMount: true, validateOnChange: true };
 
     return (
-        <FormProvider {...methods}>
-            <Stack width="100%" gap={3} component="form" onSubmit={handleSubmit(onSubmit)}>
+        <Formik {...configFormik}>
+            <Stack width="100%" gap={3} component={FormikForm}>
                 {children}
             </Stack>
-        </FormProvider>
+        </Formik>
     );
 }
