@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
 import useStateStore from "@/hooks/useStateStore";
 import { Container, Stack, Typography, Divider, Collapse } from "@mui/material";
@@ -10,7 +11,11 @@ export function MobileMenu({ children }: React.PropsWithChildren) {
 }
 
 export function ThemedLogo() {
-    return <Image src="/mui.png" alt="logo" width={65} height={30} />;
+    return (
+        <Link href="/">
+            <Image src="/mui.png" alt="logo" width={65} height={30} />
+        </Link>
+    );
 }
 
 export function Copyright(props: any) {
