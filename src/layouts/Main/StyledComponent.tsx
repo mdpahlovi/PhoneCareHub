@@ -1,7 +1,9 @@
 "use client";
 
-import { styled } from "@mui/material/styles";
 import { Container, Box } from "@mui/material";
+import ThemedLogo from "@/components/Common/ThemedLogo";
+import { styled, useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 export const StyledNav = styled("nav")(({ theme }) => ({
     borderBottom: "1px solid",
@@ -47,3 +49,13 @@ export const StyledFooter = styled("footer")(({ theme }) => ({
     padding: theme.spacing(3),
     borderColor: theme.palette.divider,
 }));
+
+export function FooterLogo() {
+    const theme = useTheme();
+    const lessThanSm = useMediaQuery(theme.breakpoints.up("sm"));
+
+    let props = {};
+    if (lessThanSm) props = { position: "top", orientation: "vertical" };
+
+    return <ThemedLogo {...props} />;
+}
