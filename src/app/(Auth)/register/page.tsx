@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, Link } from "@/exports/mui";
 import RegisterForm from "@/components/Auth/RegisterForm";
 
 export const metadata = { title: "Register" };

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/exports/mui";
 import Form from "@/components/Forms/Form";
 import loginSchema from "@/validations/loginSchema";
 import FormInput from "@/components/Forms/FormInput";

@@ -1,9 +1,8 @@
-import Link from "next/link";
 import LoginForm from "@/components/Auth/LoginForm";
 import GoogleIcon from "@mui/icons-material/Google";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import AuthButton from "@/components/Auth/AuthButton";
-import { Stack, Grid, Typography } from "@mui/material";
+import { Stack, Grid, Typography, Link } from "@/exports/mui";
 
 export const metadata = { title: "Login" };
 

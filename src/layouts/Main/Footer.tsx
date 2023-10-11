@@ -1,16 +1,17 @@
 import { createElement } from "react";
 import convertToSlug from "@/libs/convertToSlug";
 import { StyledFooter } from "./StyledComponent";
-import { StyledLink } from "@/exports/StyledComponent";
+import ThemedLogo from "@/components/Common/ThemedLogo";
 import { footer_links, footer_social } from "@/exports/data";
-import { Container, Stack, Typography, Divider, Copyright, ThemedLogo } from "@/exports/mui";
+import { StyledLink } from "@/components/Common/StyledComponent";
+import { Container, Stack, Typography, Divider, Copyright } from "@/exports/mui";
 
 export default function Footer() {
     return (
         <StyledFooter>
             <Container>
                 <Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-between" gap={3}>
-                    <ThemedLogo />
+                    <ThemedLogo position="top" orientation="vertical" />
                     <Stack direction="row" justifyContent="space-between" flexWrap="wrap" gap={6}>
                         {footer_links.map(({ title, items }) => (
                             <Stack key={title} gap={0.5}>

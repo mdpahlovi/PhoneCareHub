@@ -2,7 +2,7 @@
 
 import { Fragment } from "react";
 import { usePathname } from "next/navigation";
-import { StyledLink, StyledLinkButton } from "@/exports/StyledComponent";
+import { StyledLink, StyledLinkButton } from "@/components/Common/StyledComponent";
 
 const routes = [
     { href: "/", text: "Home" },

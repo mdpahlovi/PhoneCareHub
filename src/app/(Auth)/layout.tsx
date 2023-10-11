@@ -1,7 +1,8 @@
 import Image from "next/image";
+import { Copyright } from "@/exports/mui";
 import { Divider, Grid } from "@mui/material";
-import { Copyright, ThemedLogo } from "@/exports/mui";
 import LayoutTitle from "@/components/Auth/LayoutTitle";
+import ThemedLogo from "@/components/Common/ThemedLogo";
 
 export default function AuthLayout({ children }: React.PropsWithChildren) {
     const gap = { xs: 3, sm: 8, md: 4, lg: 6 };

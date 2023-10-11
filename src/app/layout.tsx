@@ -2,8 +2,8 @@ import Provider from "@/layouts/Provider";
 
 export const metadata = {
     title: {
-        default: "mui",
-        template: "%s - mui",
+        default: "PhoneCareHub",
+        template: "%s - PhoneCareHub",
     },
 };
 

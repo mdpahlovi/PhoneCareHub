@@ -5,6 +5,7 @@ import { Button, Grid } from "@mui/material";
 import FormInput from "@/components/Forms/FormInput";
 import type { RegisterFormInput } from "@/types/global";
 import registerSchema from "@/validations/registerSchema";
+import FormSubmit from "../Forms/FormSubmit";
 
 const initialValues = { first_name: "", last_name: "", email: "", password: "", c_password: "" };
 
@@ -22,9 +23,7 @@ export default function RegisterForm() {
             <FormInput type="email" name="email" label="Your Email" />
             <FormInput type="password" name="password" label="Your Password" />
             <FormInput type="password" name="c_password" label="Confirm Password" />
-            <Button type="submit" size="large">
-                Register
-            </Button>
+            <FormSubmit>Register</FormSubmit>
         </Form>
     );
 }

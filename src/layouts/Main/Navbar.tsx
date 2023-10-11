@@ -1,6 +1,7 @@
 import MenuItems from "./MenuItems";
+import { MobileMenu } from "@/exports/mui";
 import { MenuButton, ModeToggle } from "./Button";
-import { MobileMenu, ThemedLogo } from "@/exports/mui";
+import ThemedLogo from "@/components/Common/ThemedLogo";
 import { CollapseMenuItems, StyledMenuBox, StyledMenuItems, StyledNav, StyledNavbar } from "./StyledComponent";
 
 export default function Navbar() {

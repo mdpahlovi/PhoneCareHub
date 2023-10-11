@@ -12,13 +12,13 @@ export const StyledNavbar = styled(Container)(({ theme }) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: theme.spacing(2),
 }));
 
 export const StyledMenuBox = styled(Box)(({ theme }) => ({
     display: "flex",
     alignItems: "center",
     gap: theme.spacing(3),
+    padding: theme.spacing(2),
 }));
 
 export const StyledMenuItems = styled(Box)(({ theme }) => ({
