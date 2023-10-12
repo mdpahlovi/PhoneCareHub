@@ -1,17 +1,36 @@
 "use client";
 
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { Grid } from "@mui/material";
 import Form from "@/components/Forms/Form";
-import { Button, Grid } from "@mui/material";
+import { useRouter } from "next/navigation";
+import { baseAxios } from "@/exports/axios";
+import FormSubmit from "../Forms/FormSubmit";
 import FormInput from "@/components/Forms/FormInput";
 import type { RegisterFormInput } from "@/types/global";
 import registerSchema from "@/validations/registerSchema";
-import FormSubmit from "../Forms/FormSubmit";
 
 const initialValues = { first_name: "", last_name: "", email: "", password: "", c_password: "" };
 
 export default function RegisterForm() {
+    const { push } = useRouter();
+    const [loading, setLoading] = useState(false);
+
     const onSubmit = (data: RegisterFormInput) => {
-        console.log(data);
+        setLoading(true);
+        const payload = { name: `${data.first_name} ${data.last_name}`, email: data.email, password: data.password };
+
+        baseAxios
+            .post("/auth/signup", payload)
+            .then((res) => {
+                setLoading(false);
+                if (res.data) push("/login");
+            })
+            .catch((error) => {
+                setLoading(false);
+                toast.error(error.message);
+            });
     };
 
     return (
@@ -23,7 +42,7 @@ export default function RegisterForm() {
             <FormInput type="email" name="email" label="Your Email" />
             <FormInput type="password" name="password" label="Your Password" />
             <FormInput type="password" name="c_password" label="Confirm Password" />
-            <FormSubmit>Register</FormSubmit>
+            <FormSubmit loading={loading}>Register</FormSubmit>
         </Form>
     );
 }

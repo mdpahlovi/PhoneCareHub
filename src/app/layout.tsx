@@ -1,4 +1,5 @@
 import Provider from "@/layouts/Provider";
+import ToastProvider from "@/layouts/ToastProvider";
 
 export const metadata = {
     title: {
@@ -11,7 +12,10 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
     return (
         <html lang="en">
             <Provider>
-                <body>{children}</body>
+                <body>
+                    {children}
+                    <ToastProvider />
+                </body>
             </Provider>
         </html>
     );

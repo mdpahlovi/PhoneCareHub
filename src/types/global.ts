@@ -44,3 +44,25 @@ export interface RegisterFormInput {
     password: string;
     c_password: string;
 }
+
+export interface Meta {
+    page: number;
+    size: number;
+    total: number;
+}
+
+export type GenericResponse = {
+    data: any;
+    meta?: Meta;
+};
+
+export type GenericErrorMessage = {
+    path: string | number;
+    message: string;
+};
+
+export type GenericErrorResponse = {
+    statusCode: number;
+    message: string;
+    errorMessages: GenericErrorMessage[];
+};

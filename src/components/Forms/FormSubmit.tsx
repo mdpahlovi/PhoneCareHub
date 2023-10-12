@@ -1,15 +1,15 @@
 "use client";
 
-import { Button } from "@mui/material";
 import { useFormikContext } from "formik";
+import { Button, ButtonProps, CircularProgress } from "@mui/material";
 
-export default function FormSubmit({ children, loading }: { loading?: string } & React.PropsWithChildren) {
+export default function FormSubmit({ children, loading }: { loading?: boolean } & React.PropsWithChildren) {
     const { submitForm, errors } = useFormikContext();
     const hasError = Object.keys(errors).length !== 0;
 
-    return (
-        <Button size="large" onClick={submitForm} disabled={hasError}>
-            {loading ? "Loading" : children}
-        </Button>
-    );
+    let props: ButtonProps = { size: "large", onClick: submitForm };
+    if (hasError) props = { ...props, disabled: hasError };
+    if (loading) props = { ...props, disabled: loading, startIcon: <CircularProgress size={24} /> };
+
+    return <Button {...props}>{loading ? "Loading..." : children}</Button>;
 }
