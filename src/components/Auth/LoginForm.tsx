@@ -1,7 +1,11 @@
 "use client";
 
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { Link } from "@/exports/mui";
+import { signIn } from "next-auth/react";
 import Form from "@/components/Forms/Form";
+import { useRouter } from "next/navigation";
 import loginSchema from "@/validations/loginSchema";
 import FormInput from "@/components/Forms/FormInput";
 import type { LoginFormInput } from "@/types/global";
@@ -10,8 +14,16 @@ import FormSubmit from "@/components/Forms/FormSubmit";
 const initialValues = { email: "", password: "" };
 
 export default function LoginForm() {
-    const onSubmit = (data: LoginFormInput) => {
-        console.log(data);
+    const { push } = useRouter();
+    const [loading, setLoading] = useState(false);
+
+    const onSubmit = ({ email, password }: LoginFormInput) => {
+        setLoading(true);
+        signIn("credentials", { redirect: false, email, password, callbackUrl: "/" }).then((res) => {
+            setLoading(false);
+            if (res?.error) toast.error(res?.error);
+            else push(res?.url!);
+        });
     };
 
     return (
@@ -21,7 +33,7 @@ export default function LoginForm() {
             <Link href="/forget-password" style={{ marginLeft: "auto" }}>
                 Forget Password
             </Link>
-            <FormSubmit>Login</FormSubmit>
+            <FormSubmit loading={loading}>Login</FormSubmit>
         </Form>
     );
 }

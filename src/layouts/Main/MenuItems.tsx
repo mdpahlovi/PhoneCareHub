@@ -1,19 +1,12 @@
 "use client";
 
 import { Fragment } from "react";
+import useNavLinks from "@/hooks/useNavLinks";
 import { usePathname } from "next/navigation";
 import { StyledLink, StyledLinkButton } from "@/components/Common/StyledComponent";
 
-const routes = [
-    { href: "/", text: "Home" },
-    { href: "/features", text: "Features" },
-    { href: "/services", text: "Services" },
-    { href: "/listed", text: "Listed" },
-    { href: "/contact", text: "Contact" },
-    { href: "/login", text: "Login / Register", button: true },
-];
-
 export default function MenuItems() {
+    const routes = useNavLinks();
     const pathname = usePathname();
 
     return routes.map(({ href, text, button }, idx) => (
