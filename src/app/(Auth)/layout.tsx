@@ -15,7 +15,7 @@ export default function AuthLayout({ children }: React.PropsWithChildren) {
                 <Image src="/auth-illustration.png" alt="" width={480} height={360} />
             </Grid>
             <Divider orientation="vertical" flexItem sx={{ display: mdHidden }} />
-            <Grid xs={12} md={7} lg={6} marginY={4} display="flex" direction="column" gap={4}>
+            <Grid xs={12} md={7} lg={6} my={4} display="flex" direction="column" gap={4}>
                 <ThemedLogo />
                 {children}
                 <Copyright />

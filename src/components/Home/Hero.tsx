@@ -16,7 +16,7 @@ export default function Hero() {
                     <Button variant="outlined">Book Now</Button>
                 </Stack>
             </Stack>
-            <Box display={{ xs: "none", md: "block" }} marginLeft="auto">
+            <Box display={{ xs: "none", md: "block" }} ml="auto">
                 <Image src="/images/hero.svg" alt="" style={{ width: "100%" }} width={500} height={500} />
             </Box>
         </StyledHero>
