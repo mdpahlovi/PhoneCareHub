@@ -1,13 +1,13 @@
 import { createElement } from "react";
+import { FooterLogo } from "./Client";
 import convertToSlug from "@/libs/convertToSlug";
 import { footer_links, footer_social } from "@/exports/data";
-import { FooterLogo, StyledFooter } from "./StyledComponent";
-import { StyledLink } from "@/components/Common/StyledComponent";
-import { Container, Stack, Typography, Divider, Copyright } from "@/exports/mui";
+import { StyledLink } from "@/components/Common/StyledLink";
+import { Container, Stack, Typography, Divider, Copyright, Box } from "@/exports/mui";
 
 export default function Footer() {
     return (
-        <StyledFooter>
+        <Box borderTop={1} borderColor="divider" py={3}>
             <Container>
                 <Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-between" gap={3}>
                     <FooterLogo />
@@ -36,6 +36,6 @@ export default function Footer() {
                     </Stack>
                 </Stack>
             </Container>
-        </StyledFooter>
+        </Box>
     );
 }

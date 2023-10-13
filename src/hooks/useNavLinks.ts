@@ -2,15 +2,18 @@ import { useSession } from "next-auth/react";
 
 type RouteType = { href: string; text: string; button?: boolean };
 
-export default function useNavLinks() {
+export default function useNavLinks(): RouteType[] {
     const { data } = useSession();
+    const defaultRoutes = [home, about, services];
 
-    let routes: RouteType[] = [home, about, services];
+    let routes: RouteType[] = [];
     if (data?.user) {
-        return [...routes, dashboard];
+        routes = [dashboard];
     } else {
-        return [...routes, login];
+        routes = [login];
     }
+
+    return [...defaultRoutes, ...routes];
 }
 
 // All Navbar Routes

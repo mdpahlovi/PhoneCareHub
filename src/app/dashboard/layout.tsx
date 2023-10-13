@@ -1,6 +1,6 @@
 import { Box, Divider } from "@mui/material";
 import SideBar from "@/layouts/Dashboard/SideBar";
-import { ModeToggle } from "@/layouts/Main/Button";
+import { ModeToggle } from "@/layouts/Main/Client";
 import ThemedLogo from "@/components/Common/ThemedLogo";
 import { PermanentSideBar, TemporarySideBar, SideBarButton } from "@/layouts/Dashboard/Client";
 

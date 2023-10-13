@@ -54,7 +54,7 @@ export function ProfileCard() {
     const { data } = useSession();
 
     return (
-        <Box display="flex" alignItems="center" m={3} border={1} borderColor="divider" borderRadius={3}>
+        <Box mt={1.25} mb={3} display="flex" alignItems="center" border={1} borderColor="divider" borderRadius={3}>
             <Image src={data?.user?.image!} alt="" width={60} height={60} style={{ padding: "8px", borderRadius: "24px" }} />
             <Typography fontWeight={600}>{data?.user?.name}</Typography>
         </Box>

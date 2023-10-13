@@ -1,36 +1,56 @@
 "use client";
 
+import Link from "next/link";
+import { createElement } from "react";
 import { ProfileCard } from "./Client";
-import MailIcon from "@mui/icons-material/Mail";
-import InboxIcon from "@mui/icons-material/Inbox";
-import { Divider, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack } from "@mui/material";
+import { signOut } from "next-auth/react";
+import { usePathname } from "next/navigation";
+import { styled, alpha } from "@mui/material/styles";
+import useDashboardLinks from "@/hooks/useDashboardLinks";
+import { Button, ButtonProps, Divider, Stack, Box } from "@mui/material";
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import Person2RoundedIcon from "@mui/icons-material/Person2Rounded";
+
+type StyledLinkButtonProps = { href?: string; selected?: boolean; children?: React.ReactNode } & ButtonProps;
 
 export default function SideBar() {
-    return (
-        <Stack minHeight="100vh" display="flex" direction="column" justifyContent="space-between" pt={3}>
-            <div>
-                <ProfileCard />
-                {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </div>
+    const pathname = usePathname();
+    const routes = useDashboardLinks();
 
-            <div>
-                <Divider />
-                {["All mail", "Trash", "Spam"].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
+    const StyledLinkButton = styled((props: StyledLinkButtonProps) => {
+        const { selected, ...others } = props;
+        return <Button size="large" variant="text" color="inherit" component={Link} {...others} fullWidth />;
+    })(({ theme, selected }) => ({
+        justifyContent: "start",
+        backgroundColor: selected ? alpha(theme.palette.primary.main, 0.25) : "",
+        "&:hover": { backgroundColor: selected ? alpha(theme.palette.primary.main, 0.5) : "" },
+    }));
+
+    const StyledButton = styled((props: { children?: React.ReactNode } & ButtonProps) => {
+        return <Button size="large" variant="outlined" {...props} fullWidth />;
+    })(({ theme }) => ({
+        justifyContent: "start",
+    }));
+
+    return (
+        <Stack minHeight="100vh" display="flex" direction="column" justifyContent="space-between" px={2} py={3}>
+            <Box>
+                <ProfileCard />
+                {routes.map(({ href, text, icon }, idx) => (
+                    <StyledLinkButton key={idx} href={href} selected={href === pathname} startIcon={createElement(icon)}>
+                        {text}
+                    </StyledLinkButton>
                 ))}
-            </div>
+            </Box>
+            <Box>
+                <Divider sx={{ mb: 3 }} />
+                <StyledButton component={Link} href="/dashboard/profile" startIcon={<Person2RoundedIcon />} sx={{ mb: 1 }}>
+                    Profile
+                </StyledButton>
+                <StyledButton color="error" startIcon={<LogoutRoundedIcon />} onClick={() => signOut()}>
+                    Sign Out
+                </StyledButton>
+            </Box>
         </Stack>
     );
 }

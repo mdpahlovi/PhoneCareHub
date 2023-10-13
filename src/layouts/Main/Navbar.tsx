@@ -1,27 +1,27 @@
 import MenuItems from "./MenuItems";
 import { MobileMenu } from "@/exports/mui";
-import { MenuButton, ModeToggle } from "./Button";
+import { MenuButton, ModeToggle } from "./Client";
+import { Box, Stack, Container } from "@mui/material";
 import ThemedLogo from "@/components/Common/ThemedLogo";
-import { CollapseMenuItems, StyledMenuBox, StyledMenuItems, StyledNav, StyledNavbar } from "./StyledComponent";
 
 export default function Navbar() {
     return (
-        <StyledNav>
-            <StyledNavbar>
+        <Box borderBottom={1} borderColor="divider">
+            <Container sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                 <ThemedLogo />
-                <StyledMenuBox>
-                    <StyledMenuItems>
+                <Stack direction="row" alignItems="center" gap={3} p={2}>
+                    <Stack display={{ xs: "none", md: "flex" }} direction="row" alignItems="center" justifyContent="space-between" gap={3}>
                         <MenuItems />
-                    </StyledMenuItems>
+                    </Stack>
                     <ModeToggle />
                     <MenuButton />
-                </StyledMenuBox>
-            </StyledNavbar>
+                </Stack>
+            </Container>
             <MobileMenu>
-                <CollapseMenuItems>
+                <Stack display={{ md: "none" }} gap={1} px={3} pb={3}>
                     <MenuItems />
-                </CollapseMenuItems>
+                </Stack>
             </MobileMenu>
-        </StyledNav>
+        </Box>
     );
 }

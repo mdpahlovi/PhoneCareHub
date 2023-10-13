@@ -1,10 +1,11 @@
 "use client";
 
-import Link from "next/link";
+import Link, { LinkProps } from "next/link";
 import { styled } from "@mui/material/styles";
 import { usePathname } from "next/navigation";
-import { StyledLinkProps } from "@/types/global";
 import { Breadcrumbs, Container, Typography } from "@mui/material";
+
+type StyledLinkProps = { selected?: boolean; children?: React.ReactNode } & LinkProps;
 
 export const StyledBackground = styled("div")(({ theme }) => ({
     padding: "80px 0",

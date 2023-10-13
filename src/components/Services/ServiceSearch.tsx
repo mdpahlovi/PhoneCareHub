@@ -6,7 +6,7 @@ import useCreateQuery from "@/hooks/useCreateQuery";
 import useDeleteQuery from "@/hooks/useDeleteQuery";
 import { InputBase, IconButton, Box } from "@mui/material";
 
-export default function ServiceSearch({ search }: { search: string | null }) {
+export default function ServiceSearch({ search }: { search: string }) {
     const createQuery = useCreateQuery();
     const deleteQuery = useDeleteQuery();
     const inputField = useRef<HTMLInputElement | null>(null);
