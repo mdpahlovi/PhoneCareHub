@@ -7,22 +7,19 @@ import { StyledLinkProps } from "@/types/global";
 import { Breadcrumbs, Container, Typography } from "@mui/material";
 
 export const StyledBackground = styled("div")(({ theme }) => ({
+    padding: "80px 0",
+    position: "relative",
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundImage: "url(/images/banner.jpg)",
-    position: "relative",
-    paddingTop: "100px",
-    paddingBottom: "100px",
     "&::before": {
+        inset: "0",
         content: '""',
         width: "100%",
         height: "100%",
-        backgroundColor: "rgba(0, 0, 0, 0.7)",
         position: "absolute",
-        left: "0",
-        top: "0",
-        zIndex: "0",
+        backgroundColor: "rgba(0, 0, 0, 0.7)",
     },
 }));
 
