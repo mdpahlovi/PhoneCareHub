@@ -30,7 +30,7 @@ export default function LoginForm() {
         <Form initialValues={initialValues} validationSchema={loginSchema} onSubmit={onSubmit}>
             <FormInput type="email" name="email" label="Your Email" />
             <FormInput type="password" name="password" label="Your Password" />
-            <Link href="/forget-password" style={{ marginLeft: "auto" }}>
+            <Link href="/forget-password" sx={{ ml: "auto" }}>
                 Forget Password
             </Link>
             <FormSubmit loading={loading}>Login</FormSubmit>

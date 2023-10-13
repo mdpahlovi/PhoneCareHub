@@ -1,7 +1,6 @@
 import Image from "next/image";
-
-import { Box, Button, Stack, Typography } from "@mui/material";
 import { StyledHero } from "./Styled";
+import { Box, Button, Stack, Typography } from "@mui/material";
 
 export default function Hero() {
     return (

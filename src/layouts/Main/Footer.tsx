@@ -28,7 +28,7 @@ export default function Footer() {
                         ))}
                     </Stack>
                 </Stack>
-                <Divider style={{ margin: "24px 0" }} />
+                <Divider sx={{ m: "24px 0" }} />
                 <Stack direction={{ xs: "column", sm: "row" }} alignItems="center" justifyContent="space-between" gap={1.5}>
                     <Copyright />
                     <Stack direction="row" gap={2}>
