@@ -21,3 +21,10 @@ export async function getallusers(token: string | undefined, page: number, size:
 
     return res.json();
 }
+
+export async function getprofile(token: string | undefined): Promise<IApiResponse<Admin | User>> {
+    const res = await fetch(`${BASE_URL}/profile`, { headers: { authorization: token! } });
+    if (!res.ok) throw new Error("Failed To Fetch Data");
+
+    return res.json();
+}

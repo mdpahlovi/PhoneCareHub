@@ -7,10 +7,10 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { InputAdornment, TextField, type TextFieldProps } from "@mui/material";
 
-const FormInput = ({ type = "text", name, label }: FromInputProps) => {
+const FormInput = ({ type = "text", name, label, disabled }: FromInputProps) => {
     const [field, meta] = useField(name);
     const [show, setShow] = useState(false);
-    let configTextfield: TextFieldProps = { type, label, ...field };
+    let configTextfield: TextFieldProps = { type, label, disabled, ...field };
 
     if (meta && meta.touched && meta.error) {
         configTextfield.error = true;
@@ -32,7 +32,7 @@ const FormInput = ({ type = "text", name, label }: FromInputProps) => {
             />
         );
     } else {
-        return <TextField {...configTextfield} />;
+        return <TextField {...configTextfield} sx={{ "& .MuiInputBase-input.Mui-disabled": { WebkitTextFillColor: "#000000" } }} />;
     }
 };
 

@@ -11,7 +11,7 @@ export type NextEmotionCacheProviderProps = {
 
 export type FormProps = {
     initialValues: any;
-    validationSchema: any;
+    validationSchema?: any;
     onSubmit: (values: any, formikHelpers: FormikHelpers<any>) => void | Promise<any>;
 } & React.PropsWithChildren;
 
@@ -19,6 +19,20 @@ export interface FromInputProps {
     type?: HTMLInputTypeAttribute;
     name: string;
     label: React.ReactNode;
+    disabled?: boolean;
+}
+
+export interface FromSelectProps {
+    items: string[];
+    name: string;
+    label: React.ReactNode;
+    disabled?: boolean;
+}
+
+export interface FromDatePickProps {
+    name: string;
+    label: React.ReactNode;
+    disabled?: boolean;
 }
 
 export interface LoginFormInput {
