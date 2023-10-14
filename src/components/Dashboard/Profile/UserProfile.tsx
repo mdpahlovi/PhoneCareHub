@@ -1,25 +1,53 @@
 "use client";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { User } from "@/types/response";
+import { format, parseISO } from "date-fns";
 import Form from "@/components/Forms/Form";
 import { Box, Stack, Button } from "@mui/material";
 import FormInput from "@/components/Forms/FormInput";
+import useAxiosRequest from "@/hooks/useAxiosRequest";
 import FormSubmit from "@/components/Forms/FormSubmit";
-import FormProfileUpload from "@/components/Forms/FormProfileUpload";
 import FormSelect from "@/components/Forms/FormSelect";
 import FormDatePack from "@/components/Forms/FormDatePack";
+import FormProfileUpload from "@/components/Forms/FormProfileUpload";
+import { useSession } from "next-auth/react";
 
-type UserProfileValue = { name: string; image: string; email: string; phone: string; address: string; birthdate: string; gender: string };
+type UserProfileValue = {
+    name: string;
+    image: string;
+    email: string;
+    phone: string;
+    address: string;
+    birthdate: Date | string;
+    gender: string;
+};
 
 export default function UserProfile({ profile }: { profile: User }) {
+    const axios = useAxiosRequest();
+    const { update } = useSession();
     const [editing, setEditing] = useState(false);
     const [loading, setLoading] = useState(false);
     const { name, image, email, phone, address, birthdate, gender } = profile;
-    const initialValues = { name, image, email, phone, address, birthdate, gender };
+    const initialValues = { name, email, phone, address, birthdate: format(parseISO(birthdate!), "y-M-d"), gender };
 
     const onSubmit = (data: UserProfileValue) => {
-        console.log(data);
+        setLoading(true);
+        if (data.birthdate) data.birthdate = new Date(data.birthdate);
+        axios
+            .patch("/profile", data)
+            .then((res: any) => {
+                if (res.success) {
+                    setLoading(false);
+                    update({ name: res.data.name, image: res.data.image });
+                    toast.success(res.message);
+                }
+            })
+            .catch((error) => {
+                setLoading(false);
+                toast.error(error.message);
+            });
     };
 
     return (
@@ -28,7 +56,7 @@ export default function UserProfile({ profile }: { profile: User }) {
                 {editing ? "Cancel" : "Edit"}
             </Button>
             <Form initialValues={initialValues} onSubmit={onSubmit}>
-                <FormProfileUpload image={image} disabled={!editing} />
+                <FormProfileUpload image={image} name="image" disabled={!editing} />
                 <FormInput name="name" label="Name" disabled={!editing} />
                 <Stack direction={{ sm: "row" }} gap={3}>
                     <FormInput type="email" name="email" label="Email" disabled={true} />

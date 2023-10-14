@@ -2,6 +2,7 @@
 
 import { useField } from "formik";
 import type { FromDatePickProps } from "@/types/global";
+import { textAreaDisableColor } from "@/exports/constant";
 import { TextField, type TextFieldProps } from "@mui/material";
 
 export default function FormSelect({ name, label, disabled }: FromDatePickProps) {
@@ -13,5 +14,5 @@ export default function FormSelect({ name, label, disabled }: FromDatePickProps)
         configTextfield.helperText = meta.error;
     }
 
-    return <TextField type="date" {...configTextfield} />;
+    return <TextField type="date" {...configTextfield} sx={{ ...textAreaDisableColor }} />;
 }

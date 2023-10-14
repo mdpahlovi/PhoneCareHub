@@ -51,7 +51,7 @@ export function PermanentSideBar({ children }: React.PropsWithChildren) {
 }
 
 export function ProfileCard() {
-    const { data } = useSession();
+    const { data, update } = useSession();
 
     return (
         <Box mt={1.25} mb={3} display="flex" alignItems="center" {...borderRounded}>

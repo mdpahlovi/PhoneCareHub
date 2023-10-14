@@ -65,14 +65,19 @@ export const authOptions: NextAuthOptions = {
                 return true;
             }
         },
-        async jwt({ token, user }) {
+        async jwt({ token, user, trigger, session }) {
             if (user) token.role = user.role;
+            if (trigger === "update") {
+                if (session.name) token.name = session.name;
+                if (session.image) token.picture = session.image;
+            }
             return token;
         },
         async session({ session, token }) {
             const secret = process.env.NEXTAUTH_SECRET;
             session.token = await encode({ token, secret });
             if (session?.user) session.user.role = token.role;
+
             return session;
         },
     },

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useField } from "formik";
 import type { FromInputProps } from "@/types/global";
+import { textAreaDisableColor } from "@/exports/constant";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { InputAdornment, TextField, type TextFieldProps } from "@mui/material";
@@ -32,7 +33,7 @@ const FormInput = ({ type = "text", name, label, disabled }: FromInputProps) => 
             />
         );
     } else {
-        return <TextField {...configTextfield} sx={{ "& .MuiInputBase-input.Mui-disabled": { WebkitTextFillColor: "#000000" } }} />;
+        return <TextField {...configTextfield} sx={{ ...textAreaDisableColor }} />;
     }
 };
 
