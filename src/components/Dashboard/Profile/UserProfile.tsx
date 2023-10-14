@@ -29,7 +29,8 @@ export default function UserProfile({ profile }: { profile: User }) {
     const [editing, setEditing] = useState(false);
     const { updateProfile, loading } = useUpdateProfile();
     const { name, image, email, phone, address, birthdate, gender } = profile;
-    const initialValues = { name, email, phone, address, birthdate: format(parseISO(birthdate!), "y-M-d"), gender };
+    const birthdateformat = birthdate ? format(parseISO(birthdate!), "y-M-d") : "";
+    const initialValues = { name, email, phone, address, birthdate: birthdateformat, gender };
 
     const onSubmit = (data: UserProfileValue) => {
         if (data.birthdate) data.birthdate = new Date(data.birthdate);
