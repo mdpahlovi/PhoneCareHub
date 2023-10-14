@@ -13,7 +13,7 @@ type SearchParams = { searchParams: { page: string | null; search: string | null
 export default async function Services({ searchParams }: SearchParams) {
     const search = searchParams?.search ? searchParams.search : "";
     const page = Number(searchParams?.page ? searchParams.page : 1);
-    const services = await getallservices(search, page);
+    const services = await getallservices(6, page, search);
 
     return (
         <>

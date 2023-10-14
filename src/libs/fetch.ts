@@ -1,8 +1,8 @@
 import { BASE_URL } from "@/exports/axios";
 import { Admin, IApiResponse, Service, User } from "@/types/response";
 
-export async function getallservices(search: string, page: number): Promise<IApiResponse<Service[]>> {
-    const res = await fetch(`${BASE_URL}/service?page=${page}&search=${search}`);
+export async function getallservices(size: number, page: number, search: string): Promise<IApiResponse<Service[]>> {
+    const res = await fetch(`${BASE_URL}/service?size=${size}&page=${page + 1}&search=${search}`);
     if (!res.ok) throw new Error("Failed To Fetch Data");
 
     return res.json();

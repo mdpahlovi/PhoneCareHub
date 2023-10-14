@@ -11,27 +11,26 @@ type SearchParams = { searchParams: { page: string | null; size: string | null }
 
 export const metadata = { title: "All Admin" };
 
+const columns: readonly Column[] = [
+    { label: "Image" },
+    { label: "Name", minWidth: 120 },
+    { label: "Email", minWidth: 240 },
+    { label: "Phone", minWidth: 170, align: "right" },
+    { label: "Created At", minWidth: 170, align: "right" },
+];
+
 export default async function ManageAdmins({ searchParams }: SearchParams) {
     const session = await getServerSession(authOptions);
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const admins = await getalladmins(session?.token, page, size);
 
-    const rows = admins.data?.map(({ id, role, image, ...row }) => ({ image, ...row }));
-    const columns: readonly Column[] = [
-        { label: "Image" },
-        { label: "Name", minWidth: 120 },
-        { label: "Email", minWidth: 240 },
-        { label: "Phone", minWidth: 170, align: "right" },
-        { label: "Created At", minWidth: 170, align: "right" },
-    ];
-
     return (
         <>
-            <Banner>All Admins</Banner>
+            <Banner>All Admin</Banner>
             <Table columns={columns} total={admins?.meta?.total!} page={page} size={size}>
                 <TableBody>
-                    {rows?.map(({ image, name, email, phone, createdAt }, idx) => (
+                    {admins?.data?.map(({ image, name, email, phone, createdAt }, idx) => (
                         <TableRow key={idx} hover>
                             <TableCell>
                                 <Avatar src={image} alt="" />

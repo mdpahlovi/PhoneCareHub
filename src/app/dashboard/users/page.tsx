@@ -9,7 +9,17 @@ import { TableRow, TableCell, TableBody, Avatar } from "@mui/material";
 
 type SearchParams = { searchParams: { page: string | null; size: string | null } };
 
-export const metadata = { title: "All Admin" };
+export const metadata = { title: "All User" };
+
+const columns: readonly Column[] = [
+    { label: "Image" },
+    { label: "Name", minWidth: 120 },
+    { label: "Email", minWidth: 240 },
+    { label: "BirthDate", minWidth: 120 },
+    { label: "Gender", minWidth: 120, align: "right" },
+    { label: "Phone", minWidth: 170, align: "right" },
+    { label: "Created At", minWidth: 170, align: "right" },
+];
 
 export default async function ManageUsers({ searchParams }: SearchParams) {
     const session = await getServerSession(authOptions);
@@ -17,32 +27,21 @@ export default async function ManageUsers({ searchParams }: SearchParams) {
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const users = await getallusers(session?.token, page, size);
 
-    const rows = users.data?.map(({ id, role, image, ...row }) => ({ image, ...row }));
-    const columns: readonly Column[] = [
-        { label: "Image" },
-        { label: "Name", minWidth: 120 },
-        { label: "Email", minWidth: 240 },
-        { label: "BirthDate", minWidth: 120 },
-        { label: "Gender", minWidth: 120 },
-        { label: "Phone", minWidth: 170, align: "right" },
-        { label: "Created At", minWidth: 170, align: "right" },
-    ];
-
     return (
         <>
-            <Banner>All Users</Banner>
+            <Banner>All User</Banner>
             <Table columns={columns} total={users?.meta?.total!} page={page} size={size}>
                 <TableBody>
-                    {rows?.map(({ image, name, email, phone, birthdate, gender, createdAt }, idx) => (
+                    {users?.data?.map(({ image, name, email, phone, birthdate, gender, createdAt }, idx) => (
                         <TableRow key={idx} hover>
                             <TableCell>
                                 <Avatar src={image} alt="" />
                             </TableCell>
                             <TableCell>{name}</TableCell>
                             <TableCell>{email}</TableCell>
-                            <TableCell align="right">{phone}</TableCell>
-                            <TableCell align="right">{birthdate && format(parseISO(birthdate), "PPP")}</TableCell>
+                            <TableCell>{birthdate && format(parseISO(birthdate), "PPP")}</TableCell>
                             <TableCell align="right">{gender}</TableCell>
+                            <TableCell align="right">{phone}</TableCell>
                             <TableCell align="right">{format(parseISO(createdAt), "PPPp")}</TableCell>
                         </TableRow>
                     ))}

@@ -1,38 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import toast from "react-hot-toast";
 import { User } from "@/types/response";
-import { format, parseISO } from "date-fns";
 import Form from "@/components/Forms/Form";
 import { Box, Stack, Button } from "@mui/material";
 import FormInput from "@/components/Forms/FormInput";
-import useAxiosRequest from "@/hooks/useAxiosRequest";
 import FormSubmit from "@/components/Forms/FormSubmit";
 import FormSelect from "@/components/Forms/FormSelect";
-import FormDatePack from "@/components/Forms/FormDatePack";
-import FormProfileUpload from "@/components/Forms/FormProfileUpload";
-import { useSession } from "next-auth/react";
 import useUpdateProfile from "@/hooks/useUpdateProfile";
-
-type UserProfileValue = {
-    name: string;
-    image: string;
-    email: string;
-    phone: string;
-    address: string;
-    birthdate: Date | string;
-    gender: string;
-};
+import FormDatePack from "@/components/Forms/FormDatePack";
+import { getUserInitialValues } from "@/libs/initialValues";
+import FormProfileUpload from "@/components/Forms/FormProfileUpload";
 
 export default function UserProfile({ profile }: { profile: User }) {
     const [editing, setEditing] = useState(false);
     const { updateProfile, loading } = useUpdateProfile();
-    const { name, image, email, phone, address, birthdate, gender } = profile;
-    const birthdateformat = birthdate ? format(parseISO(birthdate!), "y-M-d") : "";
-    const initialValues = { name, email, phone, address, birthdate: birthdateformat, gender };
 
-    const onSubmit = (data: UserProfileValue) => {
+    const onSubmit = (data: any) => {
         if (data.birthdate) data.birthdate = new Date(data.birthdate);
         updateProfile(data);
     };
@@ -42,8 +26,8 @@ export default function UserProfile({ profile }: { profile: User }) {
             <Button sx={{ width: "max-content", position: "absolute", right: 0 }} onClick={() => setEditing(!editing)}>
                 {editing ? "Cancel" : "Edit"}
             </Button>
-            <Form initialValues={initialValues} onSubmit={onSubmit}>
-                <FormProfileUpload image={image} name="image" disabled={!editing} />
+            <Form initialValues={getUserInitialValues(profile)} onSubmit={onSubmit}>
+                <FormProfileUpload image={profile.image} name="image" disabled={!editing} />
                 <FormInput name="name" label="Name" disabled={!editing} />
                 <Stack direction={{ sm: "row" }} gap={3}>
                     <FormInput type="email" name="email" label="Email" disabled={true} />
