@@ -13,6 +13,7 @@ import FormSelect from "@/components/Forms/FormSelect";
 import FormDatePack from "@/components/Forms/FormDatePack";
 import FormProfileUpload from "@/components/Forms/FormProfileUpload";
 import { useSession } from "next-auth/react";
+import useUpdateProfile from "@/hooks/useUpdateProfile";
 
 type UserProfileValue = {
     name: string;
@@ -25,29 +26,14 @@ type UserProfileValue = {
 };
 
 export default function UserProfile({ profile }: { profile: User }) {
-    const axios = useAxiosRequest();
-    const { update } = useSession();
     const [editing, setEditing] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const { updateProfile, loading } = useUpdateProfile();
     const { name, image, email, phone, address, birthdate, gender } = profile;
     const initialValues = { name, email, phone, address, birthdate: format(parseISO(birthdate!), "y-M-d"), gender };
 
     const onSubmit = (data: UserProfileValue) => {
-        setLoading(true);
         if (data.birthdate) data.birthdate = new Date(data.birthdate);
-        axios
-            .patch("/profile", data)
-            .then((res: any) => {
-                if (res.success) {
-                    setLoading(false);
-                    update({ name: res.data.name, image: res.data.image });
-                    toast.success(res.message);
-                }
-            })
-            .catch((error) => {
-                setLoading(false);
-                toast.error(error.message);
-            });
+        updateProfile(data);
     };
 
     return (

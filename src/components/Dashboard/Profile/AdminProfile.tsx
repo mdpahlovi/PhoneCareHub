@@ -10,40 +10,23 @@ import FormSubmit from "@/components/Forms/FormSubmit";
 import FormProfileUpload from "@/components/Forms/FormProfileUpload";
 import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
+import useUpdateProfile from "@/hooks/useUpdateProfile";
 
 type AdminProfileValue = { name: string; email: string; phone: string };
 
 export default function AdminProfile({ profile }: { profile: Admin }) {
-    const axios = useAxiosRequest();
-    const { update } = useSession();
     const [editing, setEditing] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const { updateProfile, loading } = useUpdateProfile();
+
     const { name, email, phone, image } = profile;
     const initialValues = { name, email, phone };
-
-    const onSubmit = (data: AdminProfileValue) => {
-        setLoading(true);
-        axios
-            .patch("/profile", data)
-            .then((res: any) => {
-                if (res.success) {
-                    setLoading(false);
-                    update({ name: res.data.name, image: res.data.image });
-                    toast.success(res.message);
-                }
-            })
-            .catch((error) => {
-                setLoading(false);
-                toast.error(error.message);
-            });
-    };
 
     return (
         <Box position="relative" my={3}>
             <Button sx={{ width: "max-content", position: "absolute", right: 0 }} onClick={() => setEditing(!editing)}>
                 {editing ? "Cancel" : "Edit"}
             </Button>
-            <Form initialValues={initialValues} onSubmit={onSubmit}>
+            <Form initialValues={initialValues} onSubmit={updateProfile}>
                 <FormProfileUpload image={image} name="image" disabled={!editing} />
                 <FormInput name="name" label="Name" disabled={!editing} />
                 <Stack direction={{ sm: "row" }} gap={3}>
