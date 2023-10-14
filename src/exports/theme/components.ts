@@ -46,6 +46,10 @@ const components = (mode: PaletteMode): Components<Omit<Theme, "components">> =>
             },
         },
         MuiFormLabel: { styleOverrides: { root: { marginTop: "2px" } } },
+        MuiAvatar: {
+            defaultProps: { variant: "rounded" },
+            styleOverrides: { rounded: { borderRadius: 16 } },
+        },
     };
 };
 

@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { useSession } from "next-auth/react";
 import MenuIcon from "@mui/icons-material/Menu";
 import useStateStore from "@/hooks/useStateStore";
-import { Box, Drawer, IconButton, Typography } from "@mui/material";
+import { borderRounded } from "@/exports/constant";
+import { Box, Drawer, IconButton, Typography, Avatar } from "@mui/material";
 
 export function SideBarButton() {
     const { setToggleSideBar } = useStateStore();
@@ -54,8 +54,8 @@ export function ProfileCard() {
     const { data } = useSession();
 
     return (
-        <Box mt={1.25} mb={3} display="flex" alignItems="center" border={1} borderColor="divider" borderRadius={3}>
-            <Image src={data?.user?.image!} alt="" width={60} height={60} style={{ padding: "8px", borderRadius: "24px" }} />
+        <Box mt={1.25} mb={3} display="flex" alignItems="center" {...borderRounded}>
+            <Avatar src={data?.user?.image!} alt="" sx={{ m: 1, width: 48, height: 48 }} />
             <Typography fontWeight={600}>{data?.user?.name}</Typography>
         </Box>
     );

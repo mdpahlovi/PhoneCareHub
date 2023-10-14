@@ -23,7 +23,7 @@ export default function DashboardLayout({ children }: React.PropsWithChildren) {
                     <ModeToggle />
                 </Box>
                 <Divider />
-                {children}
+                <Box m={3}>{children}</Box>
             </Box>
         </Box>
     );

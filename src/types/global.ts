@@ -2,6 +2,7 @@ import type { LinkProps } from "next/link";
 import type { FormikHelpers } from "formik";
 import type { HTMLInputTypeAttribute } from "react";
 import type { EmotionCache, Options } from "@emotion/cache";
+import { type } from "os";
 
 export type NextEmotionCacheProviderProps = {
     options: Omit<Options, "insertionPoint">;
@@ -54,3 +55,7 @@ export type GenericErrorResponse = {
     message: string;
     errorMessages: GenericErrorMessage[];
 };
+
+export type Column = { label: string; minWidth?: number; align?: "inherit" | "left" | "center" | "right" | "justify" };
+
+export type TableProps = { columns: readonly Column[]; total: number; page: number; size: number };

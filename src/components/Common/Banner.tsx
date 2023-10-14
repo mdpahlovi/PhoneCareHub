@@ -1,11 +1,10 @@
 "use client";
 
-import Link, { LinkProps } from "next/link";
+import Breadcrumbs from "./Breadcrumbs";
 import { styled } from "@mui/material/styles";
 import { usePathname } from "next/navigation";
-import { Breadcrumbs, Container, Typography } from "@mui/material";
-
-type StyledLinkProps = { selected?: boolean; children?: React.ReactNode } & LinkProps;
+import { borderRounded } from "@/exports/constant";
+import { Stack, Container, Typography } from "@mui/material";
 
 export const StyledBackground = styled("div")(({ theme }) => ({
     padding: "80px 0",
@@ -24,36 +23,35 @@ export const StyledBackground = styled("div")(({ theme }) => ({
     },
 }));
 
-export const StyledBreadcrumbLink = styled((props: StyledLinkProps) => {
-    const { selected, ...other } = props;
-    return <Link {...other} />;
-})(({ theme, selected }) => ({
-    textDecoration: selected ? "underline" : "none",
-    color: selected ? theme.palette.secondary.main : "white",
-    "&:hover": { textDecoration: "underline" },
-}));
-
 export default function Banner({ children }: React.PropsWithChildren) {
-    const paths = usePathname().split("/");
+    const pathname = usePathname().split("/");
 
-    return (
-        <StyledBackground>
-            <Container sx={{ position: "relative", zIndex: 10 }}>
-                <Typography variant="h3" fontWeight={600} color="white">
+    if (pathname.includes("dashboard")) {
+        return (
+            <Stack
+                p={3}
+                direction={{ sm: "row" }}
+                alignItems="center"
+                justifyContent="space-between"
+                gap={{ xs: 1, sm: 3 }}
+                {...borderRounded}
+            >
+                <Typography variant="h5" fontWeight={600}>
                     {children}
                 </Typography>
-                <Breadcrumbs separator="›" sx={{ color: "white", mt: 1 }}>
-                    {paths.map((path, idx) => {
-                        const href = path ? `/${path}` : "/";
-                        const selected = paths.length - 1 === idx;
-                        return (
-                            <StyledBreadcrumbLink key={idx} href={href} selected={selected}>
-                                {path ? path.charAt(0).toUpperCase() + path.slice(1) : "Home"}
-                            </StyledBreadcrumbLink>
-                        );
-                    })}
-                </Breadcrumbs>
-            </Container>
-        </StyledBackground>
-    );
+                <Breadcrumbs />
+            </Stack>
+        );
+    } else {
+        return (
+            <StyledBackground>
+                <Container sx={{ position: "relative", zIndex: 10 }}>
+                    <Typography variant="h3" fontWeight={600} color="white">
+                        {children}
+                    </Typography>
+                    <Breadcrumbs white />
+                </Container>
+            </StyledBackground>
+        );
+    }
 }
