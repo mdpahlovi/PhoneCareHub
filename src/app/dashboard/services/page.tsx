@@ -13,7 +13,7 @@ const columns: readonly Column[] = [
     { label: "Image" },
     { label: "Name" },
     { label: "Description" },
-    { label: "Estimate time", minWidth: 128, align: "right" },
+    { label: "Estimate Time", minWidth: 128, align: "right" },
     { label: "Edit", align: "right" },
     { label: "Delete", align: "right" },
 ];

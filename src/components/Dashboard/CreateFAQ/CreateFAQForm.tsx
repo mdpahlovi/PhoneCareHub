@@ -14,7 +14,7 @@ export default function CreateFAQForm() {
 
     return (
         <Form initialValues={initialValues} validationSchema={createFAQSchema} onSubmit={handleCreate}>
-            <Stack mt={3} direction={{ sm: "row" }} gap={3}>
+            <Stack direction={{ sm: "row" }} gap={3}>
                 <FormInput name="question" label="Question" />
                 <FormInput name="answer" label="Answer" />
             </Stack>

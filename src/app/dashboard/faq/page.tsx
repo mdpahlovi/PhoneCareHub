@@ -1,17 +1,16 @@
+import { Column } from "@/types/global";
+import { getallfaqs } from "@/libs/fetch";
+import Table from "@/components/Table/Table";
 import Banner from "@/components/Common/Banner";
 import DeleteButton from "@/components/Common/DeleteButton";
-import EditButton from "@/components/Common/EditButton";
 import CreateFAQForm from "@/components/Dashboard/CreateFAQ/CreateFAQForm";
-import Table from "@/components/Table/Table";
-import { getallfaqs } from "@/libs/fetch";
-import { Column } from "@/types/global";
+
 import { TableBody, TableCell, TableRow } from "@mui/material";
 
 const columns: readonly Column[] = [
     { label: "Serial" },
     { label: "Question" },
-    { label: "Answer" },
-    { label: "Edit", align: "right" },
+    { label: "Answer", align: "right" },
     { label: "Delete", align: "right" },
 ];
 
@@ -22,18 +21,15 @@ export default async function FAQs() {
 
     return (
         <>
-            <Banner>FAQs</Banner>
+            <Banner>All FAQ</Banner>
             <CreateFAQForm />
             <Table columns={columns}>
                 <TableBody>
-                    {faqs?.data?.map(({ id, serial, question, answer, createdAt }, idx) => (
+                    {faqs?.data?.map(({ id, serial, question, answer }, idx) => (
                         <TableRow key={idx} hover>
                             <TableCell>{serial}</TableCell>
                             <TableCell>{question}</TableCell>
-                            <TableCell>{answer}</TableCell>
-                            <TableCell align="right">
-                                <EditButton />
-                            </TableCell>
+                            <TableCell align="right">{answer}</TableCell>
                             <TableCell align="right">
                                 <DeleteButton id={id} path="faq" />
                             </TableCell>

@@ -13,7 +13,7 @@ export default function EditServiceForm({ service }: { service: Service }) {
     const { handleUpdate, loading } = useUpdateData("service", service.id);
 
     return (
-        <Form initialValues={getServiceInitialValues} onSubmit={handleUpdate}>
+        <Form initialValues={getServiceInitialValues(service)} onSubmit={handleUpdate}>
             <FormImageUpload name="image" image={service.image} />
             <Stack direction={{ sm: "row" }} gap={3}>
                 <FormInput name="name" label="Service Name" />
