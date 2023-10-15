@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import useThemeStore from "@/hooks/useThemeStore";
+import useThemeStore from "@/hooks/zustand/useThemeStore";
 
 export default function ThemedLogo({ position, orientation }: { position?: "top"; orientation?: "vertical" }) {
     const { mode } = useThemeStore();

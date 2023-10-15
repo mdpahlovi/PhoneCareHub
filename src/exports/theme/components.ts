@@ -22,6 +22,7 @@ const components = (mode: PaletteMode): Components<Omit<Theme, "components">> =>
                 root: { borderRadius: "12px" },
                 sizeMedium: { padding: "6px" },
                 colorPrimary: ({ theme }) => CustomStyle.PrimaryButton(theme),
+                colorError: ({ theme }) => CustomStyle.ErrorButton(theme),
             },
         },
         MuiTextField: { defaultProps: { fullWidth: true, variant: "filled" } },

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Fragment } from "react";
 import { Button } from "@mui/material";
-import useNavLinks from "@/hooks/useNavLinks";
+import useNavLinks from "@/hooks/links/useNavLinks";
 import { usePathname } from "next/navigation";
 import { StyledLink } from "@/components/Common/StyledLink";
 

@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import MenuIcon from "@mui/icons-material/Menu";
-import useStateStore from "@/hooks/useStateStore";
+import useStateStore from "@/hooks/zustand/useStateStore";
 import { borderRounded } from "@/exports/constant";
 import { Box, Drawer, IconButton, Typography, Avatar } from "@mui/material";
 

@@ -4,11 +4,11 @@ import { useEffect } from "react";
 import { baseAxios } from "@/exports/axios";
 import { useSession } from "next-auth/react";
 
-const useAxiosRequest = () => {
+export default function useAxiosRequest() {
     const { data } = useSession();
 
     useEffect(() => {
-        const requestIntercept = baseAxios.interceptors.request.use(config => {
+        const requestIntercept = baseAxios.interceptors.request.use((config) => {
             if (!config.headers["authorization"]) config.headers["authorization"] = data?.token;
             return config;
         });
@@ -17,6 +17,4 @@ const useAxiosRequest = () => {
     }, [data]);
 
     return baseAxios;
-};
-
-export default useAxiosRequest;
+}

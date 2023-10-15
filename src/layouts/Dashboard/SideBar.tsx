@@ -6,7 +6,7 @@ import { ProfileCard } from "./Client";
 import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { styled, alpha } from "@mui/material/styles";
-import useDashboardLinks from "@/hooks/useDashboardLinks";
+import useDashboardLinks from "@/hooks/links/useDashboardLinks";
 import { Button, ButtonProps, Divider, Stack, Box } from "@mui/material";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import Person2RoundedIcon from "@mui/icons-material/Person2Rounded";

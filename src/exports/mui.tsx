@@ -1,6 +1,6 @@
 "use client";
 
-import useStateStore from "@/hooks/useStateStore";
+import useStateStore from "@/hooks/zustand/useStateStore";
 import NextLink, { type LinkProps as NextLinkProps } from "next/link";
 import { Container, Stack, Typography, Divider, Collapse, Grid, Link as MuiLink, LinkProps, Box } from "@mui/material";
 

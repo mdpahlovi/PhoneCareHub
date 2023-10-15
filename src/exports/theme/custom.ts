@@ -12,4 +12,16 @@ const PrimaryButton = (theme: Theme) => {
     };
 };
 
-export const CustomStyle = { PrimaryButton };
+const ErrorButton = (theme: Theme) => {
+    return {
+        transition: "all 300ms",
+        color: theme.palette.error.contrastText,
+        backgroundColor: theme.palette.error.main,
+        "&:hover": {
+            boxShadow: theme.shadows[2],
+            backgroundColor: theme.palette.error.dark,
+        },
+    };
+};
+
+export const CustomStyle = { PrimaryButton, ErrorButton };

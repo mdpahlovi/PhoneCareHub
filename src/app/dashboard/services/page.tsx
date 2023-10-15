@@ -1,9 +1,10 @@
-import { Column } from "@/types/global";
-import { getallservices } from "@/libs/fetch";
-import Table from "@/components/Table/Table";
-import { Avatar, TableBody, TableCell, TableRow, Button, Stack } from "@mui/material";
 import Link from "next/link";
+import { Column } from "@/types/global";
+import Table from "@/components/Table/Table";
+import { getallservices } from "@/libs/fetch";
 import Banner from "@/components/Common/Banner";
+import DeleteButton from "@/components/Common/DeleteButton";
+import { Avatar, TableBody, TableCell, TableRow, Button, Stack } from "@mui/material";
 
 type SearchParams = { searchParams: { page: string | null; size: string | null } };
 
@@ -33,7 +34,7 @@ export default async function ManageService({ searchParams }: SearchParams) {
             </Stack>
             <Table columns={columns} total={services?.meta?.total!} size={size} page={page}>
                 <TableBody>
-                    {services?.data?.map(({ image, name, estimatetime, description }, idx) => (
+                    {services?.data?.map(({ id, image, name, estimatetime, description }, idx) => (
                         <TableRow key={idx} hover>
                             <TableCell>
                                 <Avatar src={image} alt="" />
@@ -42,7 +43,9 @@ export default async function ManageService({ searchParams }: SearchParams) {
                             <TableCell>{description}</TableCell>
                             <TableCell align="right">{estimatetime}</TableCell>
                             <TableCell align="right">{}</TableCell>
-                            <TableCell align="right">{}</TableCell>
+                            <TableCell align="right">
+                                <DeleteButton id={id} path="service" />
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
