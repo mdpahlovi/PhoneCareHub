@@ -6,6 +6,7 @@ import Banner from "@/components/Common/Banner";
 import Table from "@/components/Table/Table";
 import DeleteButton from "@/components/Common/DeleteButton";
 import { format, parseISO } from "date-fns";
+import EditButton from "@/components/Common/EditButton";
 
 type SearchParams = { searchParams: { page: string | null; size: string | null } };
 
@@ -14,7 +15,7 @@ const columns: readonly Column[] = [
     { label: "Title" },
     { label: "Content" },
     { label: "Source" },
-    { label: "Published Date", align: "right" },
+    { label: "Published Date", minWidth: 136, align: "right" },
     { label: "Edit", align: "right" },
     { label: "Delete", align: "right" },
 ];
@@ -30,7 +31,7 @@ export default async function Blogs({ searchParams }: SearchParams) {
         <>
             <Banner>All Blog</Banner>
             <Stack alignItems="end">
-                <Button component={Link} href="/dashboard/create_blog" sx={{ mt: 3 }}>
+                <Button component={Link} href="/dashboard/create_blog">
                     Create Blog
                 </Button>
             </Stack>
@@ -45,7 +46,9 @@ export default async function Blogs({ searchParams }: SearchParams) {
                             <TableCell>{content}</TableCell>
                             <TableCell>{source}</TableCell>
                             <TableCell align="right">{format(parseISO(publishedDate), "PPP")}</TableCell>
-                            <TableCell align="right">{}</TableCell>
+                            <TableCell align="right">
+                                <EditButton href={`/edit-blog/${id}`} />
+                            </TableCell>
                             <TableCell align="right">
                                 <DeleteButton id={id} path="blog" />
                             </TableCell>

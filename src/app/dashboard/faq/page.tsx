@@ -1,5 +1,6 @@
 import Banner from "@/components/Common/Banner";
 import DeleteButton from "@/components/Common/DeleteButton";
+import EditButton from "@/components/Common/EditButton";
 import CreateFAQForm from "@/components/Dashboard/CreateFAQ/CreateFAQForm";
 import Table from "@/components/Table/Table";
 import { getallfaqs } from "@/libs/fetch";
@@ -30,7 +31,9 @@ export default async function FAQs() {
                             <TableCell>{serial}</TableCell>
                             <TableCell>{question}</TableCell>
                             <TableCell>{answer}</TableCell>
-                            <TableCell align="right">{}</TableCell>
+                            <TableCell align="right">
+                                <EditButton />
+                            </TableCell>
                             <TableCell align="right">
                                 <DeleteButton id={id} path="faq" />
                             </TableCell>

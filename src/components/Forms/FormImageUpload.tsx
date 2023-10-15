@@ -7,9 +7,9 @@ import { Stack, Typography, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { borderRounded } from "@/exports/constant";
 
-export default function FormImageUpload({ name }: { name: string }) {
+export default function FormImageUpload({ image, name }: { image?: string; name: string }) {
     const { setFieldValue } = useFormikContext();
-    const [preview, setPreview] = useState<string | ArrayBuffer | null>();
+    const [preview, setPreview] = useState<string | ArrayBuffer | null | undefined>(image);
 
     return (
         <Stack direction="row" alignItems="center" gap={3}>

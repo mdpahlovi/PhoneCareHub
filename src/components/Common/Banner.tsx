@@ -30,6 +30,7 @@ export default function Banner({ children }: React.PropsWithChildren) {
         return (
             <Stack
                 p={3}
+                mb={3}
                 direction={{ sm: "row" }}
                 alignItems="center"
                 justifyContent="space-between"

@@ -5,6 +5,7 @@ import { getallservices } from "@/libs/fetch";
 import Banner from "@/components/Common/Banner";
 import DeleteButton from "@/components/Common/DeleteButton";
 import { Avatar, TableBody, TableCell, TableRow, Button, Stack } from "@mui/material";
+import EditButton from "@/components/Common/EditButton";
 
 type SearchParams = { searchParams: { page: string | null; size: string | null } };
 
@@ -12,7 +13,7 @@ const columns: readonly Column[] = [
     { label: "Image" },
     { label: "Name" },
     { label: "Description" },
-    { label: "Estimate time", align: "right" },
+    { label: "Estimate time", minWidth: 128, align: "right" },
     { label: "Edit", align: "right" },
     { label: "Delete", align: "right" },
 ];
@@ -28,7 +29,7 @@ export default async function ManageService({ searchParams }: SearchParams) {
         <>
             <Banner>All Service</Banner>
             <Stack alignItems="end">
-                <Button component={Link} href="/dashboard/create-service" sx={{ mt: 3 }}>
+                <Button component={Link} href="/dashboard/create-service">
                     Create Service
                 </Button>
             </Stack>
@@ -42,7 +43,9 @@ export default async function ManageService({ searchParams }: SearchParams) {
                             <TableCell>{name}</TableCell>
                             <TableCell>{description}</TableCell>
                             <TableCell align="right">{estimatetime}</TableCell>
-                            <TableCell align="right">{}</TableCell>
+                            <TableCell align="right">
+                                <EditButton href={`/edit-service/${id}`} />
+                            </TableCell>
                             <TableCell align="right">
                                 <DeleteButton id={id} path="service" />
                             </TableCell>

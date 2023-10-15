@@ -3,15 +3,15 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import useAxiosRequest from "./useAxiosRequest";
 
-export default function useCreateData(path: string, noRedirect?: boolean) {
+export default function useUpdateData(path: string, id: string, noRedirect?: boolean) {
     const axios = useAxiosRequest();
     const { push, refresh } = useRouter();
     const [loading, setLoading] = useState(false);
 
-    const handleCreate = (data: any) => {
+    const handleUpdate = (data: any) => {
         setLoading(true);
         axios
-            .post(`/${path}/create`, data)
+            .patch(`/${path}/${id}`, data)
             .then((res: any) => {
                 refresh();
                 setLoading(false);
@@ -24,5 +24,5 @@ export default function useCreateData(path: string, noRedirect?: boolean) {
             });
     };
 
-    return { handleCreate, loading };
+    return { handleUpdate, loading };
 }
