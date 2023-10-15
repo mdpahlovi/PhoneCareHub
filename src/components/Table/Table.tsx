@@ -19,7 +19,7 @@ export default function Table({ children, columns, total, page, size }: TablePro
                     {children}
                 </MuiTable>
             </TableContainer>
-            <TablePagination total={total} page={page} size={size} />
+            {total && page && size && <TablePagination total={total} page={page} size={size} />}
         </Paper>
     );
 }

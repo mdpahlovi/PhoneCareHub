@@ -23,6 +23,26 @@ export type Service = {
     updatedAt: string;
 };
 
+export type Blog = {
+    id: string;
+    image: string;
+    title: string;
+    content: string;
+    source: number;
+    publishedDate: string;
+    createdAt: string;
+    updatedAt: string;
+};
+
+export type FAQ = {
+    id: string;
+    serial: number;
+    question: string;
+    answer: string;
+    createdAt: string;
+    updatedAt: string;
+};
+
 export type Admin = {
     id: string;
     name: string;

@@ -1,11 +1,28 @@
 import { BASE_URL } from "@/exports/axios";
-import { Admin, IApiResponse, Service, User } from "@/types/response";
+import { Admin, Blog, FAQ, IApiResponse, Service, User } from "@/types/response";
 
 export async function getallservices(size: number, page: number, search: string): Promise<IApiResponse<Service[]>> {
     const res = await fetch(`${BASE_URL}/service?size=${size}&page=${page}&search=${search}`, {
         cache: "no-cache",
         next: { tags: ["services"] },
     });
+    if (!res.ok) throw new Error("Failed To Fetch Data");
+
+    return res.json();
+}
+
+export async function getallblogs(size: number, page: number, search: string): Promise<IApiResponse<Blog[]>> {
+    const res = await fetch(`${BASE_URL}/blog?size=${size}&page=${page}&search=${search}`, {
+        cache: "no-cache",
+        next: { tags: ["blogs"] },
+    });
+    if (!res.ok) throw new Error("Failed To Fetch Data");
+
+    return res.json();
+}
+
+export async function getallfaqs(): Promise<IApiResponse<FAQ[]>> {
+    const res = await fetch(`${BASE_URL}/faq`, { cache: "no-cache", next: { tags: ["blogs"] } });
     if (!res.ok) throw new Error("Failed To Fetch Data");
 
     return res.json();

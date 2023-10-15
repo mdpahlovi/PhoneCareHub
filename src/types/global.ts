@@ -72,4 +72,4 @@ export type GenericErrorResponse = {
 
 export type Column = { label: string; minWidth?: number; align?: "inherit" | "left" | "center" | "right" | "justify" };
 
-export type TableProps = { columns: readonly Column[]; total: number; page: number; size: number };
+export type TableProps = { columns: readonly Column[]; total?: number; page?: number; size?: number };
