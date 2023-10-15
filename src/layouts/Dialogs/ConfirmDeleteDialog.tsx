@@ -15,8 +15,8 @@ export default function ConfirmDeleteDialog() {
         axios
             .delete(`/${path}/${id}`)
             .then((res: any) => {
-                toast.success(res.message);
                 onClose();
+                toast.success(res.message);
             })
             .catch((error) => toast.error(error.message));
     };

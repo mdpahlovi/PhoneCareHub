@@ -22,7 +22,7 @@ export const metadata = { title: "All Service" };
 export default async function ManageService({ searchParams }: SearchParams) {
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
-    const services = await getallservices(size, page, "");
+    const services = await getallservices(size, page + 1, "");
 
     return (
         <>
