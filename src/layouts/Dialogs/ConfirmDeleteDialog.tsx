@@ -6,9 +6,11 @@ import useAxiosRequest from "@/hooks/useAxiosRequest";
 import DeleteSweepRounded from "@mui/icons-material/DeleteSweepRounded";
 import useConfirmDeleteStore from "@/hooks/zustand/useConfirmDeleteStore";
 import { Dialog, DialogContent, DialogActions, Button, Box, IconButton, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 export default function ConfirmDeleteDialog() {
     const axios = useAxiosRequest();
+    const { refresh } = useRouter();
     const { id, path, open, onClose } = useConfirmDeleteStore();
 
     const onConfirm = () => {
@@ -16,6 +18,7 @@ export default function ConfirmDeleteDialog() {
             .delete(`/${path}/${id}`)
             .then((res: any) => {
                 onClose();
+                refresh();
                 toast.success(res.message);
             })
             .catch((error) => toast.error(error.message));

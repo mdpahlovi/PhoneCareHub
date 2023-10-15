@@ -4,6 +4,7 @@ import { format, parseISO } from "date-fns";
 import { getServerSession } from "next-auth";
 import Table from "@/components/Table/Table";
 import Banner from "@/components/Common/Banner";
+import DeleteButton from "@/components/Common/DeleteButton";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { TableRow, TableCell, TableBody, Avatar } from "@mui/material";
 
@@ -13,12 +14,13 @@ export const metadata = { title: "All User" };
 
 const columns: readonly Column[] = [
     { label: "Image" },
-    { label: "Name", minWidth: 120 },
-    { label: "Email", minWidth: 240 },
-    { label: "BirthDate", minWidth: 120 },
-    { label: "Gender", minWidth: 120, align: "right" },
-    { label: "Phone", minWidth: 170, align: "right" },
-    { label: "Created At", minWidth: 170, align: "right" },
+    { label: "Name" },
+    { label: "Email" },
+    { label: "BirthDate" },
+    { label: "Gender", align: "right" },
+    { label: "Phone", align: "right" },
+    { label: "Created At", align: "right" },
+    { label: "Delete", align: "right" },
 ];
 
 export default async function ManageUsers({ searchParams }: SearchParams) {
@@ -32,7 +34,7 @@ export default async function ManageUsers({ searchParams }: SearchParams) {
             <Banner>All User</Banner>
             <Table columns={columns} total={users?.meta?.total!} page={page} size={size}>
                 <TableBody>
-                    {users?.data?.map(({ image, name, email, phone, birthdate, gender, createdAt }, idx) => (
+                    {users?.data?.map(({ id, image, name, email, phone, birthdate, gender, createdAt }, idx) => (
                         <TableRow key={idx} hover>
                             <TableCell>
                                 <Avatar src={image} alt="" />
@@ -43,6 +45,9 @@ export default async function ManageUsers({ searchParams }: SearchParams) {
                             <TableCell align="right">{gender}</TableCell>
                             <TableCell align="right">{phone}</TableCell>
                             <TableCell align="right">{format(parseISO(createdAt), "PPPp")}</TableCell>
+                            <TableCell align="right">
+                                <DeleteButton id={id} path="user" />
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
