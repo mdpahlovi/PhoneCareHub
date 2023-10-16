@@ -65,3 +65,16 @@ export type User = {
     gender: string | null;
     createdAt: string;
 };
+
+export type OfflineAppointment = {
+    id: string;
+    userId: string;
+    serviceId: string;
+    deviceInfo: string;
+    issueDescription: string;
+    appointmentDate: string;
+    status: string;
+    createdAt: string;
+    updatedAt: string;
+    service: { name: string };
+};

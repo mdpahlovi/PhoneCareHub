@@ -30,7 +30,7 @@ export default async function Blogs({ searchParams }: SearchParams) {
     return (
         <>
             <Banner>All Blog</Banner>
-            <Stack alignItems="end">
+            <Stack mb={3} alignItems="end">
                 <Button component={Link} href="/dashboard/create_blog">
                     Create Blog
                 </Button>

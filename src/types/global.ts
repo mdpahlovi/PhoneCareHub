@@ -1,6 +1,7 @@
 import type { FormikHelpers } from "formik";
 import type { HTMLInputTypeAttribute } from "react";
 import type { EmotionCache, Options } from "@emotion/cache";
+import { OfflineAppointment } from "./response";
 
 export type NextEmotionCacheProviderProps = {
     options: Omit<Options, "insertionPoint">;
@@ -71,3 +72,5 @@ export type GenericErrorResponse = {
 export type Column = { label: string; minWidth?: number; align?: "inherit" | "left" | "center" | "right" | "justify" };
 
 export type TableProps = { columns: readonly Column[]; total?: number; page?: number; size?: number };
+
+export type OfflineAppointmentTableProps = { appointment: OfflineAppointment[]; total?: number; page?: number; size?: number };

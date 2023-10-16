@@ -4,7 +4,7 @@ import { Paper, TableContainer, Table as MuiTable, TableHead, TableRow, TableCel
 
 export default function Table({ children, columns, total, page, size }: TableProps & React.PropsWithChildren) {
     return (
-        <Paper sx={{ mt: 3, width: "100%", overflow: "hidden" }}>
+        <Paper sx={{ width: "100%", overflow: "hidden" }}>
             <TableContainer>
                 <MuiTable stickyHeader>
                     <TableHead>

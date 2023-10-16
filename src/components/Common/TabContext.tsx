@@ -21,7 +21,7 @@ export default function TabContext({ value, values, tabs }: { value: string; val
                 </TabList>
             </Box>
             {tabs.map((tab, idx) => (
-                <TabPanel key={idx} value={values[idx]}>
+                <TabPanel key={idx} value={values[idx]} sx={{ px: 0 }}>
                     {tab}
                 </TabPanel>
             ))}

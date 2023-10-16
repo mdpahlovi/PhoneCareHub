@@ -1,9 +1,9 @@
 "use client";
 
-import Form from "../Forms/Form";
-import FormInput from "../Forms/FormInput";
-import FormSubmit from "../Forms/FormSubmit";
+import Form from "@/components/Forms/Form";
 import useCreateData from "@/hooks/useCreateData";
+import FormInput from "@/components/Forms/FormInput";
+import FormSubmit from "@/components/Forms/FormSubmit";
 import createOnlineAppointment from "@/validations/createOnlineAppointment";
 
 const initialValues = { deviceInfo: "", issueDescription: "", shippingAddress: "" };

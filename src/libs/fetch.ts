@@ -1,5 +1,5 @@
 import { BASE_URL } from "@/exports/axios";
-import { Admin, Blog, FAQ, IApiResponse, Service, User } from "@/types/response";
+import { Admin, Blog, FAQ, IApiResponse, OfflineAppointment, Service, User } from "@/types/response";
 
 export async function getallservices(size: number, page: number, search: string): Promise<IApiResponse<Service[]>> {
     const res = await fetch(`${BASE_URL}/service?size=${size}&page=${page}&search=${search}`, { cache: "no-cache" });
@@ -58,6 +58,37 @@ export async function getallusers(token: string | undefined, page: number, size:
 
 export async function getprofile(token: string | undefined): Promise<IApiResponse<Admin | User>> {
     const res = await fetch(`${BASE_URL}/profile`, { cache: "no-cache", headers: { authorization: token! } });
+
+    if (!res.ok) throw new Error("Failed To Fetch Data");
+    return res.json();
+}
+
+export async function getallOfflineAppointment(
+    token: string | undefined,
+    size: number,
+    page: number,
+    status: string
+): Promise<IApiResponse<OfflineAppointment[]>> {
+    if (status === "appointments") status = "pending";
+    const res = await fetch(`${BASE_URL}/offlineAppointment?size=${size}&page=${page + 1}&status=${status}`, {
+        cache: "no-cache",
+        headers: { authorization: token! },
+    });
+
+    if (!res.ok) throw new Error("Failed To Fetch Data");
+    return res.json();
+}
+
+export async function getallOnlineAppointment(
+    token: string | undefined,
+    size: number,
+    page: number,
+    status: string
+): Promise<IApiResponse<Service[]>> {
+    const res = await fetch(`${BASE_URL}/onlineAppointment?size=${size}&page=${page + 1}&status=${status}`, {
+        cache: "no-cache",
+        headers: { authorization: token! },
+    });
 
     if (!res.ok) throw new Error("Failed To Fetch Data");
     return res.json();

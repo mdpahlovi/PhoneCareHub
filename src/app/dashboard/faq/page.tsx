@@ -5,7 +5,7 @@ import Banner from "@/components/Common/Banner";
 import DeleteButton from "@/components/Common/DeleteButton";
 import CreateFAQForm from "@/components/Dashboard/CreateFAQ/CreateFAQForm";
 
-import { TableBody, TableCell, TableRow } from "@mui/material";
+import { Divider, TableBody, TableCell, TableRow } from "@mui/material";
 
 const columns: readonly Column[] = [
     { label: "Serial" },
@@ -23,6 +23,7 @@ export default async function FAQs() {
         <>
             <Banner>All FAQ</Banner>
             <CreateFAQForm />
+            <Divider sx={{ mb: 3, border: "none" }} />
             <Table columns={columns}>
                 <TableBody>
                     {faqs?.data?.map(({ id, serial, question, answer }, idx) => (
