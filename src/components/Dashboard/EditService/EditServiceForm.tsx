@@ -10,7 +10,7 @@ import FormImageUpload from "@/components/Forms/FormImageUpload";
 import { getServiceInitialValues } from "@/libs/initialValues";
 
 export default function EditServiceForm({ service }: { service: Service }) {
-    const { handleUpdate, loading } = useUpdateData("service", service.id);
+    const { handleUpdate, loading } = useUpdateData(`/service/${service.id}`, "/services");
 
     return (
         <Form initialValues={getServiceInitialValues(service)} onSubmit={handleUpdate}>

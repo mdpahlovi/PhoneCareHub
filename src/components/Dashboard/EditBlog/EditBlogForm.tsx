@@ -11,7 +11,7 @@ import { getBlogInitialValues } from "@/libs/initialValues";
 import FormImageUpload from "@/components/Forms/FormImageUpload";
 
 export default function EditBlogForm({ blog }: { blog: Blog }) {
-    const { handleUpdate, loading } = useUpdateData("blog", blog.id);
+    const { handleUpdate, loading } = useUpdateData(`/blog/${blog.id}`, "/blogs");
 
     return (
         <Form initialValues={getBlogInitialValues(blog)} onSubmit={handleUpdate}>

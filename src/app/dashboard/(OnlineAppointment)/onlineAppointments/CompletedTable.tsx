@@ -1,6 +1,6 @@
 import Table from "@/components/Table/Table";
 import { TableBody, TableCell, TableRow } from "@mui/material";
-import { Column, OfflineAppointmentTableProps } from "@/types/global";
+import { Column, OnlineAppointmentTableProps } from "@/types/global";
 
 const columns: readonly Column[] = [
     { label: "Service Name", minWidth: 128 },
@@ -10,7 +10,7 @@ const columns: readonly Column[] = [
     { label: "Give Review", minWidth: 116, align: "right" },
 ];
 
-export default function CompletedTable({ appointment, total, page, size }: OfflineAppointmentTableProps) {
+export default function CompletedTable({ appointment, total, page, size }: OnlineAppointmentTableProps) {
     return (
         <Table columns={columns} total={total} size={size} page={page}>
             <TableBody>

@@ -44,7 +44,7 @@ export default function SideBar() {
             </Box>
             <Box>
                 <Divider sx={{ mb: 3 }} />
-                <StyledButton component={Link} href="/dashboard/profile" startIcon={<Person2RoundedIcon />} sx={{ mb: 1 }}>
+                <StyledButton LinkComponent={Link} href="/dashboard/profile" startIcon={<Person2RoundedIcon />} sx={{ mb: 1 }}>
                     Profile
                 </StyledButton>
                 <StyledButton color="error" startIcon={<LogoutRoundedIcon />} onClick={() => signOut()}>

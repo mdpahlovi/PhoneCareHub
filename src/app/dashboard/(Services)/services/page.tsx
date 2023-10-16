@@ -29,7 +29,7 @@ export default async function ManageService({ searchParams }: SearchParams) {
         <>
             <Banner>All Service</Banner>
             <Stack mb={3} alignItems="end">
-                <Button component={Link} href="/dashboard/create-service">
+                <Button LinkComponent={Link} href="/dashboard/create-service">
                     Create Service
                 </Button>
             </Stack>

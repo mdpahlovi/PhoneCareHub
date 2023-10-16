@@ -14,7 +14,7 @@ export default function MenuItems() {
     return routes.map(({ href, text, button }, idx) => (
         <Fragment key={idx}>
             {button ? (
-                <Button component={Link} href={href} sx={{ width: "max-content", mt: { xs: 1, md: 0 } }}>
+                <Button LinkComponent={Link} href={href} sx={{ width: "max-content", mt: { xs: 1, md: 0 } }}>
                     {text}
                 </Button>
             ) : (

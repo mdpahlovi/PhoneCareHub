@@ -2,6 +2,7 @@ import { format, parseISO } from "date-fns";
 import Table from "@/components/Table/Table";
 import { TableBody, TableCell, TableRow } from "@mui/material";
 import { Column, OfflineAppointmentTableProps } from "@/types/global";
+import CancelAppointment from "@/components/Common/CancelAppointment";
 
 const columns: readonly Column[] = [
     { label: "Service Name", minWidth: 128 },
@@ -23,7 +24,9 @@ export default function AllAppointmentTable({ appointment, total, page, size }: 
                         <TableCell>{issueDescription}</TableCell>
                         <TableCell align="right">{format(parseISO(appointmentDate), "PPP")}</TableCell>
                         <TableCell align="right"></TableCell>
-                        <TableCell align="right"></TableCell>
+                        <TableCell align="right">
+                            <CancelAppointment type="offline" id={id} />
+                        </TableCell>
                     </TableRow>
                 ))}
             </TableBody>

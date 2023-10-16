@@ -1,5 +1,5 @@
 import { BASE_URL } from "@/exports/axios";
-import { Admin, Blog, FAQ, IApiResponse, OfflineAppointment, Service, User } from "@/types/response";
+import { Admin, Blog, FAQ, IApiResponse, OfflineAppointment, OnlineAppointment, Service, User } from "@/types/response";
 
 export async function getallservices(size: number, page: number, search: string): Promise<IApiResponse<Service[]>> {
     const res = await fetch(`${BASE_URL}/service?size=${size}&page=${page}&search=${search}`, { cache: "no-cache" });
@@ -69,8 +69,7 @@ export async function getallOfflineAppointment(
     page: number,
     status: string
 ): Promise<IApiResponse<OfflineAppointment[]>> {
-    if (status === "appointments") status = "pending";
-    const res = await fetch(`${BASE_URL}/offlineAppointment?size=${size}&page=${page + 1}&status=${status}`, {
+    const res = await fetch(`${BASE_URL}/offlineAppointment/${status}?size=${size}&page=${page + 1}`, {
         cache: "no-cache",
         headers: { authorization: token! },
     });
@@ -84,8 +83,8 @@ export async function getallOnlineAppointment(
     size: number,
     page: number,
     status: string
-): Promise<IApiResponse<Service[]>> {
-    const res = await fetch(`${BASE_URL}/onlineAppointment?size=${size}&page=${page + 1}&status=${status}`, {
+): Promise<IApiResponse<OnlineAppointment[]>> {
+    const res = await fetch(`${BASE_URL}/onlineAppointment/${status}?size=${size}&page=${page + 1}`, {
         cache: "no-cache",
         headers: { authorization: token! },
     });

@@ -74,7 +74,27 @@ export type OfflineAppointment = {
     issueDescription: string;
     appointmentDate: string;
     status: string;
+    paymentAmount: number | null;
+    issueDidected: string[];
     createdAt: string;
     updatedAt: string;
+    user: { name: string; image: string };
+    service: { name: string };
+};
+
+export type OnlineAppointment = {
+    id: string;
+    userId: string;
+    serviceId: string;
+    deviceInfo: string;
+    issueDescription: string;
+    shippingAddress: string;
+    status: string;
+    paymentAmount: number | null;
+    issueDidected: string[];
+    deliveryDate: string | null;
+    createdAt: string;
+    updatedAt: string;
+    user: { name: string; image: string };
     service: { name: string };
 };
