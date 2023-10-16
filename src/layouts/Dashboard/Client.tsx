@@ -27,7 +27,7 @@ export function TemporarySideBar({ children }: React.PropsWithChildren) {
             ModalProps={{ keepMounted: true }}
             sx={{
                 display: { xs: "block", md: "none" },
-                "& .MuiDrawer-paper": { boxSizing: "border-box", width: 240 },
+                "& .MuiDrawer-paper": { boxSizing: "border-box", width: 264 },
             }}
         >
             {children}
@@ -41,7 +41,7 @@ export function PermanentSideBar({ children }: React.PropsWithChildren) {
             variant="permanent"
             sx={{
                 display: { xs: "none", md: "block" },
-                "& .MuiDrawer-paper": { boxSizing: "border-box", width: 240 },
+                "& .MuiDrawer-paper": { boxSizing: "border-box", width: 264 },
             }}
             open
         >

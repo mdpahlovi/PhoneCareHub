@@ -7,7 +7,7 @@ import { PermanentSideBar, TemporarySideBar, SideBarButton } from "@/layouts/Das
 export default function DashboardLayout({ children }: React.PropsWithChildren) {
     return (
         <Box display="flex">
-            <Box width={{ md: 240 }} flexShrink={{ md: 0 }}>
+            <Box width={{ md: 288 }} flexShrink={{ md: 0 }}>
                 <TemporarySideBar>
                     <SideBar />
                 </TemporarySideBar>
@@ -15,7 +15,7 @@ export default function DashboardLayout({ children }: React.PropsWithChildren) {
                     <SideBar />
                 </PermanentSideBar>
             </Box>
-            <Box width={{ md: `calc(100% - 240px)` }} flexGrow={1}>
+            <Box width={{ md: `calc(100% - 288px)` }} flexGrow={1}>
                 <Box height={64} display="flex" alignItems="center" mx={3} gap={3}>
                     <SideBarButton />
                     <ThemedLogo />
