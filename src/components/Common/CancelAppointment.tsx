@@ -7,14 +7,14 @@ export default function CancelAppointment({ type, id }: { type: "online" | "offl
     let path: string;
     switch (type) {
         case "online":
-            path = `/onlineAppointment/${id}`;
+            path = `/onlineAppointment`;
             break;
         case "offline":
-            path = `/offlineAppointment/${id}`;
+            path = `/offlineAppointment`;
             break;
     }
 
-    const { handleUpdate } = useUpdateData(path);
+    const { handleUpdate } = useUpdateData(`${path}/${id}`, `${path}s/?type=cancelled`);
     return (
         <Button size="small" color="error" onClick={() => handleUpdate({ status: "cancelled" })}>
             Cancel

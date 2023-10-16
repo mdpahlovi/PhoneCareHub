@@ -9,8 +9,8 @@ const columns: readonly Column[] = [
     { label: "Device Info", minWidth: 110 },
     { label: "Issue Details", minWidth: 120 },
     { label: "Status", align: "right" },
+    { label: "Delivery", align: "right" },
     { label: "See Details", minWidth: 98, align: "right" },
-    { label: "Cancel", align: "right" },
 ];
 
 export default function AllAppointmentTable({ appointment, total, page, size }: OnlineAppointmentTableProps) {
@@ -26,12 +26,14 @@ export default function AllAppointmentTable({ appointment, total, page, size }: 
                             <Chip label={status.charAt(0).toUpperCase() + status.slice(1)} color="primary" />
                         </TableCell>
                         <TableCell align="right">
-                            <Button size="small" LinkComponent={Link} href={`/dashboard/appointment/${id}`}>
-                                See Details
+                            <Button size="small" disabled>
+                                Pay Now
                             </Button>
                         </TableCell>
                         <TableCell align="right">
-                            <CancelAppointment type="online" id={id} />
+                            <Button size="small" LinkComponent={Link} href={`/dashboard/appointment/${id}`}>
+                                See Details
+                            </Button>
                         </TableCell>
                     </TableRow>
                 ))}

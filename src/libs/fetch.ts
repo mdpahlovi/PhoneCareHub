@@ -69,7 +69,7 @@ export async function getallOfflineAppointment(
     page: number,
     status: string
 ): Promise<IApiResponse<OfflineAppointment[]>> {
-    const res = await fetch(`${BASE_URL}/offlineAppointment/${status}?size=${size}&page=${page + 1}`, {
+    const res = await fetch(`${BASE_URL}/offlineAppointment/appointment/${status}?size=${size}&page=${page + 1}`, {
         cache: "no-cache",
         headers: { authorization: token! },
     });
@@ -84,7 +84,17 @@ export async function getallOnlineAppointment(
     page: number,
     status: string
 ): Promise<IApiResponse<OnlineAppointment[]>> {
-    const res = await fetch(`${BASE_URL}/onlineAppointment/${status}?size=${size}&page=${page + 1}`, {
+    const res = await fetch(`${BASE_URL}/onlineAppointment/appointment/${status}?size=${size}&page=${page + 1}`, {
+        cache: "no-cache",
+        headers: { authorization: token! },
+    });
+
+    if (!res.ok) throw new Error("Failed To Fetch Data");
+    return res.json();
+}
+
+export async function getOnlineAppointment(id: string, token: string | undefined): Promise<IApiResponse<OnlineAppointment>> {
+    const res = await fetch(`${BASE_URL}/onlineAppointment/${id}`, {
         cache: "no-cache",
         headers: { authorization: token! },
     });
