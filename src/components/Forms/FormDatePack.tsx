@@ -1,18 +1,37 @@
 "use client";
 
-import { useField } from "formik";
+import { useField, useFormikContext } from "formik";
 import type { FromDatePickProps } from "@/types/global";
-import { textAreaDisableColor } from "@/exports/constant";
-import { TextField, type TextFieldProps } from "@mui/material";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 
-export default function FormSelect({ name, label, disabled }: FromDatePickProps) {
-    const [field, meta] = useField(name);
+type TextFieldConfig = { name: string; error: boolean; helperText?: React.ReactNode };
 
-    let configTextfield: TextFieldProps = { label, disabled, ...field };
+export default function FormDatePack({ name, label, disabled }: FromDatePickProps) {
+    const [{ value }, meta] = useField(name);
+    const { setFieldValue } = useFormikContext();
+
+    let configTextfield: TextFieldConfig = { name, error: false };
     if (meta && meta.touched && meta.error) {
-        configTextfield.error = true;
-        configTextfield.helperText = meta.error;
+        configTextfield = { ...configTextfield, error: true, helperText: meta.error };
     }
 
-    return <TextField type="date" {...configTextfield} sx={{ ...textAreaDisableColor }} />;
+    return (
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+                label={label}
+                value={value}
+                disabled={disabled}
+                onChange={(newValue) => setFieldValue(name, newValue)}
+                slotProps={{
+                    textField: { ...configTextfield },
+                    clearButton: { color: "default" },
+                    nextIconButton: { color: "default" },
+                    openPickerButton: { color: "default" },
+                    switchViewButton: { color: "default" },
+                    previousIconButton: { color: "default" },
+                }}
+            />
+        </LocalizationProvider>
+    );
 }

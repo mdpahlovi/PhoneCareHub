@@ -1,4 +1,4 @@
-import { format, parseISO } from "date-fns";
+import { parseISO } from "date-fns";
 import { Admin, Blog, Service, User } from "@/types/response";
 
 export const getUserInitialValues = (profile: User) => {
@@ -6,7 +6,7 @@ export const getUserInitialValues = (profile: User) => {
     const email = profile?.email ? profile.email : "";
     const phone = profile?.phone ? profile.phone : "";
     const address = profile?.address ? profile.address : "";
-    const birthdate = profile?.birthdate ? format(parseISO(profile.birthdate), "yyyy-MM-dd") : "";
+    const birthdate = profile?.birthdate ? parseISO(profile.birthdate) : "";
     const gender = profile?.gender ? profile.gender : "";
 
     return { name, email, phone, address, birthdate, gender };
@@ -24,7 +24,7 @@ export const getBlogInitialValues = (blog: Blog) => {
     const title = blog?.title ? blog.title : "";
     const content = blog?.content ? blog.content : "";
     const source = blog?.source ? blog.source : "";
-    const publishedDate = blog?.publishedDate ? format(parseISO(blog.publishedDate), "yyyy-MM-dd") : "";
+    const publishedDate = blog?.publishedDate ? parseISO(blog.publishedDate) : "";
 
     return { title, content, source, publishedDate };
 };

@@ -1,8 +1,6 @@
-import type { LinkProps } from "next/link";
 import type { FormikHelpers } from "formik";
 import type { HTMLInputTypeAttribute } from "react";
 import type { EmotionCache, Options } from "@emotion/cache";
-import { type } from "os";
 
 export type NextEmotionCacheProviderProps = {
     options: Omit<Options, "insertionPoint">;

@@ -10,18 +10,11 @@ import FormDatePack from "@/components/Forms/FormDatePack";
 import { getBlogInitialValues } from "@/libs/initialValues";
 import FormImageUpload from "@/components/Forms/FormImageUpload";
 
-type CreateBlogFormValue = { image: string; title: string; content: string; source: string; publishedDate: Date | string };
-
 export default function EditBlogForm({ blog }: { blog: Blog }) {
     const { handleUpdate, loading } = useUpdateData("blog", blog.id);
 
-    const onSubmit = (data: CreateBlogFormValue) => {
-        data.publishedDate = new Date(data.publishedDate);
-        handleUpdate(data);
-    };
-
     return (
-        <Form initialValues={getBlogInitialValues(blog)} onSubmit={onSubmit}>
+        <Form initialValues={getBlogInitialValues(blog)} onSubmit={handleUpdate}>
             <FormImageUpload image={blog.image} name="image" />
             <FormInput name="title" label="Title" />
             <FormInput name="content" label="Content" />

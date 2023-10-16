@@ -16,17 +16,12 @@ export default function UserProfile({ profile }: { profile: User }) {
     const [editing, setEditing] = useState(false);
     const { updateProfile, loading } = useUpdateProfile();
 
-    const onSubmit = (data: any) => {
-        if (data.birthdate) data.birthdate = new Date(data.birthdate);
-        updateProfile(data);
-    };
-
     return (
         <Box position="relative" my={3}>
             <Button sx={{ width: "max-content", position: "absolute", right: 0 }} onClick={() => setEditing(!editing)}>
                 {editing ? "Cancel" : "Edit"}
             </Button>
-            <Form initialValues={getUserInitialValues(profile)} onSubmit={onSubmit}>
+            <Form initialValues={getUserInitialValues(profile)} onSubmit={updateProfile}>
                 <FormProfileUpload image={profile.image} name="image" disabled={!editing} />
                 <FormInput name="name" label="Name" disabled={!editing} />
                 <Stack direction={{ sm: "row" }} gap={3}>
