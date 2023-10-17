@@ -2,6 +2,7 @@
 
 import { useField, useFormikContext } from "formik";
 import type { FromDatePickProps } from "@/types/global";
+import { textAreaDisableColor } from "@/exports/constant";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 
@@ -22,6 +23,7 @@ export default function FormDatePack({ name, label, disabled }: FromDatePickProp
                 label={label}
                 value={value}
                 disabled={disabled}
+                sx={{ ...textAreaDisableColor }}
                 onChange={(newValue) => setFieldValue(name, newValue)}
                 slotProps={{
                     textField: { ...configTextfield },

@@ -8,7 +8,7 @@ export default async function Dashboard() {
 
     return (
         <Stack minHeight="calc(100vh - 112px)" alignItems="center" justifyContent="center" gap={3}>
-            <Image src={session?.user?.image!} alt="" width={160} height={160} />
+            <Image src={session?.user?.image!} alt="" width={160} height={160} style={{ borderRadius: 24 }} />
             <Typography variant="h3" fontWeight={800} textAlign="center">
                 Welcome {session?.user?.name}
                 <br />

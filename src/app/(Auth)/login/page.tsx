@@ -2,7 +2,7 @@ import LoginForm from "@/components/Auth/LoginForm";
 import GoogleIcon from "@mui/icons-material/Google";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import AuthButton from "@/components/Auth/AuthButton";
-import { Stack, Grid, Typography, Link } from "@/exports/mui";
+import { Stack, Typography, Link } from "@/exports/mui";
 
 export const metadata = { title: "Login" };
 
@@ -17,14 +17,14 @@ export default function Login() {
                     Don&apos;t have an account? <Link href="/register">Register</Link>
                 </Typography>
             </Stack>
-            <Grid container flexWrap={{ sm: "nowrap" }} gap={3}>
-                <Grid xs={12} sm={6} component={AuthButton} provider="google" startIcon={<GoogleIcon />} whiteSpace="nowrap">
+            <Stack direction={{ sm: "row" }} gap={3}>
+                <AuthButton provider="google" startIcon={<GoogleIcon />}>
                     Login With Google
-                </Grid>
-                <Grid xs={12} sm={6} component={AuthButton} provider="github" startIcon={<GitHubIcon />} whiteSpace="nowrap">
+                </AuthButton>
+                <AuthButton provider="github" startIcon={<GitHubIcon />}>
                     Login With Github
-                </Grid>
-            </Grid>
+                </AuthButton>
+            </Stack>
             <LoginForm />
         </>
     );

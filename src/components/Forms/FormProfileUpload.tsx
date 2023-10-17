@@ -14,7 +14,7 @@ export default function FormProfileUpload({ image, name, disabled }: { image: st
         <Stack direction="row" alignItems="center" gap={3}>
             <Image src={preview as string} alt="" style={{ borderRadius: "16px" }} width={100} height={100} />
             {disabled ? null : (
-                <Button LinkComponent="label" htmlFor="File Upload" startIcon={<CloudUploadIcon />}>
+                <Button component="label" htmlFor="File Upload" startIcon={<CloudUploadIcon />}>
                     Choose Avatar
                     <input
                         hidden

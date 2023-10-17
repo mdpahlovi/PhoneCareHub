@@ -69,7 +69,13 @@ export async function getallOfflineAppointment(
     page: number,
     status: string
 ): Promise<IApiResponse<OfflineAppointment[]>> {
-    const res = await fetch(`${BASE_URL}/offlineAppointment/appointment/${status}?size=${size}&page=${page + 1}`, {
+    let statusParams;
+    if (status === "appointments") {
+        statusParams = `status=pending&status=reviewing&status=payment&status=servicing`;
+    } else {
+        statusParams = `status=${status}`;
+    }
+    const res = await fetch(`${BASE_URL}/offlineAppointment?size=${size}&page=${page + 1}&${statusParams}`, {
         cache: "no-cache",
         headers: { authorization: token! },
     });
@@ -84,7 +90,13 @@ export async function getallOnlineAppointment(
     page: number,
     status: string
 ): Promise<IApiResponse<OnlineAppointment[]>> {
-    const res = await fetch(`${BASE_URL}/onlineAppointment/appointment/${status}?size=${size}&page=${page + 1}`, {
+    let statusParams;
+    if (status === "appointments") {
+        statusParams = `status=pending&status=reviewing&status=payment&status=servicing`;
+    } else {
+        statusParams = `status=${status}`;
+    }
+    const res = await fetch(`${BASE_URL}/onlineAppointment?size=${size}&page=${page + 1}&${statusParams}`, {
         cache: "no-cache",
         headers: { authorization: token! },
     });

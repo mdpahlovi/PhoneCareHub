@@ -1,8 +1,8 @@
 import { getServerSession } from "next-auth";
 import { getOnlineAppointment } from "@/libs/fetch";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
-import { Box, Chip, Button, Stack, Divider, Typography, ListItemText, List, ListItem } from "@mui/material";
 import CancelAppointment from "@/components/Common/CancelAppointment";
+import { Chip, Button, Stack, Divider, Typography, ListItemText, List, ListItem } from "@mui/material";
 
 export const metadata = { title: "Appointment Details" };
 
@@ -12,10 +12,10 @@ export default async function AppointmentDetails({ params }: { params: { id: str
 
     let ActionButton;
     switch (appointment?.data?.status) {
-        case "paymentPending":
+        case "payment":
             ActionButton = <Button size="small">Pay Now</Button>;
             break;
-        case "completed":
+        case "servicing" || "completed":
             ActionButton = <Button size="small">Completed</Button>;
         default:
             ActionButton = <CancelAppointment type="online" id={appointment?.data?.id!} />;
@@ -44,7 +44,7 @@ export default async function AppointmentDetails({ params }: { params: { id: str
             <Divider variant="middle" sx={{ mb: 2.5 }} />
             <Typography mb={1.5}>Current Status</Typography>
             <Stack direction="row" gap={1}>
-                {["pending", "reviewing", "paymentPending", "completed"].map((status, idx) => (
+                {["pending", "reviewing", "payment", "servicing", "completed"].map((status, idx) => (
                     <Chip
                         key={idx}
                         label={status.charAt(0).toUpperCase() + status.slice(1)}
@@ -52,7 +52,7 @@ export default async function AppointmentDetails({ params }: { params: { id: str
                     />
                 ))}
             </Stack>
-            {appointment?.data?.status === ("paymentPending" || "completed") ? (
+            {appointment?.data?.status === ("payment" || "servicing" || "completed") ? (
                 <List>
                     <ListItem>
                         <ListItemText primary="Payment Amount" secondary={appointment?.data?.deviceInfo} />

@@ -1,3 +1,9 @@
+import Banner from "@/components/Common/Banner";
+
 export default function ManageOfflineAppointment() {
-    return <div>ManageOfflineAppointment</div>;
+    return (
+        <>
+            <Banner>Offline Appointment</Banner>
+        </>
+    );
 }
