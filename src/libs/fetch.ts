@@ -67,18 +67,20 @@ export async function getallOfflineAppointment(
     token: string | undefined,
     size: number,
     page: number,
-    status: string
+    status: string | undefined,
+    { email, appointmentDate }: { email?: string; appointmentDate?: string }
 ): Promise<IApiResponse<OfflineAppointment[]>> {
+    let emailParams;
     let statusParams;
-    if (status === "appointments") {
-        statusParams = `status=pending&status=reviewing&status=payment&status=servicing`;
-    } else {
-        statusParams = `status=${status}`;
-    }
-    const res = await fetch(`${BASE_URL}/offlineAppointment?size=${size}&page=${page + 1}&${statusParams}`, {
-        cache: "no-cache",
-        headers: { authorization: token! },
-    });
+    let appointmentDateParams;
+    if (email) emailParams = `email=${email}`;
+    if (status) statusParams = getStatusParams(status);
+    if (appointmentDate) appointmentDateParams = `appointmentDate=${appointmentDate}`;
+
+    const res = await fetch(
+        `${BASE_URL}/offlineAppointment?size=${size}&page=${page + 1}&${statusParams}&${emailParams}&${appointmentDateParams}`,
+        { cache: "no-cache", headers: { authorization: token! } }
+    );
 
     if (!res.ok) throw new Error("Failed To Fetch Data");
     return res.json();
@@ -88,15 +90,15 @@ export async function getallOnlineAppointment(
     token: string | undefined,
     size: number,
     page: number,
-    status: string
+    status: string | undefined,
+    { email }: { email?: string }
 ): Promise<IApiResponse<OnlineAppointment[]>> {
+    let emailParams;
     let statusParams;
-    if (status === "appointments") {
-        statusParams = `status=pending&status=reviewing&status=payment&status=servicing`;
-    } else {
-        statusParams = `status=${status}`;
-    }
-    const res = await fetch(`${BASE_URL}/onlineAppointment?size=${size}&page=${page + 1}&${statusParams}`, {
+    if (email) emailParams = `email=${email}`;
+    if (status) statusParams = getStatusParams(status);
+
+    const res = await fetch(`${BASE_URL}/onlineAppointment?size=${size}&page=${page + 1}&${statusParams}&${emailParams}`, {
         cache: "no-cache",
         headers: { authorization: token! },
     });
@@ -114,3 +116,11 @@ export async function getOnlineAppointment(id: string, token: string | undefined
     if (!res.ok) throw new Error("Failed To Fetch Data");
     return res.json();
 }
+
+const getStatusParams = (status: string) => {
+    if (status === "appointments") {
+        return `status=pending&status=reviewing&status=payment&status=servicing`;
+    } else {
+        return `status=${status}`;
+    }
+};

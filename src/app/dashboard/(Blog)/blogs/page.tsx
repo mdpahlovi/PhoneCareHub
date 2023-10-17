@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { Column } from "@/types/global";
 import { getallblogs } from "@/libs/fetch";
-import { Avatar, Button, Stack, TableBody, TableCell, TableRow } from "@mui/material";
-import Banner from "@/components/Common/Banner";
-import Table from "@/components/Table/Table";
-import DeleteButton from "@/components/Common/DeleteButton";
 import { format, parseISO } from "date-fns";
+import Table from "@/components/Table/Table";
+import Banner from "@/components/Common/Banner";
 import EditButton from "@/components/Common/EditButton";
+import DeleteButton from "@/components/Common/DeleteButton";
+import { Avatar, Button, Stack, TableBody, TableCell, TableRow } from "@mui/material";
 
-type SearchParams = { searchParams: { page: string | null; size: string | null } };
+type SearchParams = { searchParams: { page?: string; size?: string } };
 
 const columns: readonly Column[] = [
     { label: "Image" },

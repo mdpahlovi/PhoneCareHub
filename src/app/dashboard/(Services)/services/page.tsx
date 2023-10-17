@@ -7,7 +7,7 @@ import DeleteButton from "@/components/Common/DeleteButton";
 import { Avatar, TableBody, TableCell, TableRow, Button, Stack } from "@mui/material";
 import EditButton from "@/components/Common/EditButton";
 
-type SearchParams = { searchParams: { page: string | null; size: string | null } };
+type SearchParams = { searchParams: { page?: string; size?: string } };
 
 const columns: readonly Column[] = [
     { label: "Image" },

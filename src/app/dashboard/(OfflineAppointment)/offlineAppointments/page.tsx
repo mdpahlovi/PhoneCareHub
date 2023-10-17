@@ -10,20 +10,21 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
 export const metadata = { title: "Offline Appointment" };
 
-type SearchParams = { searchParams: { page: string | null; size: string | null; type: string | undefined } };
+type SearchParams = { searchParams: { page?: string; size?: string; status?: string } };
 
 export default async function OfflineAppointment({ searchParams }: SearchParams) {
     const session = await getServerSession(authOptions);
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
-    const value = searchParams?.type ? searchParams.type : "appointments";
-    const offlineAppointment = await getallOfflineAppointment(session?.token, size, page, value);
+    const status = searchParams?.status ? searchParams.status : "appointments";
+    const offlineAppointment = await getallOfflineAppointment(session?.token, size, page, status, {});
 
     return (
         <>
             <Banner>Offline Appointment</Banner>
             <TabContext
-                value={value}
+                query="status"
+                value={status}
                 values={["appointments", "completed", "cancelled"]}
                 tabs={[
                     <AllAppointmentTable

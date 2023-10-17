@@ -1,14 +1,16 @@
 "use client";
 
 import { Box, Tab } from "@mui/material";
-import { TabContext as MuiTabs, TabList, TabPanel } from "@mui/lab";
 import useCreateQuery from "@/hooks/useCreateQuery";
+import { TabContext as MuiTabs, TabList, TabPanel } from "@mui/lab";
 
-export default function TabContext({ value, values, tabs }: { value: string; values: string[]; tabs: React.ReactNode[] }) {
+type TabContextProps = { query: string; value: string; values: string[]; tabs: React.ReactNode[] };
+
+export default function TabContext({ query, value, values, tabs }: TabContextProps) {
     const createQuery = useCreateQuery();
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-        createQuery("type", newValue);
+        createQuery(query, newValue);
     };
 
     return (

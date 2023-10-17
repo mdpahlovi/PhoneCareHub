@@ -8,7 +8,7 @@ import DeleteButton from "@/components/Common/DeleteButton";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { TableRow, TableCell, TableBody, Avatar } from "@mui/material";
 
-type SearchParams = { searchParams: { page: string | null; size: string | null } };
+type SearchParams = { searchParams: { page?: string; size?: string } };
 
 export const metadata = { title: "All Admin" };
 

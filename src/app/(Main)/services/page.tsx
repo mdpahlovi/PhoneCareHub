@@ -8,7 +8,7 @@ import ServicePagination from "@/components/Services/ServicePagination";
 
 export const metadata = { title: "Services" };
 
-type SearchParams = { searchParams: { page: string | null; search: string | null } };
+type SearchParams = { searchParams: { page?: string; search?: string } };
 
 export default async function Services({ searchParams }: SearchParams) {
     const search = searchParams?.search ? searchParams.search : "";
