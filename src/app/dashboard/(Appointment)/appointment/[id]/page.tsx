@@ -1,9 +1,10 @@
-import getDateRange from "@/libs/getDateRange";
 import { getServerSession } from "next-auth";
+import getDateRange from "@/libs/getDateRange";
 import { getOnlineAppointment } from "@/libs/fetch";
+import PaymentButton from "@/components/Common/PaymentButton";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import CancelAppointment from "@/components/Common/CancelAppointment";
-import { Chip, Button, Stack, Divider, Typography, ListItemText, List, ListItem } from "@mui/material";
+import { Chip, Button, Stack, Divider, Typography, ListItemText, List, ListItem, Box } from "@mui/material";
 
 export const metadata = { title: "Appointment Details" };
 
@@ -14,14 +15,34 @@ export default async function AppointmentDetails({ params }: { params: { id: str
     let ActionButton;
     switch (appointment?.data?.status) {
         case "payment":
-            ActionButton = <Button size="small">Pay Now</Button>;
+            ActionButton = (
+                <PaymentButton
+                    onlineAppointmentId={appointment?.data?.id}
+                    amount={appointment?.data?.paymentAmount}
+                    status={appointment?.data?.status}
+                />
+            );
             break;
-        case "servicing" || "completed":
-            ActionButton = <Button size="small">Completed</Button>;
+        case "servicing":
+            ActionButton = (
+                <Button color="success" size="small">
+                    Servicing
+                </Button>
+            );
+            break;
+        case "completed":
+            ActionButton = (
+                <Button color="success" size="small">
+                    Completed
+                </Button>
+            );
+            break;
         default:
             ActionButton = <CancelAppointment type="online" id={appointment?.data?.id!} />;
             break;
     }
+    const status = appointment?.data?.status;
+    const dateRange = getDateRange(appointment?.data?.deliveryDate!);
 
     return (
         <Stack mx={1.5}>
@@ -53,23 +74,25 @@ export default async function AppointmentDetails({ params }: { params: { id: str
                     />
                 ))}
             </Stack>
-            {appointment?.data?.status === ("payment" || "servicing" || "completed") ? (
+            {status === "payment" || status === "servicing" || status === "completed" ? (
                 <List>
                     <ListItem>
                         <ListItemText primary="Payment Amount" secondary={appointment?.data?.deviceInfo} />
                     </ListItem>
                     <ListItem>
-                        <ListItemText primary="Issue Didected" />
+                        <ListItemText
+                            primary="Issue Didected"
+                            secondary={
+                                <Box>
+                                    {appointment?.data?.issueDidected.map((issue, idx) => (
+                                        <ListItemText key={idx} secondary={issue} />
+                                    ))}
+                                </Box>
+                            }
+                        />
                     </ListItem>
-                    <List>
-                        <ListItem>
-                            {appointment?.data?.issueDidected.map((issue, idx) => (
-                                <ListItemText key={idx} secondary={issue} />
-                            ))}
-                        </ListItem>
-                    </List>
                     <ListItem>
-                        <ListItemText primary="Delivery Date" secondary={getDateRange(appointment?.data?.deliveryDate)} />
+                        <ListItemText primary="Delivery Date" secondary={dateRange} />
                     </ListItem>
                 </List>
             ) : null}

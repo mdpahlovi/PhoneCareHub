@@ -3,6 +3,8 @@ import Table from "@/components/Table/Table";
 import Status from "@/components/Appointment/Status";
 import { Button, TableBody, TableCell, TableRow } from "@mui/material";
 import { Column, OnlineAppointmentTableProps } from "@/types/global";
+import PaymentButton from "@/components/Common/PaymentButton";
+import getDateRange from "@/libs/getDateRange";
 
 const columns: readonly Column[] = [
     { label: "Service Name", minWidth: 128 },
@@ -17,7 +19,7 @@ export default function AllAppointmentTable({ appointment, total, page, size }: 
     return (
         <Table columns={columns} total={total} size={size} page={page}>
             <TableBody>
-                {appointment?.map(({ id, service, deviceInfo, issueDescription, status }, idx) => (
+                {appointment?.map(({ id, service, deviceInfo, issueDescription, status, paymentAmount, deliveryDate }, idx) => (
                     <TableRow key={idx} hover>
                         <TableCell>{service.name}</TableCell>
                         <TableCell>{deviceInfo}</TableCell>
@@ -26,9 +28,11 @@ export default function AllAppointmentTable({ appointment, total, page, size }: 
                             <Status status={status} />
                         </TableCell>
                         <TableCell align="right">
-                            <Button size="small" disabled={status !== "payment"}>
-                                Pay Now
-                            </Button>
+                            {status === "servicing" ? (
+                                getDateRange(deliveryDate)
+                            ) : (
+                                <PaymentButton onlineAppointmentId={id} amount={paymentAmount} status={status} />
+                            )}
                         </TableCell>
                         <TableCell align="right">
                             <Button size="small" LinkComponent={Link} href={`/dashboard/appointment/${id}`}>

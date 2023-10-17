@@ -20,6 +20,7 @@ export default function useCreateData(path: string, noRedirect?: boolean) {
             })
             .catch((error) => {
                 setLoading(false);
+                console.log(error);
                 toast.error(error.message);
             });
     };

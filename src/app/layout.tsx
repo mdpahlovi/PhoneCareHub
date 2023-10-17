@@ -1,6 +1,7 @@
 import Provider from "@/layouts/Provider";
 import ToastProvider from "@/layouts/ToastProvider";
 import ConfirmDeleteDialog from "@/layouts/Dialogs/ConfirmDeleteDialog";
+import PaymentDialog from "@/layouts/Dialogs/PaymentDialog";
 
 export const metadata = {
     title: {
@@ -16,6 +17,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
                 <body>
                     {children}
                     <ToastProvider />
+                    <PaymentDialog />
                     <ConfirmDeleteDialog />
                 </body>
             </Provider>
