@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Table from "@/components/Table/Table";
-import { Button, Chip, TableBody, TableCell, TableRow } from "@mui/material";
+import Status from "@/components/Appointment/Status";
+import { Button, TableBody, TableCell, TableRow } from "@mui/material";
 import { Column, OnlineAppointmentTableProps } from "@/types/global";
-import CancelAppointment from "@/components/Common/CancelAppointment";
 
 const columns: readonly Column[] = [
     { label: "Service Name", minWidth: 128 },
@@ -23,7 +23,7 @@ export default function AllAppointmentTable({ appointment, total, page, size }: 
                         <TableCell>{deviceInfo}</TableCell>
                         <TableCell>{issueDescription}</TableCell>
                         <TableCell align="right">
-                            <Chip label={status.charAt(0).toUpperCase() + status.slice(1)} color="primary" />
+                            <Status status={status} />
                         </TableCell>
                         <TableCell align="right">
                             <Button size="small" disabled>

@@ -3,8 +3,8 @@ import { getservice } from "@/libs/fetch";
 import { Container } from "@mui/material";
 import Banner from "@/components/Common/Banner";
 import TabContext from "@/components/Common/TabContext";
-import OnlineAppointmentForm from "@/components/Appoitment/OnlineAppointmentForm";
-import OfflineAppointmentForm from "@/components/Appoitment/OfflineAppointmentForm";
+import OnlineAppointmentForm from "@/components/Appointment/OnlineAppointmentForm";
+import OfflineAppointmentForm from "@/components/Appointment/OfflineAppointmentForm";
 
 type Params = { params: { id?: string }; searchParams: { type?: string } };
 
