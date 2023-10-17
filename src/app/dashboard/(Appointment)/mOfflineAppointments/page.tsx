@@ -1,13 +1,13 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/options";
-import Banner from "@/components/Common/Banner";
-import DeleteButton from "@/components/Common/DeleteButton";
-import Table from "@/components/Table/Table";
-import { getallOfflineAppointment } from "@/libs/fetch";
+import Link from "next/link";
 import { Column } from "@/types/global";
-import { Avatar, Button, Stack, TableBody, TableCell, TableRow, Typography } from "@mui/material";
 import { format, parseISO } from "date-fns";
 import { getServerSession } from "next-auth";
-import Link from "next/link";
+import Table from "@/components/Table/Table";
+import Banner from "@/components/Common/Banner";
+import { getallOfflineAppointment } from "@/libs/fetch";
+import DeleteButton from "@/components/Common/DeleteButton";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import { Avatar, Button, Stack, TableBody, TableCell, TableRow, Typography } from "@mui/material";
 
 export const metadata = { title: "Manage Offline Appointment" };
 
@@ -53,7 +53,7 @@ export default async function ManageOfflineAppointment({ searchParams }: SearchP
                             <TableCell>{issueDescription}</TableCell>
                             <TableCell align="right">{format(parseISO(appointmentDate), "PPP")}</TableCell>
                             <TableCell align="right">
-                                <Button size="small" LinkComponent={Link} href={`/dashboard/appointment/${id}`}>
+                                <Button size="small" LinkComponent={Link} href={`/dashboard/mOfflineAppointments/${id}`}>
                                     Set Detail
                                 </Button>
                             </TableCell>

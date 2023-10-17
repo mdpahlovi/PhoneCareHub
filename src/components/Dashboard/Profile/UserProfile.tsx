@@ -8,7 +8,7 @@ import { Box, Stack, Button } from "@mui/material";
 import FormInput from "@/components/Forms/FormInput";
 import FormSubmit from "@/components/Forms/FormSubmit";
 import FormSelect from "@/components/Forms/FormSelect";
-import FormDatePack from "@/components/Forms/FormDatePack";
+import FormDatePick from "@/components/Forms/FormDatePick";
 import { getUserInitialValues } from "@/libs/initialValues";
 import FormProfileUpload from "@/components/Forms/FormProfileUpload";
 
@@ -30,7 +30,7 @@ export default function UserProfile({ profile }: { profile: User }) {
                 </Stack>
                 <Stack direction={{ sm: "row" }} gap={3}>
                     <FormSelect items={["male", "female", "transgender"]} name="gender" label="Gender" disabled={!editing} />
-                    <FormDatePack name="birthdate" label="BirthDate" disabled={!editing} />
+                    <FormDatePick name="birthdate" label="BirthDate" disabled={!editing} />
                 </Stack>
                 <FormInput name="address" label="Address" disabled={!editing} />
                 {editing ? <FormSubmit loading={loading}>Submit</FormSubmit> : null}

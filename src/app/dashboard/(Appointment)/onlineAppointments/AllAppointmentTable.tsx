@@ -26,7 +26,7 @@ export default function AllAppointmentTable({ appointment, total, page, size }: 
                             <Status status={status} />
                         </TableCell>
                         <TableCell align="right">
-                            <Button size="small" disabled>
+                            <Button size="small" disabled={status !== "payment"}>
                                 Pay Now
                             </Button>
                         </TableCell>

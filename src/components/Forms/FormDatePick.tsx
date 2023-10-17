@@ -8,7 +8,7 @@ import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 
 type TextFieldConfig = { name: string; error: boolean; helperText?: React.ReactNode };
 
-export default function FormDatePack({ name, label, disabled }: FromDatePickProps) {
+export default function FormDatePick({ name, label, disabled }: FromDatePickProps) {
     const [{ value }, meta] = useField(name);
     const { setFieldValue } = useFormikContext();
 

@@ -6,7 +6,7 @@ import Form from "@/components/Forms/Form";
 import useUpdateData from "@/hooks/useUpdateData";
 import FormInput from "@/components/Forms/FormInput";
 import FormSubmit from "@/components/Forms/FormSubmit";
-import FormDatePack from "@/components/Forms/FormDatePack";
+import FormDatePick from "@/components/Forms/FormDatePick";
 import { getBlogInitialValues } from "@/libs/initialValues";
 import FormImageUpload from "@/components/Forms/FormImageUpload";
 
@@ -20,7 +20,7 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
             <FormInput name="content" label="Content" />
             <Stack direction={{ sm: "row" }} gap={3}>
                 <FormInput name="source" label="Source" />
-                <FormDatePack name="publishedDate" label="Published Date" />
+                <FormDatePick name="publishedDate" label="Published Date" />
             </Stack>
             <FormSubmit loading={loading}>Submit</FormSubmit>
         </Form>

@@ -117,6 +117,16 @@ export async function getOnlineAppointment(id: string, token: string | undefined
     return res.json();
 }
 
+export async function getOfflineAppointment(id: string, token: string | undefined): Promise<IApiResponse<OfflineAppointment>> {
+    const res = await fetch(`${BASE_URL}/offlineAppointment/${id}`, {
+        cache: "no-cache",
+        headers: { authorization: token! },
+    });
+
+    if (!res.ok) throw new Error("Failed To Fetch Data");
+    return res.json();
+}
+
 const getStatusParams = (status: string) => {
     if (status === "appointments") {
         return `status=pending&status=reviewing&status=payment&status=servicing`;

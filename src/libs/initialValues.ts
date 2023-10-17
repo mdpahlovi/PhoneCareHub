@@ -1,5 +1,5 @@
 import { parseISO } from "date-fns";
-import { Admin, Blog, Service, User } from "@/types/response";
+import { Admin, Blog, OfflineAppointment, OnlineAppointment, Service, User } from "@/types/response";
 
 export const getUserInitialValues = (profile: User) => {
     const name = profile?.name ? profile.name : "";
@@ -35,4 +35,21 @@ export const getServiceInitialValues = (service: Service) => {
     const estimatetime = service?.estimatetime ? service.estimatetime : "";
 
     return { name, description, estimatetime };
+};
+
+export const getOnlineAppointmentInitialValues = (appointment: OnlineAppointment) => {
+    const status = appointment?.status ? appointment.status : "";
+    const paymentAmount = appointment?.paymentAmount ? appointment.paymentAmount : null;
+    const issueDidected = appointment?.issueDidected ? appointment.issueDidected : [""];
+    const deliveryDate = appointment?.deliveryDate ? parseISO(appointment.deliveryDate) : "";
+
+    return { status, paymentAmount, issueDidected, deliveryDate };
+};
+
+export const getOfflineAppointmentInitialValues = (appointment: OfflineAppointment) => {
+    const status = appointment?.status ? appointment.status : "";
+    const paymentAmount = appointment?.paymentAmount ? appointment.paymentAmount : null;
+    const issueDidected = appointment?.issueDidected ? appointment.issueDidected : [""];
+
+    return { status, paymentAmount, issueDidected };
 };

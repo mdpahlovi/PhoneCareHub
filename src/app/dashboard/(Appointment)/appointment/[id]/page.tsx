@@ -1,3 +1,4 @@
+import getDateRange from "@/libs/getDateRange";
 import { getServerSession } from "next-auth";
 import { getOnlineAppointment } from "@/libs/fetch";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
@@ -58,7 +59,7 @@ export default async function AppointmentDetails({ params }: { params: { id: str
                         <ListItemText primary="Payment Amount" secondary={appointment?.data?.deviceInfo} />
                     </ListItem>
                     <ListItem>
-                        <ListItemText primary="Issue Didected" secondary={appointment?.data?.issueDescription} />
+                        <ListItemText primary="Issue Didected" />
                     </ListItem>
                     <List>
                         <ListItem>
@@ -68,7 +69,7 @@ export default async function AppointmentDetails({ params }: { params: { id: str
                         </ListItem>
                     </List>
                     <ListItem>
-                        <ListItemText primary="Delivery Date" secondary={appointment?.data?.deliveryDate} />
+                        <ListItemText primary="Delivery Date" secondary={getDateRange(appointment?.data?.deliveryDate)} />
                     </ListItem>
                 </List>
             ) : null}

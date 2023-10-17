@@ -4,7 +4,7 @@ import Form from "@/components/Forms/Form";
 import useCreateData from "@/hooks/useCreateData";
 import FormInput from "@/components/Forms/FormInput";
 import FormSubmit from "@/components/Forms/FormSubmit";
-import FormDatePicker from "@/components/Forms/FormDatePack";
+import FormDatePicker from "@/components/Forms/FormDatePick";
 import createOfflineAppointment from "@/validations/createOfflineAppointment";
 
 const initialValues = { deviceInfo: "", issueDescription: "", appointmentDate: "" };

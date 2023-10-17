@@ -30,13 +30,13 @@ export default async function ManageOnlineAppointment({ searchParams }: SearchPa
 
     return (
         <>
-            <Banner>Online Appointment</Banner>
+            <Banner>Online Appointments</Banner>
             <Stack mb={3} alignItems="end">
                 Pahlovi
             </Stack>
             <Table columns={columns} total={onlineAppointment?.meta?.total} size={size} page={page}>
                 <TableBody>
-                    {onlineAppointment?.data?.map(({ id, user, deviceInfo, issueDescription, status }) => (
+                    {onlineAppointment?.data?.map(({ id, user, deviceInfo, issueDescription }) => (
                         <TableRow key={id} hover>
                             <TableCell>
                                 <Stack direction="row" alignItems="center" gap={1}>
@@ -47,7 +47,7 @@ export default async function ManageOnlineAppointment({ searchParams }: SearchPa
                             <TableCell>{deviceInfo}</TableCell>
                             <TableCell>{issueDescription}</TableCell>
                             <TableCell align="right">
-                                <Button size="small" LinkComponent={Link} href={`/dashboard/appointment/${id}`}>
+                                <Button size="small" LinkComponent={Link} href={`/dashboard/mOnlineAppointments/${id}`}>
                                     Set Detail
                                 </Button>
                             </TableCell>
