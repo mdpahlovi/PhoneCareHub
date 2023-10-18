@@ -6,6 +6,7 @@ import Table from "@/components/Table/Table";
 import Banner from "@/components/Common/Banner";
 import DeleteButton from "@/components/Common/DeleteButton";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import CreateLinkButton from "@/components/Common/CreateLinkButton";
 import { TableRow, TableCell, TableBody, Avatar } from "@mui/material";
 import ChangePasswordButton from "@/components/Common/ChangePasswordButton";
 
@@ -33,6 +34,7 @@ export default async function ManageUsers({ searchParams }: SearchParams) {
     return (
         <>
             <Banner>All User</Banner>
+            <CreateLinkButton href="user" />
             <Table columns={columns} total={users?.meta?.total!} page={page} size={size}>
                 <TableBody>
                     {users?.data?.map(({ id, image, name, email, phone, birthdate, gender }, idx) => (

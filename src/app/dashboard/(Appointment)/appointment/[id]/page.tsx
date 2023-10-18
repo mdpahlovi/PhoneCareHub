@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth";
 import getDateRange from "@/libs/getDateRange";
 import { getOnlineAppointment } from "@/libs/fetch";
+import firstWordCapital from "@/libs/firstWordCapital";
 import PaymentButton from "@/components/Appointment/PaymentButton";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import CancelAppointment from "@/components/Appointment/CancelAppointment";
@@ -67,11 +68,7 @@ export default async function AppointmentDetails({ params }: { params: { id: str
             <Typography mb={1.5}>Current Status</Typography>
             <Stack direction="row" gap={1}>
                 {["pending", "reviewing", "payment", "servicing", "completed"].map((status, idx) => (
-                    <Chip
-                        key={idx}
-                        label={status.charAt(0).toUpperCase() + status.slice(1)}
-                        color={appointment.data?.status === status ? "primary" : "default"}
-                    />
+                    <Chip key={idx} label={firstWordCapital(status)} color={appointment.data?.status === status ? "primary" : "default"} />
                 ))}
             </Stack>
             {status === "payment" || status === "servicing" || status === "completed" ? (

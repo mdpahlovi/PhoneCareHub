@@ -4,6 +4,7 @@ import Link, { LinkProps } from "next/link";
 import { styled } from "@mui/material/styles";
 import { usePathname } from "next/navigation";
 import MuiBreadcrumbs from "@mui/material/Breadcrumbs";
+import firstWordCapital from "@/libs/firstWordCapital";
 
 type StyledLinkProps = { white?: boolean; selected?: boolean; children?: React.ReactNode } & LinkProps;
 
@@ -27,7 +28,7 @@ export default function Breadcrumbs({ white }: { white?: boolean }) {
                 const selected = paths.length - 1 === idx;
                 return (
                     <StyledBreadcrumbLink key={idx} href={href} selected={selected} white={white}>
-                        {path ? path.charAt(0).toUpperCase() + path.slice(1) : "Home"}
+                        {path ? firstWordCapital(path) : "Home"}
                     </StyledBreadcrumbLink>
                 );
             })}

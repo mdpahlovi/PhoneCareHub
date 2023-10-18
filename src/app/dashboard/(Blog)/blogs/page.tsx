@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Column } from "@/types/global";
 import { format, parseISO } from "date-fns";
 import Table from "@/components/Table/Table";
@@ -6,7 +5,8 @@ import { getClientBlogs } from "@/libs/fetch";
 import Banner from "@/components/Common/Banner";
 import EditButton from "@/components/Common/EditButton";
 import DeleteButton from "@/components/Common/DeleteButton";
-import { Avatar, Button, Stack, TableBody, TableCell, TableRow } from "@mui/material";
+import { Avatar, TableBody, TableCell, TableRow } from "@mui/material";
+import CreateLinkButton from "@/components/Common/CreateLinkButton";
 
 type SearchParams = { searchParams: { page?: string; size?: string } };
 
@@ -30,11 +30,7 @@ export default async function Blogs({ searchParams }: SearchParams) {
     return (
         <>
             <Banner>All Blog</Banner>
-            <Stack mb={3} alignItems="end">
-                <Button LinkComponent={Link} href="/dashboard/create_blog">
-                    Create Blog
-                </Button>
-            </Stack>
+            <CreateLinkButton href="blog" />
             <Table columns={columns} total={blogs?.meta?.total!} size={size} page={page}>
                 <TableBody>
                     {blogs?.data?.map(({ id, image, title, content, source, publishedDate }, idx) => (

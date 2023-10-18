@@ -2,6 +2,7 @@
 
 import useCreateQuery from "@/hooks/useCreateQuery";
 import { MenuItem, TextField } from "@mui/material";
+import firstWordCapital from "@/libs/firstWordCapital";
 
 export default function StatusFilter({ status, items }: { status: string; items: string[] }) {
     const createQuery = useCreateQuery();
@@ -17,7 +18,7 @@ export default function StatusFilter({ status, items }: { status: string; items:
         >
             {items.map((item, idx) => (
                 <MenuItem key={idx} value={item}>
-                    {item.charAt(0).toUpperCase() + item.slice(1)}
+                    {firstWordCapital(item)}
                 </MenuItem>
             ))}
         </TextField>

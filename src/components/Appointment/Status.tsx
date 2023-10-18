@@ -1,4 +1,5 @@
 import { Chip } from "@mui/material";
+import firstWordCapital from "@/libs/firstWordCapital";
 
 export default function Status({ status }: { status: string }) {
     let color: any;
@@ -14,5 +15,5 @@ export default function Status({ status }: { status: string }) {
             break;
     }
 
-    return <Chip label={status.charAt(0).toUpperCase() + status.slice(1)} color={color} />;
+    return <Chip label={firstWordCapital(status)} color={color} />;
 }

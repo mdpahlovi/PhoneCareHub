@@ -5,25 +5,27 @@ import Form from "@/components/Forms/Form";
 import useCreateData from "@/hooks/useCreateData";
 import FormInput from "@/components/Forms/FormInput";
 import FormSubmit from "@/components/Forms/FormSubmit";
-import createAdminSchema from "@/validations/createAdminSchema";
+import firstWordCapital from "@/libs/firstWordCapital";
+import createUserOrAdminSchema from "@/validations/createUserOrAdminSchema";
 
 const initialValues = { name: "", email: "", phone: "", password: "", c_password: "" };
-type CreateAdminFormValue = { name: string; email: string; phone: string; password: string; c_password: string };
+type CreateFormValue = { name: string; email: string; phone: string; password: string; c_password: string };
 
-export default function CreateAdminForm() {
-    const { handleCreate, loading } = useCreateData("admin");
+export default function CreateAdminForm({ path }: { path: "user" | "admin" }) {
+    const { handleCreate, loading } = useCreateData(path);
+    const pathUpperCase = firstWordCapital(path);
 
-    const onSubmit = (data: CreateAdminFormValue) => {
+    const onSubmit = (data: CreateFormValue) => {
         const { c_password, ...payload } = data;
         handleCreate(payload);
     };
 
     return (
-        <Form initialValues={initialValues} validationSchema={createAdminSchema} onSubmit={onSubmit}>
-            <FormInput name="name" label="Admin Name" />
+        <Form initialValues={initialValues} validationSchema={createUserOrAdminSchema} onSubmit={onSubmit}>
+            <FormInput name="name" label={`${pathUpperCase} Name`} />
             <Stack direction={{ sm: "row" }} gap={3}>
-                <FormInput type="email" name="email" label="Admin Email" />
-                <FormInput name="phone" label="Admin Phone" />
+                <FormInput type="email" name="email" label={`${pathUpperCase} Email`} />
+                <FormInput name="phone" label={`${pathUpperCase} Phone`} />
             </Stack>
             <Stack direction={{ sm: "row" }} gap={3}>
                 <FormInput type="password" name="password" label="Password" />
