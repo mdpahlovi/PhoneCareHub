@@ -1,4 +1,5 @@
 import { Grid } from "@mui/material";
+import SeeAllButton from "./SeeAllButton";
 import { Service } from "@/types/response";
 import { threeCol } from "@/exports/constant";
 import Section from "@/components/Common/Section";
@@ -14,6 +15,7 @@ export default function Services({ services }: { services: Service[] }) {
                     </Grid>
                 ))}
             </Grid>
+            <SeeAllButton href="service" />
         </Section>
     );
 }

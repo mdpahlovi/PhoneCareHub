@@ -84,3 +84,22 @@ export const features = [
     },
     { icon: LocalShippingRoundedIcon, title: "WE ARE FAST", secondary: "Qualified Workers" },
 ];
+
+export const survives = [
+    {
+        count: 2427,
+        title: "Repaired Glasses",
+    },
+    {
+        count: 697,
+        title: "Water Damaged Repairs",
+    },
+    {
+        count: 1440,
+        title: "Unlocked Phones",
+    },
+    {
+        count: 41472,
+        title: "Happy Customers",
+    },
+];

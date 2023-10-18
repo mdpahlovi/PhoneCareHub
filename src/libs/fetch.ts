@@ -29,10 +29,17 @@ export async function getservice(id: string): Promise<IApiResponse<Service>> {
     return res.json();
 }
 
-export async function getallblogs(size: number, page: number, search: string): Promise<IApiResponse<Blog[]>> {
-    const res = await fetch(`${BASE_URL}/blog?size=${size}&page=${page}&search=${search}`, { cache: "no-cache" });
-    if (!res.ok) throw new Error("Failed To Fetch Data");
+export async function getServerBlogs(size: number, page: number, search: string): Promise<IApiResponse<Blog[]>> {
+    const res = await fetch(`${BASE_URL}/blog?size=${size}&page=${page}&search=${search}`);
 
+    if (!res.ok) throw new Error("Failed To Fetch Data");
+    return res.json();
+}
+
+export async function getClientBlogs(size: number, page: number, search: string): Promise<IApiResponse<Blog[]>> {
+    const res = await fetch(`${BASE_URL}/blog?size=${size}&page=${page}&search=${search}`, { cache: "no-cache" });
+
+    if (!res.ok) throw new Error("Failed To Fetch Data");
     return res.json();
 }
 

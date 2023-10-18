@@ -98,3 +98,10 @@ export type OnlineAppointment = {
     user: { name: string; image: string };
     service: { name: string };
 };
+
+export type Review = {
+    name: string;
+    avatar: string;
+    rating: number;
+    text: string;
+};
