@@ -21,6 +21,12 @@ export interface FromInputProps {
     disabled?: boolean;
 }
 
+export interface FromRatting {
+    name: string;
+    label: React.ReactNode;
+    disabled?: boolean;
+}
+
 export interface FromSelectProps {
     items: string[];
     name: string;

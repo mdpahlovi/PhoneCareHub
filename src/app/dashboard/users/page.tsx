@@ -7,6 +7,7 @@ import Banner from "@/components/Common/Banner";
 import DeleteButton from "@/components/Common/DeleteButton";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { TableRow, TableCell, TableBody, Avatar } from "@mui/material";
+import ChangePasswordButton from "@/components/Common/ChangePasswordButton";
 
 type SearchParams = { searchParams: { page?: string; size?: string } };
 
@@ -19,7 +20,7 @@ const columns: readonly Column[] = [
     { label: "BirthDate" },
     { label: "Gender", align: "right" },
     { label: "Phone", align: "right" },
-    { label: "Created At", align: "right" },
+    { label: "Change Password", align: "right" },
     { label: "Delete", align: "right" },
 ];
 
@@ -34,7 +35,7 @@ export default async function ManageUsers({ searchParams }: SearchParams) {
             <Banner>All User</Banner>
             <Table columns={columns} total={users?.meta?.total!} page={page} size={size}>
                 <TableBody>
-                    {users?.data?.map(({ id, image, name, email, phone, birthdate, gender, createdAt }, idx) => (
+                    {users?.data?.map(({ id, image, name, email, phone, birthdate, gender }, idx) => (
                         <TableRow key={idx} hover>
                             <TableCell>
                                 <Avatar src={image} alt="" />
@@ -44,7 +45,9 @@ export default async function ManageUsers({ searchParams }: SearchParams) {
                             <TableCell>{birthdate && format(parseISO(birthdate), "PPP")}</TableCell>
                             <TableCell align="right">{gender}</TableCell>
                             <TableCell align="right">{phone}</TableCell>
-                            <TableCell align="right">{format(parseISO(createdAt), "PPPp")}</TableCell>
+                            <TableCell align="right">
+                                <ChangePasswordButton id={id} path="user" />
+                            </TableCell>
                             <TableCell align="right">
                                 <DeleteButton id={id} path="user" />
                             </TableCell>

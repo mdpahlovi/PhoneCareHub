@@ -10,7 +10,6 @@ interface PaymentDialogStore {
 
 const usePaymentDialogStore = create<PaymentDialogStore>((set) => ({
     onlineAppointmentId: "",
-    id: "",
     amount: null,
     open: false,
     onClose: () => set({ open: false }),

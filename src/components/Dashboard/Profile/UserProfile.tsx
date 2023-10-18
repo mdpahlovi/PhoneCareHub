@@ -11,6 +11,7 @@ import FormSelect from "@/components/Forms/FormSelect";
 import FormDatePick from "@/components/Forms/FormDatePick";
 import { getUserInitialValues } from "@/libs/initialValues";
 import FormProfileUpload from "@/components/Forms/FormProfileUpload";
+import ChangePasswordButton from "@/components/Common/ChangePasswordButton";
 
 export default function UserProfile({ profile }: { profile: User }) {
     const [editing, setEditing] = useState(false);
@@ -18,9 +19,12 @@ export default function UserProfile({ profile }: { profile: User }) {
 
     return (
         <Box position="relative" my={3}>
-            <Button sx={{ width: "max-content", position: "absolute", right: 0 }} onClick={() => setEditing(!editing)}>
-                {editing ? "Cancel" : "Edit"}
-            </Button>
+            <Stack position="absolute" right={0} alignItems="end" gap={3}>
+                <Button sx={{ width: "max-content" }} onClick={() => setEditing(!editing)}>
+                    {editing ? "Cancel" : "Edit"}
+                </Button>
+                <ChangePasswordButton id={profile.id} path="profile" />
+            </Stack>
             <Form initialValues={getUserInitialValues(profile)} onSubmit={handleUpdate}>
                 <FormProfileUpload image={profile.image} name="image" disabled={!editing} />
                 <FormInput name="name" label="Name" disabled={!editing} />

@@ -2,6 +2,8 @@ import Provider from "@/layouts/Provider";
 import ToastProvider from "@/layouts/ToastProvider";
 import ConfirmDeleteDialog from "@/layouts/Dialogs/ConfirmDeleteDialog";
 import PaymentDialog from "@/layouts/Dialogs/PaymentDialog";
+import ReviewDialog from "@/layouts/Dialogs/CreateReviewDialog";
+import ChangePasswordDialog from "@/layouts/Dialogs/ChangePasswordDialog";
 
 export const metadata = {
     title: {
@@ -18,7 +20,9 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
                     {children}
                     <ToastProvider />
                     <PaymentDialog />
+                    <ReviewDialog />
                     <ConfirmDeleteDialog />
+                    <ChangePasswordDialog />
                 </body>
             </Provider>
         </html>

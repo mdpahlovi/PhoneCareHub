@@ -25,7 +25,7 @@ export default function useDashboardLinks(): RouteType[] {
             routes = [users, services, manageOnlineAppointments, manageOfflineAppointments, blogs, faq];
             break;
         case "superadmin":
-            routes = [users, admins, create_admin];
+            routes = [admins, create_admin];
             break;
     }
 

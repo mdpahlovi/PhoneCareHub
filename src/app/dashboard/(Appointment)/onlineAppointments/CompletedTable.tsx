@@ -1,6 +1,7 @@
 import Table from "@/components/Table/Table";
 import { TableBody, TableCell, TableRow } from "@mui/material";
 import { Column, OnlineAppointmentTableProps } from "@/types/global";
+import ReviewButton from "@/components/Appointment/ReviewButton";
 
 const columns: readonly Column[] = [
     { label: "Service Name", minWidth: 128 },
@@ -14,13 +15,15 @@ export default function CompletedTable({ appointment, total, page, size }: Onlin
     return (
         <Table columns={columns} total={total} size={size} page={page}>
             <TableBody>
-                {appointment?.map(({ id, service, deviceInfo, issueDescription, paymentAmount }, idx) => (
-                    <TableRow key={idx} hover>
+                {appointment?.map(({ id, userId, serviceId, service, deviceInfo, issueDescription, paymentAmount }) => (
+                    <TableRow key={id} hover>
                         <TableCell>{service.name}</TableCell>
                         <TableCell>{deviceInfo}</TableCell>
                         <TableCell>{issueDescription}</TableCell>
                         <TableCell align="right">{paymentAmount}</TableCell>
-                        <TableCell align="right"></TableCell>
+                        <TableCell align="right">
+                            <ReviewButton userId={userId} serviceId={serviceId} />
+                        </TableCell>
                     </TableRow>
                 ))}
             </TableBody>
