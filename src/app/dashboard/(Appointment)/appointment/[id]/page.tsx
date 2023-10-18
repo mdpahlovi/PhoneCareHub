@@ -1,9 +1,9 @@
 import { getServerSession } from "next-auth";
 import getDateRange from "@/libs/getDateRange";
 import { getOnlineAppointment } from "@/libs/fetch";
-import PaymentButton from "@/components/Common/PaymentButton";
+import PaymentButton from "@/components/Appointment/PaymentButton";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
-import CancelAppointment from "@/components/Common/CancelAppointment";
+import CancelAppointment from "@/components/Appointment/CancelAppointment";
 import { Chip, Button, Stack, Divider, Typography, ListItemText, List, ListItem, Box } from "@mui/material";
 
 export const metadata = { title: "Appointment Details" };

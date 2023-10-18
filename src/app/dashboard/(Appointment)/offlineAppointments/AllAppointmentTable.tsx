@@ -2,7 +2,7 @@ import { format, parseISO } from "date-fns";
 import Table from "@/components/Table/Table";
 import { TableBody, TableCell, TableRow } from "@mui/material";
 import { Column, OfflineAppointmentTableProps } from "@/types/global";
-import CancelAppointment from "@/components/Common/CancelAppointment";
+import CancelAppointment from "@/components/Appointment/CancelAppointment";
 
 const columns: readonly Column[] = [
     { label: "Service Name", minWidth: 128 },

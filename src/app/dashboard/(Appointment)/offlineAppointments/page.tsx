@@ -17,7 +17,7 @@ export default async function OfflineAppointment({ searchParams }: SearchParams)
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const status = searchParams?.status ? searchParams.status : "appointments";
-    const offlineAppointment = await getallOfflineAppointment(session?.token, size, page, status, {});
+    const offlineAppointment = await getallOfflineAppointment(session?.token, "", size, page, status);
 
     return (
         <>

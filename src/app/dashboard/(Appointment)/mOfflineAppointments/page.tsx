@@ -8,6 +8,8 @@ import { getallOfflineAppointment } from "@/libs/fetch";
 import DeleteButton from "@/components/Common/DeleteButton";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { Avatar, Button, Stack, TableBody, TableCell, TableRow, Typography } from "@mui/material";
+import SearchField from "@/components/Common/SearchField";
+import StatusFilter from "@/components/Appointment/StatusFilter";
 
 export const metadata = { title: "Manage Offline Appointment" };
 
@@ -21,23 +23,24 @@ const columns: readonly Column[] = [
 ];
 
 type SearchParams = {
-    searchParams: { page?: string; size?: string; status?: string; email?: string; appointmentDate?: string };
+    searchParams: { search?: string; page?: string; size?: string; status?: string; email?: string; appointmentDate?: string };
 };
 
 export default async function ManageOfflineAppointment({ searchParams }: SearchParams) {
     const session = await getServerSession(authOptions);
+    const search = searchParams?.search ? searchParams.search : "";
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
-    const offlineAppointment = await getallOfflineAppointment(session?.token, size, page, searchParams?.status, {
-        email: searchParams?.email,
-        appointmentDate: searchParams?.appointmentDate,
-    });
+    const status = searchParams?.status ? searchParams.status : "appointments";
+    const appointmentDate = searchParams?.appointmentDate ? searchParams.appointmentDate : undefined;
+    const offlineAppointment = await getallOfflineAppointment(session?.token, search, size, page, status, appointmentDate);
 
     return (
         <>
             <Banner>Offline Appointment</Banner>
-            <Stack mb={3} alignItems="end">
-                Pahlovi
+            <Stack mb={3} direction="row" alignItems="end" flexWrap="wrap" gap={3}>
+                <SearchField search={search} />
+                <StatusFilter status={status} items={["appointments", "completed", "cancelled"]} />
             </Stack>
             <Table columns={columns} total={offlineAppointment?.meta?.total} size={size} page={page}>
                 <TableBody>

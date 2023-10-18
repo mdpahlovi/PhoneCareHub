@@ -3,7 +3,7 @@ import Table from "@/components/Table/Table";
 import Status from "@/components/Appointment/Status";
 import { Button, TableBody, TableCell, TableRow } from "@mui/material";
 import { Column, OnlineAppointmentTableProps } from "@/types/global";
-import PaymentButton from "@/components/Common/PaymentButton";
+import PaymentButton from "@/components/Appointment/PaymentButton";
 import getDateRange from "@/libs/getDateRange";
 
 const columns: readonly Column[] = [

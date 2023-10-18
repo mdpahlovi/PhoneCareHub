@@ -1,7 +1,14 @@
 import { BASE_URL } from "@/exports/axios";
 import { Admin, Blog, FAQ, IApiResponse, OfflineAppointment, OnlineAppointment, Service, User } from "@/types/response";
 
-export async function getallservices(size: number, page: number, search: string): Promise<IApiResponse<Service[]>> {
+export async function getServerServices(size: number, page: number, search: string): Promise<IApiResponse<Service[]>> {
+    const res = await fetch(`${BASE_URL}/service?size=${size}&page=${page}&search=${search}`);
+
+    if (!res.ok) throw new Error("Failed To Fetch Data");
+    return res.json();
+}
+
+export async function getClientServices(size: number, page: number, search: string): Promise<IApiResponse<Service[]>> {
     const res = await fetch(`${BASE_URL}/service?size=${size}&page=${page}&search=${search}`, { cache: "no-cache" });
 
     if (!res.ok) throw new Error("Failed To Fetch Data");
@@ -65,21 +72,23 @@ export async function getprofile(token: string | undefined): Promise<IApiRespons
 
 export async function getallOfflineAppointment(
     token: string | undefined,
+    search: string,
     size: number,
     page: number,
     status: string | undefined,
-    { email, appointmentDate }: { email?: string; appointmentDate?: string }
+    appointmentDate?: Date | string
 ): Promise<IApiResponse<OfflineAppointment[]>> {
-    let emailParams;
     let statusParams;
     let appointmentDateParams;
-    if (email) emailParams = `email=${email}`;
     if (status) statusParams = getStatusParams(status);
     if (appointmentDate) appointmentDateParams = `appointmentDate=${appointmentDate}`;
 
     const res = await fetch(
-        `${BASE_URL}/offlineAppointment?size=${size}&page=${page + 1}&${statusParams}&${emailParams}&${appointmentDateParams}`,
-        { cache: "no-cache", headers: { authorization: token! } }
+        `${BASE_URL}/offlineAppointment?search=${search}&size=${size}&page=${page + 1}&${statusParams}&${appointmentDateParams}`,
+        {
+            cache: "no-cache",
+            headers: { authorization: token! },
+        }
     );
 
     if (!res.ok) throw new Error("Failed To Fetch Data");
@@ -88,17 +97,15 @@ export async function getallOfflineAppointment(
 
 export async function getallOnlineAppointment(
     token: string | undefined,
+    search: string,
     size: number,
     page: number,
-    status: string | undefined,
-    { email }: { email?: string }
+    status: string | undefined
 ): Promise<IApiResponse<OnlineAppointment[]>> {
-    let emailParams;
     let statusParams;
-    if (email) emailParams = `email=${email}`;
     if (status) statusParams = getStatusParams(status);
 
-    const res = await fetch(`${BASE_URL}/onlineAppointment?size=${size}&page=${page + 1}&${statusParams}&${emailParams}`, {
+    const res = await fetch(`${BASE_URL}/onlineAppointment?search=${search}&size=${size}&page=${page + 1}&${statusParams}`, {
         cache: "no-cache",
         headers: { authorization: token! },
     });
