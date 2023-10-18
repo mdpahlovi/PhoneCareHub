@@ -1,8 +1,8 @@
+import { createElement } from "react";
+import { service_process } from "@/exports/data";
 import Section from "@/components/Common/Section";
 import { StyledProcessBackground } from "./Styled";
 import { Grid, Stack, Typography } from "@mui/material";
-import { service_process } from "@/exports/data";
-import { createElement } from "react";
 
 export default function ServiceProcess() {
     const borderWhite = { border: 1, borderRadius: 1, borderColor: "rgba(255, 255, 255, 0.12)" };

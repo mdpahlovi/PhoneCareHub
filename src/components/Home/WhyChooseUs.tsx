@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { createElement } from "react";
-
 import { features } from "@/exports/data";
 import { StyledWhyChooseUs } from "./Styled";
 import { Box, Stack, Typography, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";

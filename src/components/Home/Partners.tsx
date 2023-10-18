@@ -1,6 +1,6 @@
-import { Box, Container } from "@mui/material";
 import Image from "next/image";
 import Marquee from "react-fast-marquee";
+import { Box, Container } from "@mui/material";
 
 const images = [
     "https://demo.proteusthemes.com/repairpress/wp-content/uploads/sites/27/2015/09/1.png",

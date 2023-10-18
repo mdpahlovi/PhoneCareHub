@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useState } from "react";
 import { StyledFAQ } from "./Styled";
 import { FAQ } from "@/types/response";
+import Section from "../Common/Section";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from "@mui/material";
-import Section from "../Common/Section";
 
 export default function FAQs({ faq }: { faq: FAQ[] }) {
     const [expanded, setExpanded] = useState<number | boolean>(0);
