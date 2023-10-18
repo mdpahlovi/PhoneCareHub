@@ -13,6 +13,7 @@ const nextConfig = {
             "shorturl.at",
             "img.freepik.com",
             "res.cloudinary.com",
+            "gadget.fixherotheme.com",
             "lh3.googleusercontent.com",
             "avatars.githubusercontent.com",
         ],

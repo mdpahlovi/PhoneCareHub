@@ -8,15 +8,15 @@ export const StyledHero = styled(Container)(({ theme }) => ({
     gridTemplateColumns: "repeat(2, 1fr)",
     alignItems: "center",
     [theme.breakpoints.down("md")]: {
-        margin: "40px 0",
         gridTemplateColumns: "1fr",
+        paddingTop: theme.spacing(7.5),
+        paddingBottom: theme.spacing(7.5),
     },
 }));
 
 export const StyledProcessBackground = styled("div")(({ theme }) => ({
     color: "white",
-    padding: "40px 0 10px 0",
-    marginBottom: 40,
+    padding: "60px 0 16px 0",
     position: "relative",
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -30,5 +30,27 @@ export const StyledProcessBackground = styled("div")(({ theme }) => ({
         height: "100%",
         position: "absolute",
         backgroundColor: "rgba(0, 0, 0, 0.7)",
+    },
+}));
+
+export const StyledWhyChooseUs = styled(Container)(({ theme }) => ({
+    display: "grid",
+    gridTemplateColumns: "repeat(2, 1fr)",
+    alignItems: "center",
+    gap: theme.spacing(3),
+    paddingTop: theme.spacing(7.5),
+    paddingBottom: theme.spacing(7.5),
+    [theme.breakpoints.down("md")]: {
+        gridTemplateColumns: "1fr",
+    },
+}));
+
+export const StyledFAQ = styled("div")(({ theme }) => ({
+    display: "grid",
+    gridTemplateColumns: "repeat(2, 1fr)",
+    alignItems: "center",
+    gap: theme.spacing(3),
+    [theme.breakpoints.down("md")]: {
+        gridTemplateColumns: "1fr",
     },
 }));

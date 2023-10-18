@@ -7,7 +7,7 @@ export default function Section({ title, children }: { title: string } & React.P
     const firstPart = titleArray.join(" ");
 
     return (
-        <Container sx={{ pb: 5, position: "relative", zIndex: 10 }}>
+        <Container sx={{ pb: 7.5, position: "relative", zIndex: 10 }}>
             <Typography mb={3} variant="h4" fontWeight={600} align="center">
                 {firstPart}
                 <span style={{ marginLeft: "12px", color: SECONDARY.main }}>{lastWord}</span>

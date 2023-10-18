@@ -1,7 +1,7 @@
 import Section from "@/components/Common/Section";
 import { StyledProcessBackground } from "./Styled";
 import { Grid, Stack, Typography } from "@mui/material";
-import { servicing_process } from "@/exports/data";
+import { service_process } from "@/exports/data";
 import { createElement } from "react";
 
 export default function ServiceProcess() {
@@ -10,7 +10,7 @@ export default function ServiceProcess() {
         <StyledProcessBackground>
             <Section title="Service Process">
                 <Grid container columns={{ xs: 3, sm: 6, md: 12 }} spacing={3}>
-                    {servicing_process.map(({ icon, title, details }, idx) => (
+                    {service_process.map(({ icon, title, details }, idx) => (
                         <Grid item key={idx} xs={3}>
                             <Stack height="100%" p={3} pb={2} {...borderWhite} gap={2}>
                                 <Stack direction="row" gap={2}>
