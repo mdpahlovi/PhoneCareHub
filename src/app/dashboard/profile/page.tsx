@@ -15,14 +15,19 @@ export default async function Profile() {
     const session = await getServerSession(authOptions);
     const profile = await getprofile(session?.token);
 
-    return (
-        <>
-            <Banner>{session?.user?.name} Profile</Banner>
-            {session?.user?.role === "user" ? (
+    if (session?.user?.role === "user") {
+        return (
+            <>
+                <Banner>User Profile</Banner>
                 <UserProfile profile={profile.data as User} />
-            ) : (
+            </>
+        );
+    } else {
+        return (
+            <>
+                <Banner>Admin Profile</Banner>
                 <AdminProfile profile={profile.data as Admin} />
-            )}
-        </>
-    );
+            </>
+        );
+    }
 }
