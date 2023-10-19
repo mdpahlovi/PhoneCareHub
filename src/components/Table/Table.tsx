@@ -1,10 +1,12 @@
+import TableSearch from "./TableSearch";
 import { TableProps } from "@/types/global";
 import TablePagination from "./TablePagination";
 import { Paper, TableContainer, Table as MuiTable, TableHead, TableRow, TableCell } from "@mui/material";
 
-export default function Table({ children, columns, total, page, size }: TableProps & React.PropsWithChildren) {
+export default function Table({ children, columns, total, page, size, search, label }: TableProps) {
     return (
         <Paper>
+            {label ? <TableSearch label={label} search={search!} /> : null}
             <TableContainer>
                 <MuiTable stickyHeader>
                     <TableHead>
@@ -19,7 +21,7 @@ export default function Table({ children, columns, total, page, size }: TablePro
                     {children}
                 </MuiTable>
             </TableContainer>
-            {size && <TablePagination total={total!} page={page!} size={size} />}
+            {size ? <TablePagination total={total!} page={page!} size={size} /> : null}
         </Paper>
     );
 }

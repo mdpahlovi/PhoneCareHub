@@ -8,7 +8,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { TableRow, TableCell, TableBody, Avatar } from "@mui/material";
 import ChangePasswordButton from "@/components/Dashboard/Components/ChangePasswordButton";
 
-type SearchParams = { searchParams: { page?: string; size?: string } };
+type SearchParams = { searchParams: { search?: string; page?: string; size?: string } };
 
 export const metadata = { title: "All Admin" };
 
@@ -23,14 +23,16 @@ const columns: readonly Column[] = [
 
 export default async function ManageAdmins({ searchParams }: SearchParams) {
     const session = await getServerSession(authOptions);
+    const search = searchParams?.search ? searchParams.search : "";
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const size = Number(searchParams?.size ? searchParams.size : 5);
-    const admins = await getalladmins(session?.token, page, size);
+    const admins = await getalladmins(session?.token, search, page, size);
+    const total = admins?.meta?.total;
 
     return (
         <>
             <Banner>All Admin</Banner>
-            <Table columns={columns} total={admins?.meta?.total!} page={page} size={size}>
+            <Table columns={columns} total={total!} page={page} size={size} search={search} label="Admin">
                 <TableBody>
                     {admins?.data?.map(({ id, image, name, email, phone }, idx) => (
                         <TableRow key={idx} hover>

@@ -43,8 +43,8 @@ export async function getAllFAQ(): Promise<IApiResponse<FAQ[]>> {
     return res.json();
 }
 
-export async function getalladmins(token: string | undefined, page: number, size: number): Promise<IApiResponse<Admin[]>> {
-    const res = await fetch(`${BASE_URL}/admin?page=${page + 1}&size=${size}`, {
+export async function getalladmins(token: string | undefined, search: string, page: number, size: number): Promise<IApiResponse<Admin[]>> {
+    const res = await fetch(`${BASE_URL}/admin?search=${search}&page=${page + 1}&size=${size}`, {
         cache: "no-cache",
         headers: { authorization: token! },
     });
@@ -53,8 +53,8 @@ export async function getalladmins(token: string | undefined, page: number, size
     return res.json();
 }
 
-export async function getallusers(token: string | undefined, page: number, size: number): Promise<IApiResponse<User[]>> {
-    const res = await fetch(`${BASE_URL}/user?page=${page + 1}&size=${size}`, {
+export async function getallusers(token: string | undefined, search: string, page: number, size: number): Promise<IApiResponse<User[]>> {
+    const res = await fetch(`${BASE_URL}/user?search=${search}&page=${page + 1}&size=${size}`, {
         cache: "no-cache",
         headers: { authorization: token! },
     });

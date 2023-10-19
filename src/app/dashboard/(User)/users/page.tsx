@@ -10,7 +10,7 @@ import CreateButton from "@/components/Dashboard/Components/CreateButton";
 import { TableRow, TableCell, TableBody, Avatar } from "@mui/material";
 import ChangePasswordButton from "@/components/Dashboard/Components/ChangePasswordButton";
 
-type SearchParams = { searchParams: { page?: string; size?: string } };
+type SearchParams = { searchParams: { search?: string; page?: string; size?: string } };
 
 export const metadata = { title: "All User" };
 
@@ -27,15 +27,17 @@ const columns: readonly Column[] = [
 
 export default async function ManageUsers({ searchParams }: SearchParams) {
     const session = await getServerSession(authOptions);
+    const search = searchParams?.search ? searchParams.search : "";
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const size = Number(searchParams?.size ? searchParams.size : 5);
-    const users = await getallusers(session?.token, page, size);
+    const users = await getallusers(session?.token, search, page, size);
+    const total = users?.meta?.total;
 
     return (
         <>
             <Banner>All User</Banner>
             <CreateButton href="user" />
-            <Table columns={columns} total={users?.meta?.total!} page={page} size={size}>
+            <Table columns={columns} total={total!} page={page} size={size} search={search} label="User">
                 <TableBody>
                     {users?.data?.map(({ id, image, name, email, phone, birthdate, gender }, idx) => (
                         <TableRow key={idx} hover>
