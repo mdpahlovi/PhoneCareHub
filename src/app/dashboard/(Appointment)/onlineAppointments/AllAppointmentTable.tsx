@@ -1,10 +1,10 @@
-import Link from "next/link";
 import Table from "@/components/Table/Table";
+import getDateRange from "@/libs/getDateRange";
 import Status from "@/components/Dashboard/Components/Status";
-import { Button, TableBody, TableCell, TableRow } from "@mui/material";
+import { TableBody, TableCell, TableRow } from "@mui/material";
 import { Column, OnlineAppointmentTableProps } from "@/types/global";
 import PaymentButton from "@/components/Dashboard/Components/PaymentButton";
-import getDateRange from "@/libs/getDateRange";
+import DetailButton from "@/components/Dashboard/Components/DetailButton";
 
 const columns: readonly Column[] = [
     { label: "Service Name", minWidth: 128 },
@@ -35,9 +35,7 @@ export default function AllAppointmentTable({ appointment, total, page, size }: 
                             )}
                         </TableCell>
                         <TableCell align="right">
-                            <Button size="small" LinkComponent={Link} href={`/dashboard/appointment/${id}`}>
-                                See Details
-                            </Button>
+                            <DetailButton label="See Details" href={`/appointment/${id}`} />
                         </TableCell>
                     </TableRow>
                 ))}

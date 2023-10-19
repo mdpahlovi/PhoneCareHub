@@ -9,7 +9,12 @@ export default function PaymentButton({ onlineAppointmentId, amount, status }: P
     const { onOpen } = usePaymentDialogStore();
 
     return (
-        <Button size="small" onClick={() => onOpen(onlineAppointmentId, amount)} disabled={status !== "payment"}>
+        <Button
+            size="small"
+            onClick={() => onOpen(onlineAppointmentId, amount)}
+            disabled={status !== "payment"}
+            sx={{ whiteSpace: "nowrap" }}
+        >
             Pay Now
         </Button>
     );

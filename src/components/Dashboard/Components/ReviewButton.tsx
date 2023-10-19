@@ -9,7 +9,7 @@ export default function ReviewButton({ userId, serviceId }: ReviewButtonProps) {
     const { onOpen } = useReviewDialogStore();
 
     return (
-        <Button size="small" onClick={() => onOpen(userId, serviceId)}>
+        <Button size="small" sx={{ whiteSpace: "nowrap" }} onClick={() => onOpen(userId, serviceId)}>
             Review Now
         </Button>
     );

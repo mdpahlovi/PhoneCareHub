@@ -8,7 +8,7 @@ import SearchField from "@/components/Common/SearchField";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import StatusFilter from "@/components/Dashboard/Components/StatusFilter";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
-import SetDetailButton from "@/components/Dashboard/Components/SetDetailButton";
+import DetailButton from "@/components/Dashboard/Components/DetailButton";
 import { Avatar, Box, Stack, TableBody, TableCell, TableRow, Typography } from "@mui/material";
 
 export const metadata = { title: "Manage Offline Appointment" };
@@ -63,7 +63,7 @@ export default async function ManageOfflineAppointment({ searchParams }: SearchP
                             <TableCell>{issueDescription}</TableCell>
                             <TableCell align="right">{format(parseISO(appointmentDate), "PPP")}</TableCell>
                             <TableCell align="right">
-                                <SetDetailButton href={`mOfflineAppointments/${id}`} />
+                                <DetailButton label="Set Detail" href={`mOfflineAppointments/${id}`} />
                             </TableCell>
                             <TableCell align="right">
                                 <DeleteButton id={id} path="offlineAppointment" />

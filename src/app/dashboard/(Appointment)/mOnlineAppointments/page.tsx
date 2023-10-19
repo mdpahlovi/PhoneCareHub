@@ -7,7 +7,7 @@ import SearchField from "@/components/Common/SearchField";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import StatusFilter from "@/components/Dashboard/Components/StatusFilter";
-import SetDetailButton from "@/components/Dashboard/Components/SetDetailButton";
+import DetailButton from "@/components/Dashboard/Components/DetailButton";
 import { Avatar, TableBody, TableCell, TableRow, Typography, Stack, Box } from "@mui/material";
 
 export const metadata = { title: "Manage Online Appointment" };
@@ -57,7 +57,7 @@ export default async function ManageOnlineAppointment({ searchParams }: SearchPa
                             <TableCell>{deviceInfo}</TableCell>
                             <TableCell align="right">{issueDescription}</TableCell>
                             <TableCell align="right">
-                                <SetDetailButton href={`mOnlineAppointments/${id}`} />
+                                <DetailButton label="Set Detail" href={`mOnlineAppointments/${id}`} />
                             </TableCell>
                             <TableCell align="right">
                                 <DeleteButton id={id} path="onlineAppointment" />
