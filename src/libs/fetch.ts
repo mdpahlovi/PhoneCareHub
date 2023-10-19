@@ -1,21 +1,14 @@
 import { BASE_URL } from "@/exports/axios";
-import { Admin, Blog, FAQ, IApiResponse, OfflineAppointment, OnlineAppointment, Service, User } from "@/types/response";
+import { Admin, Blog, FAQ, IApiResponse, OfflineAppointment, OnlineAppointment, Review, Service, User } from "@/types/response";
 
-export async function getServerFAQs(): Promise<IApiResponse<FAQ[]>> {
-    const res = await fetch(`${BASE_URL}/faq`);
-
-    if (!res.ok) throw new Error("Failed To Fetch Data");
-    return res.json();
-}
-
-export async function getServerServices(size: number, page: number, search: string): Promise<IApiResponse<Service[]>> {
-    const res = await fetch(`${BASE_URL}/service?size=${size}&page=${page}&search=${search}`);
+export async function getAllReview(): Promise<IApiResponse<Review[]>> {
+    const res = await fetch(`${BASE_URL}/review`, { cache: "no-cache" });
 
     if (!res.ok) throw new Error("Failed To Fetch Data");
     return res.json();
 }
 
-export async function getClientServices(size: number, page: number, search: string): Promise<IApiResponse<Service[]>> {
+export async function getAllService(size: number, page: number, search: string): Promise<IApiResponse<Service[]>> {
     const res = await fetch(`${BASE_URL}/service?size=${size}&page=${page}&search=${search}`, { cache: "no-cache" });
 
     if (!res.ok) throw new Error("Failed To Fetch Data");
@@ -29,14 +22,7 @@ export async function getservice(id: string): Promise<IApiResponse<Service>> {
     return res.json();
 }
 
-export async function getServerBlogs(size: number, page: number, search: string): Promise<IApiResponse<Blog[]>> {
-    const res = await fetch(`${BASE_URL}/blog?size=${size}&page=${page}&search=${search}`);
-
-    if (!res.ok) throw new Error("Failed To Fetch Data");
-    return res.json();
-}
-
-export async function getClientBlogs(size: number, page: number, search: string): Promise<IApiResponse<Blog[]>> {
+export async function getAllBlog(size: number, page: number, search: string): Promise<IApiResponse<Blog[]>> {
     const res = await fetch(`${BASE_URL}/blog?size=${size}&page=${page}&search=${search}`, { cache: "no-cache" });
 
     if (!res.ok) throw new Error("Failed To Fetch Data");
@@ -50,7 +36,7 @@ export async function getblog(id: string): Promise<IApiResponse<Blog>> {
     return res.json();
 }
 
-export async function getClientFaqs(): Promise<IApiResponse<FAQ[]>> {
+export async function getAllFAQ(): Promise<IApiResponse<FAQ[]>> {
     const res = await fetch(`${BASE_URL}/faq`, { cache: "no-cache" });
 
     if (!res.ok) throw new Error("Failed To Fetch Data");

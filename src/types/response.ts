@@ -1,5 +1,3 @@
-import { type } from "os";
-
 export type IApiResponse<T> = {
     success: boolean;
     statusCode: number;
@@ -21,6 +19,7 @@ export type Service = {
     estimatetime: number;
     createdAt: string;
     updatedAt: string;
+    reviews: Review[];
 };
 
 export type Blog = {
@@ -78,8 +77,8 @@ export type OfflineAppointment = {
     issueDidected: string[];
     createdAt: string;
     updatedAt: string;
-    user: { name: string; image: string };
-    service: { name: string };
+    user: User;
+    service: Service;
 };
 
 export type OnlineAppointment = {
@@ -95,13 +94,27 @@ export type OnlineAppointment = {
     deliveryDate: string | null;
     createdAt: string;
     updatedAt: string;
-    user: { name: string; image: string };
-    service: { name: string };
+    user: User;
+    service: Service;
+    payment?: Payment;
+};
+
+export type Payment = {
+    id: string;
+    onlineAppointmentId: string;
+    method: string;
+    amount: number;
+    transactionId: string;
+    paymentDate: string;
 };
 
 export type Review = {
-    name: string;
-    avatar: string;
+    id: string;
+    userId: string;
+    serviceId: string;
     rating: number;
-    text: string;
+    comment: string;
+    createdAt: string;
+    user: User;
+    service: User;
 };

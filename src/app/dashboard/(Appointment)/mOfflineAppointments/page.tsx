@@ -9,12 +9,13 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import StatusFilter from "@/components/Dashboard/Components/StatusFilter";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import SetDetailButton from "@/components/Dashboard/Components/SetDetailButton";
-import { Avatar, Stack, TableBody, TableCell, TableRow, Typography } from "@mui/material";
+import { Avatar, Box, Stack, TableBody, TableCell, TableRow, Typography } from "@mui/material";
 
 export const metadata = { title: "Manage Offline Appointment" };
 
 const columns: readonly Column[] = [
     { label: "User" },
+    { label: "Email" },
     { label: "Device Info", minWidth: 110 },
     { label: "Issue Details", minWidth: 120 },
     { label: "Appointment Date", minWidth: 156, align: "right" },
@@ -49,8 +50,14 @@ export default async function ManageOfflineAppointment({ searchParams }: SearchP
                             <TableCell>
                                 <Stack direction="row" alignItems="center" gap={1}>
                                     <Avatar src={user?.image} alt="" />
-                                    <Typography fontWeight={500}>{user?.name}</Typography>
+                                    <Box>
+                                        <Typography variant="body2">{user?.name}</Typography>
+                                        <Typography variant="body2">{user?.phone}</Typography>
+                                    </Box>
                                 </Stack>
+                            </TableCell>
+                            <TableCell>
+                                <Typography>{user?.email}</Typography>
                             </TableCell>
                             <TableCell>{deviceInfo}</TableCell>
                             <TableCell>{issueDescription}</TableCell>

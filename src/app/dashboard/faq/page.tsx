@@ -1,5 +1,5 @@
 import { Column } from "@/types/global";
-import { getClientFaqs } from "@/libs/fetch";
+import { getAllFAQ } from "@/libs/fetch";
 import Table from "@/components/Table/Table";
 import Banner from "@/components/Common/Banner";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
@@ -17,7 +17,7 @@ const columns: readonly Column[] = [
 export const metadata = { title: "FAQs" };
 
 export default async function FAQs() {
-    const faqs = await getClientFaqs();
+    const faqs = await getAllFAQ();
 
     return (
         <>

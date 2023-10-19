@@ -8,7 +8,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import StatusFilter from "@/components/Dashboard/Components/StatusFilter";
 import SetDetailButton from "@/components/Dashboard/Components/SetDetailButton";
-import { Avatar, TableBody, TableCell, TableRow, Typography, Stack } from "@mui/material";
+import { Avatar, TableBody, TableCell, TableRow, Typography, Stack, Box } from "@mui/material";
 
 export const metadata = { title: "Manage Online Appointment" };
 
@@ -16,8 +16,9 @@ type SearchParams = { searchParams: { search?: string; page?: string; size?: str
 
 const columns: readonly Column[] = [
     { label: "User" },
+    { label: "Email" },
     { label: "Device Info", minWidth: 110 },
-    { label: "Issue Details", minWidth: 120 },
+    { label: "Issue Details", minWidth: 120, align: "right" },
     { label: "Set Detail", minWidth: 98, align: "right" },
     { label: "Delete", align: "right" },
 ];
@@ -44,11 +45,17 @@ export default async function ManageOnlineAppointment({ searchParams }: SearchPa
                             <TableCell>
                                 <Stack direction="row" alignItems="center" gap={1}>
                                     <Avatar src={user?.image} alt="" />
-                                    <Typography fontWeight={500}>{user?.name}</Typography>
+                                    <Box>
+                                        <Typography variant="body2">{user?.name}</Typography>
+                                        <Typography variant="body2">{user?.phone}</Typography>
+                                    </Box>
                                 </Stack>
                             </TableCell>
+                            <TableCell>
+                                <Typography>{user?.email}</Typography>
+                            </TableCell>
                             <TableCell>{deviceInfo}</TableCell>
-                            <TableCell>{issueDescription}</TableCell>
+                            <TableCell align="right">{issueDescription}</TableCell>
                             <TableCell align="right">
                                 <SetDetailButton href={`mOnlineAppointments/${id}`} />
                             </TableCell>

@@ -16,7 +16,13 @@ const FormRatting = ({ name, label, disabled }: FromRatting) => {
             <Typography component="legend" color={error.error ? "red" : ""}>
                 {error.error ? error.helperText : label}
             </Typography>
-            <Rating name={name} value={value} onChange={(event, newValue) => setFieldValue(name, newValue)} readOnly={disabled} />
+            <Rating
+                name={name}
+                value={value}
+                precision={0.5}
+                readOnly={disabled}
+                onChange={(event, newValue) => setFieldValue(name, newValue)}
+            />
         </>
     );
 };

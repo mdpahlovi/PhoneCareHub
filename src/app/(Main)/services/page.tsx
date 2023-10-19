@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import Services from "@/components/Services";
 import Banner from "@/components/Common/Banner";
-import { getServerServices } from "@/libs/fetch";
+import { getAllService } from "@/libs/fetch";
 import Pagination from "@/components/Common/Pagination";
 import SearchField from "@/components/Common/SearchField";
 
@@ -12,7 +12,7 @@ type SearchParams = { searchParams: { page?: string; search?: string } };
 export default async function ServicePage({ searchParams }: SearchParams) {
     const search = searchParams?.search ? searchParams.search : "";
     const page = Number(searchParams?.page ? searchParams.page : 1);
-    const services = await getServerServices(6, page, search);
+    const services = await getAllService(6, page, search);
 
     return (
         <>

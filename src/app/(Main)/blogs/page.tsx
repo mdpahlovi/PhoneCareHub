@@ -1,6 +1,6 @@
 import Blogs from "@/components/Blogs";
 import { Container } from "@mui/material";
-import { getServerBlogs } from "@/libs/fetch";
+import { getAllBlog } from "@/libs/fetch";
 import Banner from "@/components/Common/Banner";
 import Pagination from "@/components/Common/Pagination";
 import SearchField from "@/components/Common/SearchField";
@@ -12,7 +12,7 @@ type SearchParams = { searchParams: { page?: string; search?: string } };
 export default async function BlogPage({ searchParams }: SearchParams) {
     const search = searchParams?.search ? searchParams.search : "";
     const page = Number(searchParams?.page ? searchParams.page : 1);
-    const blogs = await getServerBlogs(4, page, search);
+    const blogs = await getAllBlog(4, page, search);
 
     return (
         <>
