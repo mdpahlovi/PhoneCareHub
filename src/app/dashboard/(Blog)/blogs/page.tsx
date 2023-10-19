@@ -3,10 +3,10 @@ import { format, parseISO } from "date-fns";
 import Table from "@/components/Table/Table";
 import { getClientBlogs } from "@/libs/fetch";
 import Banner from "@/components/Common/Banner";
-import EditButton from "@/components/Common/EditButton";
-import DeleteButton from "@/components/Common/DeleteButton";
+import EditButton from "@/components/Dashboard/Components/EditButton";
+import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import { Avatar, TableBody, TableCell, TableRow } from "@mui/material";
-import CreateLinkButton from "@/components/Common/CreateLinkButton";
+import CreateButton from "@/components/Dashboard/Components/CreateButton";
 
 type SearchParams = { searchParams: { page?: string; size?: string } };
 
@@ -30,7 +30,7 @@ export default async function Blogs({ searchParams }: SearchParams) {
     return (
         <>
             <Banner>All Blog</Banner>
-            <CreateLinkButton href="blog" />
+            <CreateButton href="blog" />
             <Table columns={columns} total={blogs?.meta?.total!} size={size} page={page}>
                 <TableBody>
                     {blogs?.data?.map(({ id, image, title, content, source, publishedDate }, idx) => (

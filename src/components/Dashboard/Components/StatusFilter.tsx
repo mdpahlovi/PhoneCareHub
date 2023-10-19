@@ -9,10 +9,10 @@ export default function StatusFilter({ status, items }: { status: string; items:
 
     return (
         <TextField
-            size="small"
             value={status}
             variant="outlined"
             label="Select Status"
+            sx={{ maxWidth: "448px" }}
             onChange={(e) => createQuery("status", e.target.value)}
             select
         >

@@ -2,9 +2,9 @@ import { Column } from "@/types/global";
 import Table from "@/components/Table/Table";
 import { getClientServices } from "@/libs/fetch";
 import Banner from "@/components/Common/Banner";
-import EditButton from "@/components/Common/EditButton";
-import DeleteButton from "@/components/Common/DeleteButton";
-import CreateLinkButton from "@/components/Common/CreateLinkButton";
+import EditButton from "@/components/Dashboard/Components/EditButton";
+import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
+import CreateButton from "@/components/Dashboard/Components/CreateButton";
 import { Avatar, TableBody, TableCell, TableRow } from "@mui/material";
 
 type SearchParams = { searchParams: { page?: string; size?: string } };
@@ -28,7 +28,7 @@ export default async function ManageService({ searchParams }: SearchParams) {
     return (
         <>
             <Banner>All Service</Banner>
-            <CreateLinkButton href="service" />
+            <CreateButton href="service" />
             <Table columns={columns} total={services?.meta?.total!} size={size} page={page}>
                 <TableBody>
                     {services?.data?.map(({ id, image, name, estimatetime, description }, idx) => (

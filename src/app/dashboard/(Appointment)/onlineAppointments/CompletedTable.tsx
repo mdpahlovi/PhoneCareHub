@@ -1,7 +1,7 @@
 import Table from "@/components/Table/Table";
 import { TableBody, TableCell, TableRow } from "@mui/material";
 import { Column, OnlineAppointmentTableProps } from "@/types/global";
-import ReviewButton from "@/components/Appointment/ReviewButton";
+import ReviewButton from "@/components/Dashboard/Components/ReviewButton";
 
 const columns: readonly Column[] = [
     { label: "Service Name", minWidth: 128 },

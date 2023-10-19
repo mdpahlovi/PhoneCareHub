@@ -11,7 +11,7 @@ import FormSelect from "@/components/Forms/FormSelect";
 import FormDatePick from "@/components/Forms/FormDatePick";
 import { getUserInitialValues } from "@/libs/initialValues";
 import FormProfileUpload from "@/components/Forms/FormProfileUpload";
-import ChangePasswordButton from "@/components/Common/ChangePasswordButton";
+import ChangePasswordButton from "@/components/Dashboard/Components/ChangePasswordButton";
 
 export default function UserProfile({ profile }: { profile: User }) {
     const [editing, setEditing] = useState(false);

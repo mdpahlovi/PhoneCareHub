@@ -9,7 +9,7 @@ import FormInput from "@/components/Forms/FormInput";
 import FormSubmit from "@/components/Forms/FormSubmit";
 import { getAdminInitialValues } from "@/libs/initialValues";
 import FormProfileUpload from "@/components/Forms/FormProfileUpload";
-import ChangePasswordButton from "@/components/Common/ChangePasswordButton";
+import ChangePasswordButton from "@/components/Dashboard/Components/ChangePasswordButton";
 
 export default function AdminProfile({ profile }: { profile: Admin }) {
     const [editing, setEditing] = useState(false);

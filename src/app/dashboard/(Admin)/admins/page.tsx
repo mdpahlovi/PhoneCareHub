@@ -3,10 +3,10 @@ import { getalladmins } from "@/libs/fetch";
 import { getServerSession } from "next-auth";
 import Table from "@/components/Table/Table";
 import Banner from "@/components/Common/Banner";
-import DeleteButton from "@/components/Common/DeleteButton";
+import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { TableRow, TableCell, TableBody, Avatar } from "@mui/material";
-import ChangePasswordButton from "@/components/Common/ChangePasswordButton";
+import ChangePasswordButton from "@/components/Dashboard/Components/ChangePasswordButton";
 
 type SearchParams = { searchParams: { page?: string; size?: string } };
 

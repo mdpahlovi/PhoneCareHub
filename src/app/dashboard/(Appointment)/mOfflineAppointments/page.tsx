@@ -1,15 +1,15 @@
-import Link from "next/link";
 import { Column } from "@/types/global";
 import { format, parseISO } from "date-fns";
 import { getServerSession } from "next-auth";
 import Table from "@/components/Table/Table";
 import Banner from "@/components/Common/Banner";
 import { getallOfflineAppointment } from "@/libs/fetch";
-import DeleteButton from "@/components/Common/DeleteButton";
-import { authOptions } from "@/app/api/auth/[...nextauth]/options";
-import { Avatar, Button, Stack, TableBody, TableCell, TableRow, Typography } from "@mui/material";
 import SearchField from "@/components/Common/SearchField";
-import StatusFilter from "@/components/Appointment/StatusFilter";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import StatusFilter from "@/components/Dashboard/Components/StatusFilter";
+import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
+import SetDetailButton from "@/components/Dashboard/Components/SetDetailButton";
+import { Avatar, Stack, TableBody, TableCell, TableRow, Typography } from "@mui/material";
 
 export const metadata = { title: "Manage Offline Appointment" };
 
@@ -38,7 +38,7 @@ export default async function ManageOfflineAppointment({ searchParams }: SearchP
     return (
         <>
             <Banner>Offline Appointment</Banner>
-            <Stack mb={3} direction="row" alignItems="end" flexWrap="wrap" gap={3}>
+            <Stack mb={3} direction={{ xs: "column", sm: "row" }} alignItems="end" justifyContent="end" gap={3}>
                 <SearchField search={search} />
                 <StatusFilter status={status} items={["appointments", "completed", "cancelled"]} />
             </Stack>
@@ -56,9 +56,7 @@ export default async function ManageOfflineAppointment({ searchParams }: SearchP
                             <TableCell>{issueDescription}</TableCell>
                             <TableCell align="right">{format(parseISO(appointmentDate), "PPP")}</TableCell>
                             <TableCell align="right">
-                                <Button size="small" LinkComponent={Link} href={`/dashboard/mOfflineAppointments/${id}`}>
-                                    Set Detail
-                                </Button>
+                                <SetDetailButton href={`mOfflineAppointments/${id}`} />
                             </TableCell>
                             <TableCell align="right">
                                 <DeleteButton id={id} path="offlineAppointment" />

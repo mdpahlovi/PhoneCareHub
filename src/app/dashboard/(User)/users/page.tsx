@@ -4,11 +4,11 @@ import { format, parseISO } from "date-fns";
 import { getServerSession } from "next-auth";
 import Table from "@/components/Table/Table";
 import Banner from "@/components/Common/Banner";
-import DeleteButton from "@/components/Common/DeleteButton";
+import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
-import CreateLinkButton from "@/components/Common/CreateLinkButton";
+import CreateButton from "@/components/Dashboard/Components/CreateButton";
 import { TableRow, TableCell, TableBody, Avatar } from "@mui/material";
-import ChangePasswordButton from "@/components/Common/ChangePasswordButton";
+import ChangePasswordButton from "@/components/Dashboard/Components/ChangePasswordButton";
 
 type SearchParams = { searchParams: { page?: string; size?: string } };
 
@@ -34,7 +34,7 @@ export default async function ManageUsers({ searchParams }: SearchParams) {
     return (
         <>
             <Banner>All User</Banner>
-            <CreateLinkButton href="user" />
+            <CreateButton href="user" />
             <Table columns={columns} total={users?.meta?.total!} page={page} size={size}>
                 <TableBody>
                     {users?.data?.map(({ id, image, name, email, phone, birthdate, gender }, idx) => (

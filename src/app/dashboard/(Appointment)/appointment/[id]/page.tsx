@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import getDateRange from "@/libs/getDateRange";
 import { getOnlineAppointment } from "@/libs/fetch";
 import firstWordCapital from "@/libs/firstWordCapital";
-import PaymentButton from "@/components/Appointment/PaymentButton";
+import PaymentButton from "@/components/Dashboard/Components/PaymentButton";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import CancelAppointment from "@/components/Appointment/CancelAppointment";
 import { Chip, Button, Stack, Divider, Typography, ListItemText, List, ListItem, Box } from "@mui/material";
