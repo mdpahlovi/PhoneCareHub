@@ -1,23 +1,16 @@
 import Table from "@/components/Table/Table";
 import getDateRange from "@/libs/getDateRange";
+import { OnlineAppointmentTableProps } from "@/types/global";
 import Status from "@/components/Dashboard/Components/Status";
 import { TableBody, TableCell, TableRow } from "@mui/material";
-import { Column, OnlineAppointmentTableProps } from "@/types/global";
 import PaymentButton from "@/components/Dashboard/Components/PaymentButton";
 import DetailButton from "@/components/Dashboard/Components/DetailButton";
 
-const columns: readonly Column[] = [
-    { label: "Service Name", minWidth: 128 },
-    { label: "Device Info", minWidth: 110 },
-    { label: "Issue Details", minWidth: 120 },
-    { label: "Status", align: "right" },
-    { label: "Delivery", align: "right" },
-    { label: "See Details", minWidth: 98, align: "right" },
-];
+const columns = ["Service Name", "Device Info", "Issue Details", "Status", "Delivery", "See Details"];
 
-export default function AllAppointmentTable({ appointment, total, page, size }: OnlineAppointmentTableProps) {
+export default function AllAppointmentTable({ appointment, pagination }: OnlineAppointmentTableProps) {
     return (
-        <Table columns={columns} total={total} size={size} page={page}>
+        <Table columns={columns} pagination={pagination}>
             <TableBody>
                 {appointment?.map(({ id, service, deviceInfo, issueDescription, status, paymentAmount, deliveryDate }, idx) => (
                     <TableRow key={idx} hover>

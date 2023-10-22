@@ -76,17 +76,15 @@ export type GenericErrorResponse = {
     errorMessages: GenericErrorMessage[];
 };
 
-export type Column = { label: string; minWidth?: number; align?: "inherit" | "left" | "center" | "right" | "justify" };
+export type TablePaginationProps = { total: number; page: number; size: number };
+export type TableSearchProps = { search: string; label: string };
 
 export type TableProps = {
-    columns: readonly Column[];
-    total?: number;
-    page?: number;
-    size?: number;
-    search?: string;
-    label?: string;
+    columns: string[];
+    pagination?: TablePaginationProps;
+    search?: TableSearchProps;
 } & React.PropsWithChildren;
 
-export type OfflineAppointmentTableProps = { appointment: OfflineAppointment[]; total?: number; page?: number; size?: number };
+export type OfflineAppointmentTableProps = { appointment: OfflineAppointment[]; pagination: TablePaginationProps };
 
-export type OnlineAppointmentTableProps = { appointment: OnlineAppointment[]; total?: number; page?: number; size?: number };
+export type OnlineAppointmentTableProps = { appointment: OnlineAppointment[]; pagination: TablePaginationProps };

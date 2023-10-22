@@ -1,4 +1,3 @@
-import { Column } from "@/types/global";
 import { getallusers } from "@/libs/fetch";
 import { format, parseISO } from "date-fns";
 import { getServerSession } from "next-auth";
@@ -14,16 +13,7 @@ type SearchParams = { searchParams: { search?: string; page?: string; size?: str
 
 export const metadata = { title: "All User" };
 
-const columns: readonly Column[] = [
-    { label: "Image" },
-    { label: "Name" },
-    { label: "Email" },
-    { label: "BirthDate" },
-    { label: "Gender", align: "right" },
-    { label: "Phone", align: "right" },
-    { label: "Change Password", align: "right" },
-    { label: "Delete", align: "right" },
-];
+const columns = ["Image", "Name", "Email", "BirthDate", "Gender", "Phone", "Change Password", "Delete"];
 
 export default async function ManageUsers({ searchParams }: SearchParams) {
     const session = await getServerSession(authOptions);
@@ -31,13 +21,14 @@ export default async function ManageUsers({ searchParams }: SearchParams) {
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const users = await getallusers(session?.token, search, page, size);
-    const total = users?.meta?.total;
+    const pagination = { total: users?.meta?.total!, size, page };
+    const searchProps = { search, label: "User" };
 
     return (
         <>
             <Banner>All User</Banner>
             <CreateButton href="user" />
-            <Table columns={columns} total={total!} page={page} size={size} search={search} label="User">
+            <Table columns={columns} pagination={pagination} search={searchProps}>
                 <TableBody>
                     {users?.data?.map(({ id, image, name, email, phone, birthdate, gender }, idx) => (
                         <TableRow key={idx} hover>

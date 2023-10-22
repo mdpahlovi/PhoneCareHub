@@ -1,12 +1,13 @@
 "use client";
 
 import CloseIcon from "@mui/icons-material/Close";
+import { TableSearchProps } from "@/types/global";
 import SearchIcon from "@mui/icons-material/Search";
 import useCreateQuery from "@/hooks/useCreateQuery";
 import useDeleteQuery from "@/hooks/useDeleteQuery";
 import { InputBase, IconButton, Box } from "@mui/material";
 
-export default function TableSearch({ search, label }: { search: string; label: string }) {
+export default function TableSearch({ search, label }: TableSearchProps) {
     const createQuery = useCreateQuery();
     const deleteQuery = useDeleteQuery();
 

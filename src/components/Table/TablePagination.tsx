@@ -1,9 +1,10 @@
 "use client";
 
 import useCreateQuery from "@/hooks/useCreateQuery";
+import { TablePaginationProps } from "@/types/global";
 import { TablePagination as MuiTablePagination } from "@mui/material";
 
-export default function TablePagination({ total, page, size }: { total: number; page: number; size: number }) {
+export default function TablePagination({ total, page, size }: TablePaginationProps) {
     const createQuery = useCreateQuery();
 
     const handleChangePage = (event: unknown, newPage: number) => {

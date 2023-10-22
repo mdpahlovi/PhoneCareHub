@@ -3,25 +3,28 @@ import { TableProps } from "@/types/global";
 import TablePagination from "./TablePagination";
 import { Paper, TableContainer, Table as MuiTable, TableHead, TableRow, TableCell } from "@mui/material";
 
-export default function Table({ children, columns, total, page, size, search, label }: TableProps) {
+export default function Table({ children, columns, pagination, search }: TableProps) {
     return (
         <Paper>
-            {label ? <TableSearch label={label} search={search!} /> : null}
+            {search ? <TableSearch label={search.label} search={search.search} /> : null}
             <TableContainer>
                 <MuiTable stickyHeader>
                     <TableHead>
                         <TableRow>
-                            {columns.map(({ label, align, minWidth }, idx) => (
-                                <TableCell key={idx} align={align} style={{ minWidth: minWidth }}>
-                                    {label}
-                                </TableCell>
-                            ))}
+                            {columns.map((label, idx) => {
+                                const right = Math.ceil(columns.length / 2) < idx + 1 ? "right" : "left";
+                                return (
+                                    <TableCell key={idx} align={right} sx={{ whiteSpace: "nowrap" }}>
+                                        {label}
+                                    </TableCell>
+                                );
+                            })}
                         </TableRow>
                     </TableHead>
                     {children}
                 </MuiTable>
             </TableContainer>
-            {size ? <TablePagination total={total!} page={page!} size={size} /> : null}
+            {pagination ? <TablePagination total={pagination.total} page={pagination.page} size={pagination.size} /> : null}
         </Paper>
     );
 }

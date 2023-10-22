@@ -1,4 +1,3 @@
-import { Column } from "@/types/global";
 import { getalladmins } from "@/libs/fetch";
 import { getServerSession } from "next-auth";
 import Table from "@/components/Table/Table";
@@ -12,14 +11,7 @@ type SearchParams = { searchParams: { search?: string; page?: string; size?: str
 
 export const metadata = { title: "All Admin" };
 
-const columns: readonly Column[] = [
-    { label: "Image" },
-    { label: "Name" },
-    { label: "Email" },
-    { label: "Phone", align: "right" },
-    { label: "Change Password", align: "right" },
-    { label: "Delete", align: "right" },
-];
+const columns = ["Image", "Name", "Email", "Phone", "Change Password", "Delete"];
 
 export default async function ManageAdmins({ searchParams }: SearchParams) {
     const session = await getServerSession(authOptions);
@@ -27,12 +19,13 @@ export default async function ManageAdmins({ searchParams }: SearchParams) {
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const admins = await getalladmins(session?.token, search, page, size);
-    const total = admins?.meta?.total;
+    const pagination = { total: admins?.meta?.total!, size, page };
+    const searchProps = { search, label: "Admin" };
 
     return (
         <>
             <Banner>All Admin</Banner>
-            <Table columns={columns} total={total!} page={page} size={size} search={search} label="Admin">
+            <Table columns={columns} pagination={pagination} search={searchProps}>
                 <TableBody>
                     {admins?.data?.map(({ id, image, name, email, phone }, idx) => (
                         <TableRow key={idx} hover>

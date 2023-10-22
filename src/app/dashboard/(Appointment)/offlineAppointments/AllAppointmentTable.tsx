@@ -1,21 +1,14 @@
 import { format, parseISO } from "date-fns";
 import Table from "@/components/Table/Table";
+import { OfflineAppointmentTableProps } from "@/types/global";
 import { TableBody, TableCell, TableRow } from "@mui/material";
-import { Column, OfflineAppointmentTableProps } from "@/types/global";
 import CancelAppointment from "@/components/Appointment/CancelAppointment";
 
-const columns: readonly Column[] = [
-    { label: "Service Name", minWidth: 128 },
-    { label: "Device Info", minWidth: 110 },
-    { label: "Issue Details", minWidth: 120 },
-    { label: "Appointment Date", minWidth: 156, align: "right" },
-    { label: "Time Left", minWidth: 98, align: "right" },
-    { label: "Cancel", align: "right" },
-];
+const columns = ["Service Name", "Device Info", "Issue Details", "Appointment Date", "Time Left", "Cancel"];
 
-export default function AllAppointmentTable({ appointment, total, page, size }: OfflineAppointmentTableProps) {
+export default function AllAppointmentTable({ appointment, pagination }: OfflineAppointmentTableProps) {
     return (
-        <Table columns={columns} total={total} size={size} page={page}>
+        <Table columns={columns} pagination={pagination}>
             <TableBody>
                 {appointment?.map(({ id, service, deviceInfo, issueDescription, appointmentDate }, idx) => (
                     <TableRow key={idx} hover>

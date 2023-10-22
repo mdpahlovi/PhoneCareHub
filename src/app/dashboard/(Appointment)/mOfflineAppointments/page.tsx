@@ -1,4 +1,3 @@
-import { Column } from "@/types/global";
 import { format, parseISO } from "date-fns";
 import { getServerSession } from "next-auth";
 import Table from "@/components/Table/Table";
@@ -13,15 +12,7 @@ import { Avatar, Box, Stack, TableBody, TableCell, TableRow, Typography } from "
 
 export const metadata = { title: "Manage Offline Appointment" };
 
-const columns: readonly Column[] = [
-    { label: "User" },
-    { label: "Email" },
-    { label: "Device Info", minWidth: 110 },
-    { label: "Issue Details", minWidth: 120 },
-    { label: "Appointment Date", minWidth: 156, align: "right" },
-    { label: "Set Detail", minWidth: 98, align: "right" },
-    { label: "Delete", align: "right" },
-];
+const columns = ["User", "Email", "Device Info", "Issue Details", "Appointment Date", "Set Detail", "Delete"];
 
 type SearchParams = {
     searchParams: { search?: string; page?: string; size?: string; status?: string; email?: string; appointmentDate?: string };
@@ -35,6 +26,7 @@ export default async function ManageOfflineAppointment({ searchParams }: SearchP
     const status = searchParams?.status ? searchParams.status : "appointments";
     const appointmentDate = searchParams?.appointmentDate ? searchParams.appointmentDate : undefined;
     const offlineAppointment = await getallOfflineAppointment(session?.token, search, size, page, status, appointmentDate);
+    const pagination = { total: offlineAppointment?.meta?.total!, size, page };
 
     return (
         <>
@@ -43,7 +35,7 @@ export default async function ManageOfflineAppointment({ searchParams }: SearchP
                 <SearchField search={search} />
                 <StatusFilter status={status} items={["appointments", "completed", "cancelled"]} />
             </Stack>
-            <Table columns={columns} total={offlineAppointment?.meta?.total} size={size} page={page}>
+            <Table columns={columns} pagination={pagination}>
                 <TableBody>
                     {offlineAppointment?.data?.map(({ id, user, deviceInfo, issueDescription, appointmentDate }) => (
                         <TableRow key={id} hover>

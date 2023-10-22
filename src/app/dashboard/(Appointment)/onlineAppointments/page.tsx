@@ -12,12 +12,13 @@ export const metadata = { title: "Offline Appointment" };
 
 type SearchParams = { searchParams: { page?: string; size?: string; status?: string } };
 
-export default async function OfflineAppointment({ searchParams }: SearchParams) {
+export default async function OnlineAppointment({ searchParams }: SearchParams) {
     const session = await getServerSession(authOptions);
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const value = searchParams?.status ? searchParams.status : "appointments";
-    const offlineAppointment = await getallOnlineAppointment(session?.token, "", size, page, value);
+    const onlineAppointment = await getallOnlineAppointment(session?.token, "", size, page, value);
+    const pagination = { total: onlineAppointment?.meta?.total!, size, page };
 
     return (
         <>
@@ -27,24 +28,9 @@ export default async function OfflineAppointment({ searchParams }: SearchParams)
                 value={value}
                 values={["appointments", "completed", "cancelled"]}
                 tabs={[
-                    <AllAppointmentTable
-                        appointment={offlineAppointment?.data!}
-                        total={offlineAppointment?.meta?.total!}
-                        page={page}
-                        size={size}
-                    />,
-                    <CompletedTable
-                        appointment={offlineAppointment?.data!}
-                        total={offlineAppointment?.meta?.total!}
-                        page={page}
-                        size={size}
-                    />,
-                    <CancelledTable
-                        appointment={offlineAppointment?.data!}
-                        total={offlineAppointment?.meta?.total!}
-                        page={page}
-                        size={size}
-                    />,
+                    <AllAppointmentTable appointment={onlineAppointment?.data!} pagination={pagination} />,
+                    <CompletedTable appointment={onlineAppointment?.data!} pagination={pagination} />,
+                    <CancelledTable appointment={onlineAppointment?.data!} pagination={pagination} />,
                 ]}
             />
         </>

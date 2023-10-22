@@ -1,4 +1,3 @@
-import { Column } from "@/types/global";
 import { getAllFAQ } from "@/libs/fetch";
 import Table from "@/components/Table/Table";
 import Banner from "@/components/Common/Banner";
@@ -7,12 +6,7 @@ import CreateFAQForm from "@/components/Dashboard/CreateFAQ/CreateFAQForm";
 
 import { Divider, TableBody, TableCell, TableRow } from "@mui/material";
 
-const columns: readonly Column[] = [
-    { label: "Serial" },
-    { label: "Question" },
-    { label: "Answer", align: "right" },
-    { label: "Delete", align: "right" },
-];
+const columns = ["Serial", "Question", "Answer", "Delete"];
 
 export const metadata = { title: "FAQs" };
 

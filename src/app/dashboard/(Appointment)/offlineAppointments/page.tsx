@@ -18,6 +18,7 @@ export default async function OfflineAppointment({ searchParams }: SearchParams)
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const status = searchParams?.status ? searchParams.status : "appointments";
     const offlineAppointment = await getallOfflineAppointment(session?.token, "", size, page, status);
+    const pagination = { total: offlineAppointment?.meta?.total!, size, page };
 
     return (
         <>
@@ -27,24 +28,9 @@ export default async function OfflineAppointment({ searchParams }: SearchParams)
                 value={status}
                 values={["appointments", "completed", "cancelled"]}
                 tabs={[
-                    <AllAppointmentTable
-                        appointment={offlineAppointment?.data!}
-                        total={offlineAppointment?.meta?.total!}
-                        page={page}
-                        size={size}
-                    />,
-                    <CompletedTable
-                        appointment={offlineAppointment?.data!}
-                        total={offlineAppointment?.meta?.total!}
-                        page={page}
-                        size={size}
-                    />,
-                    <CancelledTable
-                        appointment={offlineAppointment?.data!}
-                        total={offlineAppointment?.meta?.total!}
-                        page={page}
-                        size={size}
-                    />,
+                    <AllAppointmentTable appointment={offlineAppointment?.data!} pagination={pagination} />,
+                    <CompletedTable appointment={offlineAppointment?.data!} pagination={pagination} />,
+                    <CancelledTable appointment={offlineAppointment?.data!} pagination={pagination} />,
                 ]}
             />
         </>
