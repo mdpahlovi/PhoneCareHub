@@ -2,9 +2,8 @@ import Table from "@/components/Table/Table";
 import { getAllService } from "@/libs/fetch";
 import Banner from "@/components/Common/Banner";
 import EditButton from "@/components/Dashboard/Components/EditButton";
-import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
-import CreateButton from "@/components/Dashboard/Components/CreateButton";
 import { Avatar, TableBody, TableCell, TableRow } from "@mui/material";
+import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 
 type SearchParams = { searchParams: { page?: string; size?: string } };
 
@@ -21,16 +20,15 @@ export default async function ManageService({ searchParams }: SearchParams) {
     return (
         <>
             <Banner>All Service</Banner>
-            <CreateButton href="service" />
-            <Table columns={columns} pagination={pagination}>
+            <Table columns={columns} pagination={pagination} create="service">
                 <TableBody>
                     {services?.data?.map(({ id, image, name, estimatetime, description }, idx) => (
                         <TableRow key={idx} hover>
                             <TableCell>
                                 <Avatar src={image} alt="" />
                             </TableCell>
-                            <TableCell>{name}</TableCell>
-                            <TableCell>{description}</TableCell>
+                            <TableCell sx={{ minWidth: 160 }}>{name}</TableCell>
+                            <TableCell sx={{ minWidth: 640 }}>{description}</TableCell>
                             <TableCell align="right">{estimatetime}</TableCell>
                             <TableCell align="right">
                                 <EditButton href={`/edit-service/${id}`} />

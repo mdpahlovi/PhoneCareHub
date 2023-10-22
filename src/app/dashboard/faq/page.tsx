@@ -23,8 +23,10 @@ export default async function FAQs() {
                     {faqs?.data?.map(({ id, serial, question, answer }, idx) => (
                         <TableRow key={idx} hover>
                             <TableCell>{serial}</TableCell>
-                            <TableCell>{question}</TableCell>
-                            <TableCell align="right">{answer}</TableCell>
+                            <TableCell sx={{ minWidth: 224 }}>{question}</TableCell>
+                            <TableCell align="right" sx={{ minWidth: 560 }}>
+                                {answer}
+                            </TableCell>
                             <TableCell align="right">
                                 <DeleteButton id={id} path="faq" />
                             </TableCell>

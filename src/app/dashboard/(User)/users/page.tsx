@@ -3,10 +3,9 @@ import { format, parseISO } from "date-fns";
 import { getServerSession } from "next-auth";
 import Table from "@/components/Table/Table";
 import Banner from "@/components/Common/Banner";
-import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
-import CreateButton from "@/components/Dashboard/Components/CreateButton";
 import { TableRow, TableCell, TableBody, Avatar } from "@mui/material";
+import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import ChangePasswordButton from "@/components/Dashboard/Components/ChangePasswordButton";
 
 type SearchParams = { searchParams: { search?: string; page?: string; size?: string } };
@@ -27,8 +26,7 @@ export default async function ManageUsers({ searchParams }: SearchParams) {
     return (
         <>
             <Banner>All User</Banner>
-            <CreateButton href="user" />
-            <Table columns={columns} pagination={pagination} search={searchProps}>
+            <Table columns={columns} pagination={pagination} search={searchProps} create="user">
                 <TableBody>
                     {users?.data?.map(({ id, image, name, email, phone, birthdate, gender }, idx) => (
                         <TableRow key={idx} hover>

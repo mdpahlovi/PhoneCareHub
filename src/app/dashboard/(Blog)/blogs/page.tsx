@@ -3,9 +3,8 @@ import { format, parseISO } from "date-fns";
 import Table from "@/components/Table/Table";
 import Banner from "@/components/Common/Banner";
 import EditButton from "@/components/Dashboard/Components/EditButton";
-import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import { Avatar, TableBody, TableCell, TableRow } from "@mui/material";
-import CreateButton from "@/components/Dashboard/Components/CreateButton";
+import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 
 type SearchParams = { searchParams: { page?: string; size?: string } };
 
@@ -22,16 +21,15 @@ export default async function Blogs({ searchParams }: SearchParams) {
     return (
         <>
             <Banner>All Blog</Banner>
-            <CreateButton href="blog" />
-            <Table columns={columns} pagination={pagination}>
+            <Table columns={columns} pagination={pagination} create="blog">
                 <TableBody>
                     {blogs?.data?.map(({ id, image, title, content, source, publishedDate }, idx) => (
                         <TableRow key={idx} hover>
                             <TableCell>
                                 <Avatar src={image} alt="" />
                             </TableCell>
-                            <TableCell>{title}</TableCell>
-                            <TableCell>{content}</TableCell>
+                            <TableCell sx={{ minWidth: 192 }}>{title}</TableCell>
+                            <TableCell sx={{ minWidth: 384 }}>{content}</TableCell>
                             <TableCell>{source}</TableCell>
                             <TableCell align="right">{format(parseISO(publishedDate), "PPP")}</TableCell>
                             <TableCell align="right">

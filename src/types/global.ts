@@ -83,6 +83,7 @@ export type TableProps = {
     columns: string[];
     pagination?: TablePaginationProps;
     search?: TableSearchProps;
+    create?: string;
 } & React.PropsWithChildren;
 
 export type OfflineAppointmentTableProps = { appointment: OfflineAppointment[]; pagination: TablePaginationProps };

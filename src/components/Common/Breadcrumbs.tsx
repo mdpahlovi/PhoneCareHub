@@ -2,7 +2,7 @@
 
 import Link, { LinkProps } from "next/link";
 import { styled } from "@mui/material/styles";
-import { usePathname } from "next/navigation";
+import { usePathname, useParams } from "next/navigation";
 import MuiBreadcrumbs from "@mui/material/Breadcrumbs";
 import firstWordCapital from "@/libs/firstWordCapital";
 
@@ -19,7 +19,9 @@ export const StyledBreadcrumbLink = styled((props: StyledLinkProps) => {
 
 export default function Breadcrumbs({ white }: { white?: boolean }) {
     const pathname = usePathname();
-    const paths = pathname.includes("dashboard") ? pathname.split("/").slice(1) : pathname.split("/");
+    const { id }: { id: string } = useParams();
+    const path = pathname.includes(id) ? pathname.replace(`/${id}`, "") : pathname;
+    const paths = path.includes("dashboard") ? path.split("/").slice(1) : path.split("/");
 
     return (
         <MuiBreadcrumbs separator="›" sx={{ color: white ? "white" : "text.primary", mt: 1 }}>
