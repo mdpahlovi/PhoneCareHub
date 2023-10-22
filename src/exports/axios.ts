@@ -1,7 +1,7 @@
 import axios from "axios";
 import { GenericErrorResponse } from "@/types/global";
 
-export const BASE_URL = "https://phonecarehub-server.vercel.app/api/v1";
+export const BASE_URL = "https://phonecarehub.onrender.com/api/v1";
 export const baseAxios = axios.create({ baseURL: BASE_URL });
 
 baseAxios.interceptors.response.use(

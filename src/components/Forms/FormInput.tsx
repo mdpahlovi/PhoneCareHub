@@ -8,15 +8,13 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { InputAdornment, TextField, type TextFieldProps } from "@mui/material";
 
-const FormInput = ({ type = "text", name, label, disabled }: FromInputProps) => {
+const FormInput = ({ type = "text", name, label, textarea, disabled }: FromInputProps) => {
     const [field, meta] = useField(name);
     const [show, setShow] = useState(false);
     let configTextfield: TextFieldProps = { type, label, disabled, ...field };
 
-    if (meta && meta.touched && meta.error) {
-        configTextfield.error = true;
-        configTextfield.helperText = meta.error;
-    }
+    if (meta && meta.touched && meta.error) configTextfield = { ...configTextfield, error: true, helperText: meta.error };
+    if (textarea) configTextfield = { ...configTextfield, multiline: true, rows: 4 };
 
     if (type === "password") {
         configTextfield.type = show ? "text" : "password";

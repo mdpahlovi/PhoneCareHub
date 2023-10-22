@@ -28,7 +28,7 @@ export default function Breadcrumbs({ white }: { white?: boolean }) {
                 const selected = paths.length - 1 === idx;
                 return (
                     <StyledBreadcrumbLink key={idx} href={href} selected={selected} white={white}>
-                        {path ? firstWordCapital(path) : "Home"}
+                        {path ? firstWordCapital(path.includes("-") ? path.replace(/-/g, " ") : path) : "Home"}
                     </StyledBreadcrumbLink>
                 );
             })}

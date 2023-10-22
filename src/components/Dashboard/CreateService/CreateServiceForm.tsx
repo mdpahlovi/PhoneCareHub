@@ -20,7 +20,7 @@ export default function CreateServiceForm() {
                 <FormInput name="name" label="Service Name" />
                 <FormInput type="number" name="estimatetime" label="Estimate Time" />
             </Stack>
-            <FormInput name="description" label="Description" />
+            <FormInput name="description" label="Description" textarea />
             <FormSubmit loading={loading}>Submit</FormSubmit>
         </Form>
     );

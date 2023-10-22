@@ -1,3 +1,3 @@
 export default function firstWordCapital(word: string) {
-    return word.charAt(0).toUpperCase() + word.slice(1);
+    return word.replace(/\b\w/g, (char) => char.toUpperCase());
 }

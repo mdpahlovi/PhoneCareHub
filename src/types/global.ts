@@ -18,6 +18,7 @@ export interface FromInputProps {
     type?: HTMLInputTypeAttribute;
     name: string;
     label: React.ReactNode;
+    textarea?: boolean;
     disabled?: boolean;
 }
 

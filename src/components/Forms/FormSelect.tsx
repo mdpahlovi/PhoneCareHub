@@ -10,10 +10,7 @@ export default function FormSelect({ items, name, label, disabled }: FromSelectP
     const [field, meta] = useField(name);
 
     let configTextfield: TextFieldProps = { label, disabled, ...field };
-    if (meta && meta.touched && meta.error) {
-        configTextfield.error = true;
-        configTextfield.helperText = meta.error;
-    }
+    if (meta && meta.touched && meta.error) configTextfield = { ...configTextfield, error: true, helperText: meta.error };
 
     return (
         <TextField {...configTextfield} sx={{ ...textAreaDisableColor }} select>

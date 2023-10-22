@@ -13,9 +13,7 @@ export default function FormDatePick({ name, label, disabled }: FromDatePickProp
     const { setFieldValue } = useFormikContext();
 
     let configTextfield: TextFieldConfig = { name, error: false };
-    if (meta && meta.touched && meta.error) {
-        configTextfield = { ...configTextfield, error: true, helperText: meta.error };
-    }
+    if (meta && meta.touched && meta.error) configTextfield = { ...configTextfield, error: true, helperText: meta.error };
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>

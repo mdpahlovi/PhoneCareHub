@@ -17,11 +17,11 @@ export default function EditBlogForm({ blog }: { blog: Blog }) {
         <Form initialValues={getBlogInitialValues(blog)} onSubmit={handleUpdate}>
             <FormImageUpload image={blog.image} name="image" />
             <FormInput name="title" label="Title" />
-            <FormInput name="content" label="Content" />
             <Stack direction={{ sm: "row" }} gap={3}>
                 <FormInput name="source" label="Source" />
                 <FormDatePick name="publishedDate" label="Published Date" />
             </Stack>
+            <FormInput name="content" label="Content" textarea />
             <FormSubmit loading={loading}>Submit</FormSubmit>
         </Form>
     );
