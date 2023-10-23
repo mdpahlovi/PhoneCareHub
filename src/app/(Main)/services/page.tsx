@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
-import Services from "@/components/Services";
-import Banner from "@/components/Common/Banner";
 import { getAllService } from "@/libs/fetch";
+import Banner from "@/components/Common/Banner";
+import Services from "@/components/Main/Services";
 import Pagination from "@/components/Common/Pagination";
 import SearchField from "@/components/Common/SearchField";
 

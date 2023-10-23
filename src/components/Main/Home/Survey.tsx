@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { survives } from "@/exports/data";
-import { Box, Container, Divider, Typography } from "@mui/material";
+import { Box, Container, Divider, Typography, CountUp } from "@/exports/mui";
 
 export default function Survey() {
     return (
@@ -21,7 +21,9 @@ export default function Survey() {
                         ) : null}
                         {idx !== 0 ? <Divider variant="middle" flexItem sx={{ display: { sm: "none" } }} /> : null}
                         <Box>
-                            <Typography sx={{ fontSize: { xs: "3rem", sm: "2rem", md: "3rem" }, fontWeight: 800 }}>{count}</Typography>
+                            <Typography sx={{ fontSize: { xs: "3rem", sm: "2rem", md: "3rem" }, fontWeight: 800 }}>
+                                <CountUp end={count} start={5} />
+                            </Typography>
                             <Typography>{title}</Typography>
                         </Box>
                     </Fragment>

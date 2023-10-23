@@ -1,6 +1,6 @@
 import { Blog } from "@/types/response";
 import { format, parseISO } from "date-fns";
-import { StyledTypography } from "../Common/StyledTypography";
+import { StyledTypography } from "@/components/Common/StyledTypography";
 import { Card, CardMedia, CardContent, Typography, Chip, Button, CardActions } from "@mui/material";
 
 export default function BlogCard({ blog }: { blog: Blog }) {

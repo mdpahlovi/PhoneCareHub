@@ -1,14 +1,14 @@
-import Blogs from "@/components/Blogs";
-import Hero from "@/components/Home/Hero";
-import FAQs from "@/components/Home/FAQs";
-import Services from "@/components/Services";
-import Survey from "@/components/Home/Survey";
-import Reviews from "@/components/Home/Reviews";
-import Partners from "@/components/Home/Partners";
+import Blogs from "@/components/Main/Blogs";
+import Hero from "@/components/Main/Home/Hero";
+import FAQs from "@/components/Main/Home/FAQs";
 import Section from "@/components/Common/Section";
-import WhyChooseUs from "@/components/Home/WhyChooseUs";
-import SeeAllButton from "@/components/Home/SeeAllButton";
-import ServiceProcess from "@/components/Home/ServiceProcess";
+import Services from "@/components/Main/Services";
+import Survey from "@/components/Main/Home/Survey";
+import Reviews from "@/components/Main/Home/Reviews";
+import Partners from "@/components/Main/Home/Partners";
+import WhyChooseUs from "@/components/Main/Home/WhyChooseUs";
+import SeeAllButton from "@/components/Main/Home/SeeAllButton";
+import ServiceProcess from "@/components/Main/Home/ServiceProcess";
 import { getAllReview, getAllBlog, getAllFAQ, getAllService } from "@/libs/fetch";
 
 export default async function Home() {

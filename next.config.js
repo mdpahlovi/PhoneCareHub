@@ -12,6 +12,7 @@ const nextConfig = {
             "i.ibb.co",
             "shorturl.at",
             "img.freepik.com",
+            "drive.google.com",
             "res.cloudinary.com",
             "demo.proteusthemes.com",
             "gadget.fixherotheme.com",

@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import { Service } from "@/types/response";
 import { threeCol } from "@/exports/constant";
-import ServiceCard from "@/components/Services/ServiceCard";
+import ServiceCard from "@/components/Main/Services/ServiceCard";
 
 export default function Services({ services }: { services: Service[] }) {
     return (

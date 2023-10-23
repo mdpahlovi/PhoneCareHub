@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import { Blog } from "@/types/response";
-import BlogCard from "@/components/Blogs/BlogCard";
+import BlogCard from "@/components/Main/Blogs/BlogCard";
 
 export default function Blogs({ blogs }: { blogs: Blog[] }) {
     return (

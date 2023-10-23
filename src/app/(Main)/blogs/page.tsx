@@ -1,6 +1,6 @@
-import Blogs from "@/components/Blogs";
 import { Container } from "@mui/material";
 import { getAllBlog } from "@/libs/fetch";
+import Blogs from "@/components/Main/Blogs";
 import Banner from "@/components/Common/Banner";
 import Pagination from "@/components/Common/Pagination";
 import SearchField from "@/components/Common/SearchField";
