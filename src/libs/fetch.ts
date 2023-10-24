@@ -74,22 +74,12 @@ export async function getallOfflineAppointment(
     token: string | undefined,
     search: string,
     size: number,
-    page: number,
-    status: string | undefined,
-    appointmentDate?: Date | string
+    page: number
 ): Promise<IApiResponse<OfflineAppointment[]>> {
-    let statusParams;
-    let appointmentDateParams;
-    if (status) statusParams = getStatusParams(status);
-    if (appointmentDate) appointmentDateParams = `appointmentDate=${appointmentDate}`;
-
-    const res = await fetch(
-        `${BASE_URL}/offlineAppointment?search=${search}&size=${size}&page=${page + 1}&${statusParams}&${appointmentDateParams}`,
-        {
-            cache: "no-cache",
-            headers: { authorization: token! },
-        }
-    );
+    const res = await fetch(`${BASE_URL}/offlineAppointment?search=${search}&size=${size}&page=${page + 1}`, {
+        cache: "no-cache",
+        headers: { authorization: token! },
+    });
 
     if (!res.ok) throw new Error("Failed To Fetch Data");
     return res.json();
@@ -99,13 +89,9 @@ export async function getallOnlineAppointment(
     token: string | undefined,
     search: string,
     size: number,
-    page: number,
-    status: string | undefined
+    page: number
 ): Promise<IApiResponse<OnlineAppointment[]>> {
-    let statusParams;
-    if (status) statusParams = getStatusParams(status);
-
-    const res = await fetch(`${BASE_URL}/onlineAppointment?search=${search}&size=${size}&page=${page + 1}&${statusParams}`, {
+    const res = await fetch(`${BASE_URL}/onlineAppointment?search=${search}&size=${size}&page=${page + 1}`, {
         cache: "no-cache",
         headers: { authorization: token! },
     });
@@ -133,11 +119,3 @@ export async function getOfflineAppointment(id: string, token: string | undefine
     if (!res.ok) throw new Error("Failed To Fetch Data");
     return res.json();
 }
-
-const getStatusParams = (status: string) => {
-    if (status === "appointments") {
-        return `status=pending&status=reviewing&status=payment&status=servicing`;
-    } else {
-        return `status=${status}`;
-    }
-};

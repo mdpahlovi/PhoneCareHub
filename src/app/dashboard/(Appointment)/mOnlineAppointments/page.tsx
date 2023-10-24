@@ -21,7 +21,7 @@ export default async function ManageOnlineAppointment({ searchParams }: SearchPa
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const status = searchParams?.status ? searchParams.status : "pending";
-    const onlineAppointment = await getallOnlineAppointment(session?.token, search, size, page, status);
+    const onlineAppointment = await getallOnlineAppointment(session?.token, search, size, page);
     const pagination = { total: onlineAppointment?.meta?.total!, size, page };
 
     return (

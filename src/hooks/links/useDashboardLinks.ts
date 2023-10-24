@@ -44,4 +44,4 @@ const manageOfflineAppointments = { href: "/dashboard/mOfflineAppointments", tex
 const blogs = { href: "/dashboard/blogs", text: "Manage Blogs", icon: LibraryBooksRoundedIcon };
 const faq = { href: "/dashboard/faq", text: "Manage FAQs", icon: LiveHelpRoundedIcon };
 const admins = { href: "/dashboard/admins", text: "Manage Admins", icon: GroupRoundedIcon };
-const create_admin = { href: "/dashboard/create_admin", text: "Create Admin", icon: PersonAddAltRoundedIcon };
+const create_admin = { href: "/dashboard/create-admin", text: "Create Admin", icon: PersonAddAltRoundedIcon };

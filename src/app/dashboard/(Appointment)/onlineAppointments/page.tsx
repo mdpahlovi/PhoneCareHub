@@ -16,8 +16,8 @@ export default async function OnlineAppointment({ searchParams }: SearchParams) 
     const session = await getServerSession(authOptions);
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
-    const value = searchParams?.status ? searchParams.status : "appointments";
-    const onlineAppointment = await getallOnlineAppointment(session?.token, "", size, page, value);
+    const status = searchParams?.status ? searchParams.status : "pending";
+    const onlineAppointment = await getallOnlineAppointment(session?.token, "", size, page);
     const pagination = { total: onlineAppointment?.meta?.total!, size, page };
 
     return (
@@ -25,7 +25,7 @@ export default async function OnlineAppointment({ searchParams }: SearchParams) 
             <Banner>Offline Appointment</Banner>
             <TabContext
                 query="status"
-                value={value}
+                value={status}
                 values={["appointments", "completed", "cancelled"]}
                 tabs={[
                     <AllAppointmentTable appointment={onlineAppointment?.data!} pagination={pagination} />,

@@ -11,9 +11,9 @@ import createUserOrAdminSchema from "@/validations/createUserOrAdminSchema";
 const initialValues = { name: "", email: "", phone: "", password: "", c_password: "" };
 type CreateFormValue = { name: string; email: string; phone: string; password: string; c_password: string };
 
-export default function CreateAdminForm({ path }: { path: "user" | "admin" }) {
-    const { handleCreate, loading } = useCreateData(path);
+export default function CreateUserOrAdminForm({ path }: { path: "user" | "admin" }) {
     const pathUpperCase = firstWordCapital(path);
+    const { handleCreate, loading } = useCreateData(path);
 
     const onSubmit = (data: CreateFormValue) => {
         const { c_password, ...payload } = data;
@@ -23,6 +23,7 @@ export default function CreateAdminForm({ path }: { path: "user" | "admin" }) {
     return (
         <Form initialValues={initialValues} validationSchema={createUserOrAdminSchema} onSubmit={onSubmit}>
             <FormInput name="name" label={`${pathUpperCase} Name`} />
+            {path === "admin" ? <FormInput name="title" label="Admin Title" /> : ""}
             <Stack direction={{ sm: "row" }} gap={3}>
                 <FormInput type="email" name="email" label={`${pathUpperCase} Email`} />
                 <FormInput name="phone" label={`${pathUpperCase} Phone`} />

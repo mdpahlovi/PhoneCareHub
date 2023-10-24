@@ -3,7 +3,8 @@
 import { Review } from "@/types/response";
 import Section from "@/components/Common/Section";
 import { review_props } from "@/exports/constant";
-import { Carousel, Typography, Avatar, Rating, Stack } from "@/exports/mui";
+import { Card, CardContent } from "@mui/material";
+import { Carousel, Typography, Avatar, Rating } from "@/exports/mui";
 import FormatQuoteRoundedIcon from "@mui/icons-material/FormatQuoteRounded";
 
 const fake_reviews = [
@@ -74,17 +75,19 @@ export default function Reviews({ reviews }: { reviews: Review[] }) {
         <Section title="Client Reviews">
             <Carousel responsive={responsive} autoPlay infinite>
                 {fake_reviews.map(({ user, rating, comment }, idx) => (
-                    <Stack key={idx} {...review_props}>
-                        <Avatar src={user.image} alt="" />
-                        <Typography variant="subtitle1" fontWeight="bold" mt={1}>
-                            {user.name}
-                        </Typography>
-                        <Rating value={rating} precision={0.5} readOnly />
-                        <Typography color="text.secondary" mt={0.5}>
-                            {comment}
-                        </Typography>
-                        <FormatQuoteRoundedIcon sx={{ mt: "auto", color: "divider", fontSize: "4rem" }} />
-                    </Stack>
+                    <Card key={idx} sx={{ mx: 1.5, height: "100%" }}>
+                        <CardContent sx={review_props}>
+                            <Avatar src={user.image} alt="" />
+                            <Typography variant="subtitle1" fontWeight="bold" mt={1}>
+                                {user.name}
+                            </Typography>
+                            <Rating value={rating} precision={0.5} readOnly />
+                            <Typography color="text.secondary" mt={0.5}>
+                                {comment}
+                            </Typography>
+                            <FormatQuoteRoundedIcon sx={{ mt: "auto", color: "divider", fontSize: "4rem" }} />
+                        </CardContent>
+                    </Card>
                 ))}
             </Carousel>
         </Section>

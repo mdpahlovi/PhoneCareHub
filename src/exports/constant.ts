@@ -6,14 +6,11 @@ export const borderRounded = { border: 1, borderColor: "divider", borderRadius: 
 
 export const textAreaDisableColor = { "& .MuiInputBase-input.Mui-disabled": { WebkitTextFillColor: "#000000" } };
 
-export const review_props: StackProps = {
-    mx: 1.5,
+export const review_props = {
     height: "100%",
-    border: 1,
-    borderRadius: 1,
-    borderColor: "divider",
-    textAlign: "center",
-    alignItems: "center",
+    display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
-    p: 3,
+    alignItems: "center",
+    textAlign: "center",
 };

@@ -72,7 +72,7 @@ export type OfflineAppointment = {
     deviceInfo: string;
     issueDescription: string;
     appointmentDate: string;
-    status: string;
+    status: OfflineAppointmentStatus;
     paymentAmount: number | null;
     issueDidected: string[];
     createdAt: string;
@@ -88,7 +88,7 @@ export type OnlineAppointment = {
     deviceInfo: string;
     issueDescription: string;
     shippingAddress: string;
-    status: string;
+    status: OnlineAppointmentStatus;
     paymentAmount: number | null;
     issueDidected: string[];
     deliveryDate: string | null;
@@ -97,6 +97,18 @@ export type OnlineAppointment = {
     user: User;
     service: Service;
     payment?: Payment;
+    deviceShipping?: DeviceShipping;
+    deviceReturned?: DeviceReturned;
+};
+
+type DeviceShipping = {
+    id: string;
+    onlineAppointmentId: string;
+    courierName: string;
+    productId: string;
+    receiptDate: string;
+    createdAt: string;
+    updatedAt: string;
 };
 
 export type Payment = {
@@ -106,6 +118,16 @@ export type Payment = {
     amount: number;
     transactionId: string;
     paymentDate: string;
+};
+
+type DeviceReturned = {
+    id: string;
+    onlineAppointmentId: string;
+    courierName: string;
+    productId: string;
+    receiptDate: string;
+    createdAt: string;
+    updatedAt: string;
 };
 
 export type Review = {
@@ -118,3 +140,7 @@ export type Review = {
     user: User;
     service: User;
 };
+
+type OnlineAppointmentStatus = "pending" | "shipping" | "receited" | "reviewing" | "payment" | "returned" | "received" | "cancelled";
+
+type OfflineAppointmentStatus = "pending" | "completed" | "cancelled";
