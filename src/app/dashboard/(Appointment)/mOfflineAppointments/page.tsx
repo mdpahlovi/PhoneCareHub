@@ -25,7 +25,7 @@ export default async function ManageOfflineAppointment({ searchParams }: SearchP
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const status = searchParams?.status ? searchParams.status : "pending";
     const appointmentDate = searchParams?.appointmentDate ? searchParams.appointmentDate : undefined;
-    const offlineAppointment = await getallOfflineAppointment(session?.token, search, size, page);
+    const offlineAppointment = await getallOfflineAppointment(session?.token, search, size, page, status);
     const pagination = { total: offlineAppointment?.meta?.total!, size, page };
 
     return (

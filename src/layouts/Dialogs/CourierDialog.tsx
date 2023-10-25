@@ -4,20 +4,19 @@ import Form from "@/components/Forms/Form";
 import Close from "@mui/icons-material/Close";
 import useCreateData from "@/hooks/useCreateData";
 import FormInput from "@/components/Forms/FormInput";
-import createReview from "@/validations/createReview";
 import FormSubmit from "@/components/Forms/FormSubmit";
-import FormRatting from "@/components/Forms/FormRatting";
-import useReviewDialogStore from "@/hooks/zustand/useReviewDialogStore";
+import createPayment from "@/validations/createPayment";
+import useCourierDialogStore from "@/hooks/zustand/useCourierDialogStore";
 import { Dialog, DialogContent, Box, IconButton, Typography, DialogTitle } from "@mui/material";
 
-const initialValue = { rating: 0, comment: "" };
+const initialValue = { courierName: "", productId: "", receiptDate: "" };
 
-export default function CreateReviewDialog() {
-    const { handleCreate, loading } = useCreateData("review", true);
-    const { userId, serviceId, open, onClose } = useReviewDialogStore();
+export default function CourierDialog() {
+    const { onlineAppointmentId, type, open, onClose } = useCourierDialogStore();
+    const { handleCreate, loading } = useCreateData(`device${type}`, true);
 
     const onSubmit = (data: any) => {
-        const payload = { userId, serviceId, ...data };
+        const payload = { onlineAppointmentId, ...data };
         handleCreate(payload);
         onClose();
     };
@@ -31,13 +30,14 @@ export default function CreateReviewDialog() {
             </Box>
             <DialogTitle>
                 <Typography variant="h5" fontWeight={600}>
-                    Give Review
+                    Add ${type} Courier Detail
                 </Typography>
             </DialogTitle>
             <DialogContent>
-                <Form initialValues={initialValue} validationSchema={createReview} onSubmit={onSubmit}>
-                    <FormRatting name="rating" label="Ratting" />
-                    <FormInput name="comment" label="Your Comment" />
+                <Form initialValues={initialValue} validationSchema={createPayment} onSubmit={onSubmit}>
+                    <FormInput name="courierName" label="Courier Name" />
+                    <FormInput name="productId" label="Product Id" />
+                    <FormInput name="receiptDate" label="Receipt Date" />
                     <FormSubmit loading={loading}>Submit</FormSubmit>
                 </Form>
             </DialogContent>

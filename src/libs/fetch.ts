@@ -74,9 +74,11 @@ export async function getallOfflineAppointment(
     token: string | undefined,
     search: string,
     size: number,
-    page: number
+    page: number,
+    status: string
 ): Promise<IApiResponse<OfflineAppointment[]>> {
-    const res = await fetch(`${BASE_URL}/offlineAppointment?search=${search}&size=${size}&page=${page + 1}`, {
+    const statusParams = getOfflineStatus(status);
+    const res = await fetch(`${BASE_URL}/offlineAppointment?search=${search}&size=${size}&page=${page + 1}${statusParams}`, {
         cache: "no-cache",
         headers: { authorization: token! },
     });
@@ -89,9 +91,11 @@ export async function getallOnlineAppointment(
     token: string | undefined,
     search: string,
     size: number,
-    page: number
+    page: number,
+    status: string
 ): Promise<IApiResponse<OnlineAppointment[]>> {
-    const res = await fetch(`${BASE_URL}/onlineAppointment?search=${search}&size=${size}&page=${page + 1}`, {
+    const statusParams = getOnlineStatus(status);
+    const res = await fetch(`${BASE_URL}/onlineAppointment?search=${search}&size=${size}&page=${page + 1}${statusParams}`, {
         cache: "no-cache",
         headers: { authorization: token! },
     });
@@ -119,3 +123,19 @@ export async function getOfflineAppointment(id: string, token: string | undefine
     if (!res.ok) throw new Error("Failed To Fetch Data");
     return res.json();
 }
+
+const getOnlineStatus = (status: string) => {
+    if (status === "appointments") {
+        return `&status=pending&status=shipping&status=receited&status=reviewing&status=payment&status=repairing`;
+    } else {
+        return `&status=${status}`;
+    }
+};
+
+const getOfflineStatus = (status: string) => {
+    if (status === "appointments") {
+        return `&status=pending`;
+    } else {
+        return `&status=${status}`;
+    }
+};

@@ -74,7 +74,7 @@ export type OfflineAppointment = {
     appointmentDate: string;
     status: OfflineAppointmentStatus;
     paymentAmount: number | null;
-    issueDidected: string[];
+    issueDetected: string[];
     createdAt: string;
     updatedAt: string;
     user: User;
@@ -90,7 +90,7 @@ export type OnlineAppointment = {
     shippingAddress: string;
     status: OnlineAppointmentStatus;
     paymentAmount: number | null;
-    issueDidected: string[];
+    issueDetected: string[];
     deliveryDate: string | null;
     createdAt: string;
     updatedAt: string;
@@ -141,6 +141,15 @@ export type Review = {
     service: User;
 };
 
-type OnlineAppointmentStatus = "pending" | "shipping" | "receited" | "reviewing" | "payment" | "returned" | "received" | "cancelled";
+export type OnlineAppointmentStatus =
+    | "pending"
+    | "shipping"
+    | "receited"
+    | "reviewing"
+    | "payment"
+    | "repairing"
+    | "returned"
+    | "received"
+    | "cancelled";
 
-type OfflineAppointmentStatus = "pending" | "completed" | "cancelled";
+export type OfflineAppointmentStatus = "pending" | "completed" | "cancelled";

@@ -1,12 +1,10 @@
 /* eslint-disable react/jsx-key */
 import { getServerSession } from "next-auth";
-import CompletedTable from "./CompletedTable";
-import CancelledTable from "./CancelledTable";
 import Banner from "@/components/Common/Banner";
-import AllAppointmentTable from "./AllAppointmentTable";
 import TabContext from "@/components/Common/TabContext";
 import { getallOfflineAppointment } from "@/libs/fetch";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import AppointmentTabs from "@/components/Appointment/AppointmentTabs";
 
 export const metadata = { title: "Offline Appointment" };
 
@@ -16,8 +14,8 @@ export default async function OfflineAppointment({ searchParams }: SearchParams)
     const session = await getServerSession(authOptions);
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
-    const status = searchParams?.status ? searchParams.status : "pending";
-    const offlineAppointment = await getallOfflineAppointment(session?.token, "", size, page);
+    const status = searchParams?.status ? searchParams.status : "appointments";
+    const offlineAppointment = await getallOfflineAppointment(session?.token, "", size, page, status);
     const pagination = { total: offlineAppointment?.meta?.total!, size, page };
 
     return (
@@ -28,9 +26,9 @@ export default async function OfflineAppointment({ searchParams }: SearchParams)
                 value={status}
                 values={["appointments", "completed", "cancelled"]}
                 tabs={[
-                    <AllAppointmentTable appointment={offlineAppointment?.data!} pagination={pagination} />,
-                    <CompletedTable appointment={offlineAppointment?.data!} pagination={pagination} />,
-                    <CancelledTable appointment={offlineAppointment?.data!} pagination={pagination} />,
+                    <AppointmentTabs type="offline" appointment={offlineAppointment.data!} pagination={pagination} />,
+                    <AppointmentTabs type="offline" appointment={offlineAppointment.data!} pagination={pagination} />,
+                    <AppointmentTabs type="offline" appointment={offlineAppointment.data!} pagination={pagination} />,
                 ]}
             />
         </>

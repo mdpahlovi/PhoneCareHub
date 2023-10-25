@@ -1,10 +1,11 @@
 import { Chip } from "@mui/material";
 import firstWordCapital from "@/libs/firstWordCapital";
+import { OfflineAppointmentStatus, OnlineAppointmentStatus } from "@/types/response";
 
-export default function Status({ status }: { status: string }) {
+export default function Status({ status }: { status: OnlineAppointmentStatus | OfflineAppointmentStatus }) {
     let color: any;
     switch (status) {
-        case "completed":
+        case "returned" || "completed":
             color = "success";
             break;
         case "cancelled":

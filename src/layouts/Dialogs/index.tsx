@@ -1,13 +1,15 @@
+import CourierDialog from "./CourierDialog";
 import PaymentDialog from "./PaymentDialog";
-import ReviewDialog from "./CreateReviewDialog";
+import CreateReviewDialog from "./CreateReviewDialog";
 import ConfirmDeleteDialog from "./ConfirmDeleteDialog";
 import ChangePasswordDialog from "./ChangePasswordDialog";
 
 export default function DialogProvider() {
     return (
         <>
+            <CourierDialog />
             <PaymentDialog />
-            <ReviewDialog />
+            <CreateReviewDialog />
             <ConfirmDeleteDialog />
             <ChangePasswordDialog />
         </>
