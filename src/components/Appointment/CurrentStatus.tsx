@@ -1,6 +1,7 @@
 "use client";
 
 import { Chip, Stack } from "@mui/material";
+import { getStatus } from "@/exports/constant";
 import { useSearchParams } from "next/navigation";
 import firstWordCapital from "@/libs/firstWordCapital";
 import { OfflineAppointmentStatus, OnlineAppointmentStatus } from "@/types/response";
@@ -28,19 +29,3 @@ export default function CurrentStatus({ type, status, completed }: CurrentStatus
         </Stack>
     );
 }
-
-const getStatus = (type: AppointmentType, completed: boolean) => {
-    let status;
-    switch (type) {
-        case "online":
-            status = ["pending", "shipping", "receited", "reviewing", "payment", "repairing"];
-            if (completed) status = [...status, "returned", "received"];
-            break;
-        case "offline":
-            status = ["pending"];
-            if (completed) status = [...status, "completed"];
-            break;
-    }
-
-    return status;
-};

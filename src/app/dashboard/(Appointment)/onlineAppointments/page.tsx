@@ -25,7 +25,7 @@ export default async function OnlineAppointment({ searchParams }: SearchParams) 
             <TabContext
                 query="status"
                 value={status}
-                values={["appointments", "received", "cancelled"]}
+                values={["appointments", "completed", "cancelled"]}
                 tabs={[
                     <AppointmentTabs type="online" appointment={onlineAppointment.data!} pagination={pagination} />,
                     <AppointmentTabs type="online" appointment={onlineAppointment.data!} pagination={pagination} />,

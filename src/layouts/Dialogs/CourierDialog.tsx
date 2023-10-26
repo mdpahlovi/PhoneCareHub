@@ -5,7 +5,8 @@ import Close from "@mui/icons-material/Close";
 import useCreateData from "@/hooks/useCreateData";
 import FormInput from "@/components/Forms/FormInput";
 import FormSubmit from "@/components/Forms/FormSubmit";
-import createPayment from "@/validations/createPayment";
+import createCourier from "@/validations/createCourier";
+import FormDatePick from "@/components/Forms/FormDatePick";
 import useCourierDialogStore from "@/hooks/zustand/useCourierDialogStore";
 import { Dialog, DialogContent, Box, IconButton, Typography, DialogTitle } from "@mui/material";
 
@@ -30,14 +31,14 @@ export default function CourierDialog() {
             </Box>
             <DialogTitle>
                 <Typography variant="h5" fontWeight={600}>
-                    Add ${type} Courier Detail
+                    Add {type} Detail
                 </Typography>
             </DialogTitle>
             <DialogContent>
-                <Form initialValues={initialValue} validationSchema={createPayment} onSubmit={onSubmit}>
+                <Form initialValues={initialValue} validationSchema={createCourier} onSubmit={onSubmit}>
                     <FormInput name="courierName" label="Courier Name" />
                     <FormInput name="productId" label="Product Id" />
-                    <FormInput name="receiptDate" label="Receipt Date" />
+                    <FormDatePick name="receiptDate" label="Receipt Date" />
                     <FormSubmit loading={loading}>Submit</FormSubmit>
                 </Form>
             </DialogContent>

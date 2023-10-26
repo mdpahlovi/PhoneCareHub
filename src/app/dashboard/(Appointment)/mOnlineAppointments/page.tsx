@@ -8,12 +8,13 @@ import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import StatusFilter from "@/components/Dashboard/Components/StatusFilter";
 import DetailButton from "@/components/Dashboard/Components/DetailButton";
 import { Avatar, TableBody, TableCell, TableRow, Typography, Stack, Box } from "@mui/material";
+import { getStatus } from "@/exports/constant";
 
 export const metadata = { title: "Manage Online Appointment" };
 
 type SearchParams = { searchParams: { search?: string; page?: string; size?: string; status?: string; email?: string } };
 
-const columns = ["User", "Email", "Device Info", "Issue Details", "Set Detail", "Delete"];
+const columns = ["User", "Email", "Device Info", "Issue Details", "See Detail", "Delete"];
 
 export default async function ManageOnlineAppointment({ searchParams }: SearchParams) {
     const session = await getServerSession(authOptions);
@@ -29,7 +30,7 @@ export default async function ManageOnlineAppointment({ searchParams }: SearchPa
             <Banner>Online Appointments</Banner>
             <Stack mb={3} direction={{ xs: "column", sm: "row" }} alignItems="end" justifyContent="end" gap={3}>
                 <SearchField search={search} />
-                <StatusFilter status={status} items={["pending", "reviewing", "payment", "servicing", "completed", "cancelled"]} />
+                <StatusFilter status={status} items={[...getStatus("online", true), "cancelled"]} />
             </Stack>
             <Table columns={columns} pagination={pagination}>
                 <TableBody>
@@ -50,7 +51,7 @@ export default async function ManageOnlineAppointment({ searchParams }: SearchPa
                             <TableCell>{deviceInfo}</TableCell>
                             <TableCell align="right">{issueDescription}</TableCell>
                             <TableCell align="right">
-                                <DetailButton label="Set Detail" href={`mOnlineAppointments/${id}`} />
+                                <DetailButton label="See Detail" href={`mOnlineAppointments/${id}`} />
                             </TableCell>
                             <TableCell align="right">
                                 <DeleteButton id={id} path="onlineAppointment" />

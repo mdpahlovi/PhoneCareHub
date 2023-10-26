@@ -40,16 +40,16 @@ export const getServiceInitialValues = (service: Service) => {
 export const getOnlineAppointmentInitialValues = (appointment: OnlineAppointment) => {
     const status = appointment?.status ? appointment.status : "";
     const paymentAmount = appointment?.paymentAmount ? appointment.paymentAmount : null;
-    const issueDidected = appointment?.issueDidected ? appointment.issueDidected : [""];
+    const issueDetected = appointment?.issueDetected ? appointment.issueDetected : [""];
     const deliveryDate = appointment?.deliveryDate ? parseISO(appointment.deliveryDate) : "";
 
-    return { status, paymentAmount, issueDidected, deliveryDate };
+    return { status, paymentAmount, issueDetected, deliveryDate };
 };
 
 export const getOfflineAppointmentInitialValues = (appointment: OfflineAppointment) => {
     const status = appointment?.status ? appointment.status : "";
     const paymentAmount = appointment?.paymentAmount ? appointment.paymentAmount : null;
-    const issueDidected = appointment?.issueDidected ? appointment.issueDidected : [""];
+    const issueDetected = appointment?.issueDetected ? appointment.issueDetected : [""];
 
-    return { status, paymentAmount, issueDidected };
+    return { status, paymentAmount, issueDetected };
 };

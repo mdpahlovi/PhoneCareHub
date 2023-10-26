@@ -9,10 +9,11 @@ import StatusFilter from "@/components/Dashboard/Components/StatusFilter";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import DetailButton from "@/components/Dashboard/Components/DetailButton";
 import { Avatar, Box, Stack, TableBody, TableCell, TableRow, Typography } from "@mui/material";
+import { getStatus } from "@/exports/constant";
 
 export const metadata = { title: "Manage Offline Appointment" };
 
-const columns = ["User", "Email", "Device Info", "Issue Details", "Appointment Date", "Set Detail", "Delete"];
+const columns = ["User", "Email", "Device Info", "Issue Details", "Appointment Date", "See Detail", "Delete"];
 
 type SearchParams = {
     searchParams: { search?: string; page?: string; size?: string; status?: string; email?: string; appointmentDate?: string };
@@ -33,7 +34,7 @@ export default async function ManageOfflineAppointment({ searchParams }: SearchP
             <Banner>Offline Appointment</Banner>
             <Stack mb={3} direction={{ xs: "column", sm: "row" }} alignItems="end" justifyContent="end" gap={3}>
                 <SearchField search={search} />
-                <StatusFilter status={status} items={["appointments", "completed", "cancelled"]} />
+                <StatusFilter status={status} items={[...getStatus("offline", true), "cancelled"]} />
             </Stack>
             <Table columns={columns} pagination={pagination}>
                 <TableBody>
@@ -55,7 +56,7 @@ export default async function ManageOfflineAppointment({ searchParams }: SearchP
                             <TableCell>{issueDescription}</TableCell>
                             <TableCell align="right">{format(parseISO(appointmentDate), "PPP")}</TableCell>
                             <TableCell align="right">
-                                <DetailButton label="Set Detail" href={`mOfflineAppointments/${id}`} />
+                                <DetailButton label="See Detail" href={`mOfflineAppointments/${id}`} />
                             </TableCell>
                             <TableCell align="right">
                                 <DeleteButton id={id} path="offlineAppointment" />

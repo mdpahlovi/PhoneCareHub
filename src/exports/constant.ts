@@ -14,3 +14,19 @@ export const review_props = {
     alignItems: "center",
     textAlign: "center",
 };
+
+export const getStatus = (type: "online" | "offline", completed: boolean) => {
+    let status;
+    switch (type) {
+        case "online":
+            status = ["pending", "shipping", "receited", "reviewing", "payment", "repairing"];
+            if (completed) status = [...status, "returned", "received"];
+            break;
+        case "offline":
+            status = ["pending"];
+            if (completed) status = [...status, "completed"];
+            break;
+    }
+
+    return status;
+};

@@ -124,9 +124,44 @@ export async function getOfflineAppointment(id: string, token: string | undefine
     return res.json();
 }
 
+export async function getAppointment(
+    id: string,
+    type: string | undefined,
+    token: string | undefined
+): Promise<IApiResponse<OnlineAppointment | OfflineAppointment>> {
+    let res;
+    if (type) {
+        res = await fetch(`${BASE_URL}/${type}Appointment/${id}`, {
+            cache: "no-cache",
+            headers: { authorization: token! },
+        });
+    } else {
+        const onlineAppointment = await fetch(`${BASE_URL}/onlineAppointment/${id}`, {
+            cache: "no-cache",
+            headers: { authorization: token! },
+        });
+        if (onlineAppointment.ok) res = onlineAppointment;
+
+        const offlineAppointment = await fetch(`${BASE_URL}/offlineAppointment/${id}`, {
+            cache: "no-cache",
+            headers: { authorization: token! },
+        });
+        if (offlineAppointment.ok) res = offlineAppointment;
+    }
+
+    if (!res?.ok) throw new Error("Failed To Fetch Data");
+    return res.json();
+}
+
+export function isOnlineAppointment(response: IApiResponse<OnlineAppointment | OfflineAppointment>): boolean {
+    return (response.data as OnlineAppointment) !== undefined;
+}
+
 const getOnlineStatus = (status: string) => {
     if (status === "appointments") {
         return `&status=pending&status=shipping&status=receited&status=reviewing&status=payment&status=repairing`;
+    } else if (status === "completed") {
+        return `&status=returned&status=received`;
     } else {
         return `&status=${status}`;
     }
