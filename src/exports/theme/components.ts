@@ -51,6 +51,16 @@ const components = (mode: PaletteMode): Components<Omit<Theme, "components">> =>
             defaultProps: { variant: "rounded" },
             styleOverrides: { rounded: { borderRadius: 16 } },
         },
+        MuiCardContent: {
+            styleOverrides: {
+                root: {
+                    padding: 16,
+                    "&:last-child": {
+                        paddingBottom: 16,
+                    },
+                },
+            },
+        },
     };
 };
 

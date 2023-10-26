@@ -32,26 +32,26 @@ export default function AppointmentTabs({ type, appointment }: AppointmentTabsPr
                             </Typography>
                             {tab === "appointments" ? <CurrentStatus type={type} status={status} completed={false} /> : ""}
                             {status === "returned" ? (
-                                <>
-                                    <Typography mt={1}>Courier Name:</Typography>
-                                    <Typography mt={1}>Product Id:</Typography>
-                                    <Typography mt={1} mb={-1}>
-                                        Receipt Date:
-                                    </Typography>
-                                </>
+                                <Typography mt={1} mb={-1} color="text.secondary">
+                                    Courier Name:
+                                    <br /> Product Id:
+                                    <br /> Receipt Date:
+                                </Typography>
                             ) : (
                                 ""
                             )}
+                            <ActionButtons id={id} type={type}>
+                                {type === "online" && status === "pending" ? (
+                                    <CourierButton onlineAppointmentId={id} type="Shipping" />
+                                ) : null}
+                                {type === "online" && status === "payment" ? (
+                                    <PaymentButton amount={paymentAmount} onlineAppointmentId={id} />
+                                ) : null}
+                                {status === "received" || status === "completed" ? (
+                                    <ReviewButton userId={userId} serviceId={serviceId} />
+                                ) : null}
+                            </ActionButtons>
                         </CardContent>
-                        <ActionButtons id={id} type={type}>
-                            {type === "online" && status === "pending" ? <CourierButton onlineAppointmentId={id} type="Shipping" /> : null}
-                            {type === "online" && status === "payment" ? (
-                                <PaymentButton amount={paymentAmount} onlineAppointmentId={id} />
-                            ) : null}
-                            {status === "received" || status === "completed" ? (
-                                <ReviewButton userId={userId} serviceId={serviceId} />
-                            ) : null}
-                        </ActionButtons>
                     </Card>
                 </Grid>
             ))}

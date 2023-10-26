@@ -1,6 +1,6 @@
 import CourierDialog from "./CourierDialog";
 import PaymentDialog from "./PaymentDialog";
-import CreateReviewDialog from "./CreateReviewDialog";
+import ReviewDialog from "./ReviewDialog";
 import ConfirmDeleteDialog from "./ConfirmDeleteDialog";
 import ChangePasswordDialog from "./ChangePasswordDialog";
 
@@ -9,7 +9,7 @@ export default function DialogProvider() {
         <>
             <CourierDialog />
             <PaymentDialog />
-            <CreateReviewDialog />
+            <ReviewDialog />
             <ConfirmDeleteDialog />
             <ChangePasswordDialog />
         </>

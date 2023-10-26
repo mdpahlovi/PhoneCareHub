@@ -1,6 +1,6 @@
 "use client";
 
-import { CardActions } from "@mui/material";
+import { CardActions, Stack } from "@mui/material";
 import { useSearchParams } from "next/navigation";
 import SeeButton from "@/components/Dashboard/Components/DetailButton";
 
@@ -24,9 +24,9 @@ export default function ActionButtons({ id, type, children }: { id: string; type
     }
 
     return (
-        <CardActions sx={{ display: "flex", gap: 1 }}>
+        <Stack mt={2.5} direction="row" gap={1}>
             {children}
             <SeeButton href={`appointment/${id}?type=${type}`} label="See Detail" />
-        </CardActions>
+        </Stack>
     );
 }

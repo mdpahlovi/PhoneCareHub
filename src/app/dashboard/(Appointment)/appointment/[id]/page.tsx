@@ -4,6 +4,7 @@ import getDateRange from "@/libs/getDateRange";
 import { OnlineAppointment } from "@/types/response";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import CurrentStatus from "@/components/Appointment/CurrentStatus";
+import ReviewComponent from "@/components/Appointment/ReviewComponent";
 import ReviewButton from "@/components/Dashboard/Components/ReviewButton";
 import CancelAppointment from "@/components/Appointment/CancelAppointment";
 import PaymentButton from "@/components/Dashboard/Components/PaymentButton";
@@ -87,6 +88,11 @@ export default async function AppointmentDetails({ params }: { params: { id: str
                                 primary="Delivery Date"
                                 secondary={getDateRange((appointment.data as OnlineAppointment)?.deliveryDate)}
                             />
+                        </ListItem>
+                    ) : null}
+                    {status === "received" || status === "completed" ? (
+                        <ListItem>
+                            <ListItemText primary="Reviews" secondary={<ReviewComponent reviews={appointment?.data?.service?.reviews} />} />
                         </ListItem>
                     ) : null}
                 </List>

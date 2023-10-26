@@ -1,19 +1,24 @@
 import { create } from "zustand";
+import { Review } from "@/types/response";
 
 interface ReviewDialogStore {
+    isEdit: boolean;
     userId: string;
     serviceId: string;
     open: boolean;
+    review: Review | null;
     onClose: () => void;
     onOpen: (userId: string, serviceId: string) => void;
+    onEdit: (review: Review) => void;
 }
 
+const initialValue = { isEdit: false, userId: "", serviceId: "", open: false, review: null };
+
 const useReviewDialogStore = create<ReviewDialogStore>((set) => ({
-    userId: "",
-    serviceId: "",
-    open: false,
-    onClose: () => set({ open: false }),
+    ...initialValue,
+    onClose: () => set(initialValue),
     onOpen: (userId, serviceId) => set({ userId, serviceId, open: true }),
+    onEdit: (review) => set({ open: true, isEdit: true, review }),
 }));
 
 export default useReviewDialogStore;
