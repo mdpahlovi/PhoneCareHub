@@ -1,11 +1,13 @@
 "use client";
 
-import { useSession } from "next-auth/react";
-import { styled } from "@mui/material/styles";
+import Link from "next/link";
 import MenuIcon from "@mui/icons-material/Menu";
 import { borderRounded } from "@/exports/constant";
+import { signOut, useSession } from "next-auth/react";
 import useStateStore from "@/hooks/zustand/useStateStore";
-import { Box, Drawer, IconButton, Typography, Avatar, Button, ButtonProps } from "@mui/material";
+import Person2Rounded from "@mui/icons-material/Person2Rounded";
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import { Box, Drawer, IconButton, Typography, Avatar, Button } from "@mui/material";
 
 export function SideBarButton() {
     const { setToggleSideBar } = useStateStore();
@@ -62,6 +64,32 @@ export function ProfileCard() {
     );
 }
 
-export const StyledButton = styled((props: { children?: React.ReactNode } & ButtonProps) => {
-    return <Button size="large" variant="outlined" {...props} fullWidth />;
-})({ justifyContent: "start" });
+export function SignOutButton() {
+    return (
+        <Button
+            size="large"
+            color="error"
+            variant="outlined"
+            onClick={() => signOut()}
+            startIcon={<LogoutRoundedIcon />}
+            sx={{ justifyContent: "start" }}
+        >
+            Sign Out
+        </Button>
+    );
+}
+
+export function ProfileButton() {
+    return (
+        <Button
+            size="large"
+            variant="outlined"
+            LinkComponent={Link}
+            href="/dashboard/profile"
+            startIcon={<Person2Rounded />}
+            sx={{ mb: 1, justifyContent: "start" }}
+        >
+            Profile
+        </Button>
+    );
+}
