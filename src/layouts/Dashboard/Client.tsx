@@ -1,10 +1,11 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import { styled } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
-import useStateStore from "@/hooks/zustand/useStateStore";
 import { borderRounded } from "@/exports/constant";
-import { Box, Drawer, IconButton, Typography, Avatar } from "@mui/material";
+import useStateStore from "@/hooks/zustand/useStateStore";
+import { Box, Drawer, IconButton, Typography, Avatar, Button, ButtonProps } from "@mui/material";
 
 export function SideBarButton() {
     const { setToggleSideBar } = useStateStore();
@@ -51,7 +52,7 @@ export function PermanentSideBar({ children }: React.PropsWithChildren) {
 }
 
 export function ProfileCard() {
-    const { data, update } = useSession();
+    const { data } = useSession();
 
     return (
         <Box mt={1.25} mb={3} display="flex" alignItems="center" {...borderRounded}>
@@ -60,3 +61,7 @@ export function ProfileCard() {
         </Box>
     );
 }
+
+export const StyledButton = styled((props: { children?: React.ReactNode } & ButtonProps) => {
+    return <Button size="large" variant="outlined" {...props} fullWidth />;
+})({ justifyContent: "start" });

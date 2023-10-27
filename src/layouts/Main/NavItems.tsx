@@ -7,7 +7,7 @@ import useNavLinks from "@/hooks/links/useNavLinks";
 import { usePathname } from "next/navigation";
 import { StyledLink } from "@/components/Common/StyledLink";
 
-export default function MenuItems() {
+export default function NavItems() {
     const routes = useNavLinks();
     const pathname = usePathname();
 

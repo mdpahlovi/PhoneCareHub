@@ -1,6 +1,5 @@
 import { createElement } from "react";
 import { FooterLogo } from "./Client";
-import convertToSlug from "@/libs/convertToSlug";
 import { footer_links, footer_social } from "@/exports/data";
 import { StyledLink } from "@/components/Common/StyledLink";
 import { Container, Stack, Typography, Divider, Copyright, Box } from "@/exports/mui";
@@ -19,7 +18,7 @@ export default function Footer() {
                                 </Typography>
                                 <Stack>
                                     {items.map((link, idx) => (
-                                        <StyledLink key={idx} href={`/${convertToSlug(link)}`}>
+                                        <StyledLink key={idx} href={`/${link.toLowerCase().replace(/\s+/g, "-")}`}>
                                             {link}
                                         </StyledLink>
                                     ))}

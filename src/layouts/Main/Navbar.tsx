@@ -1,4 +1,4 @@
-import MenuItems from "./MenuItems";
+import NavItems from "./NavItems";
 import { MobileMenu } from "@/exports/mui";
 import { MenuButton, ModeToggle } from "./Client";
 import { Box, Stack, Container } from "@mui/material";
@@ -11,7 +11,7 @@ export default function Navbar() {
                 <ThemedLogo />
                 <Stack direction="row" alignItems="center" gap={3} p={2}>
                     <Stack display={{ xs: "none", md: "flex" }} direction="row" alignItems="center" justifyContent="space-between" gap={3}>
-                        <MenuItems />
+                        <NavItems />
                     </Stack>
                     <ModeToggle />
                     <MenuButton />
@@ -19,7 +19,7 @@ export default function Navbar() {
             </Container>
             <MobileMenu>
                 <Stack display={{ md: "none" }} gap={1} px={3} pb={3}>
-                    <MenuItems />
+                    <NavItems />
                 </Stack>
             </MobileMenu>
         </Box>
