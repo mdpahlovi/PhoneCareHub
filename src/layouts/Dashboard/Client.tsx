@@ -67,6 +67,7 @@ export function ProfileCard() {
 export function SignOutButton() {
     return (
         <Button
+            fullWidth
             size="large"
             color="error"
             variant="outlined"
@@ -82,6 +83,7 @@ export function SignOutButton() {
 export function ProfileButton() {
     return (
         <Button
+            fullWidth
             size="large"
             variant="outlined"
             LinkComponent={Link}

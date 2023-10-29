@@ -45,6 +45,7 @@ export type FAQ = {
 export type Admin = {
     id: string;
     name: string;
+    title: string;
     role: "admin";
     image: string;
     email: string;

@@ -9,13 +9,13 @@ import Partners from "@/components/Main/Home/Partners";
 import WhyChooseUs from "@/components/Main/Home/WhyChooseUs";
 import SeeAllButton from "@/components/Main/Home/SeeAllButton";
 import ServiceProcess from "@/components/Main/Home/ServiceProcess";
-import { getAllReview, getAllBlog, getAllFAQ, getAllService } from "@/libs/fetch";
+import { getAllService, getAllReview, getAllFAQ, getAllBlog } from "./fetch";
 
 export default async function Home() {
-    const faqs = await getAllFAQ();
+    const services = await getAllService(6);
     const reviews = await getAllReview();
-    const blogs = await getAllBlog(2, 1, "");
-    const services = await getAllService(6, 1, "");
+    const faqs = await getAllFAQ();
+    const blogs = await getAllBlog(2);
 
     return (
         <>

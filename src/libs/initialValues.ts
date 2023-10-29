@@ -14,10 +14,11 @@ export const getUserInitialValues = (profile: User) => {
 
 export const getAdminInitialValues = (profile: Admin) => {
     const name = profile?.name ? profile.name : "";
+    const title = profile?.title ? profile.title : "";
     const email = profile?.email ? profile.email : "";
     const phone = profile?.phone ? profile.phone : "";
 
-    return { name, email, phone };
+    return { name, title, email, phone };
 };
 
 export const getBlogInitialValues = (blog: Blog) => {

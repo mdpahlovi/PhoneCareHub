@@ -8,16 +8,47 @@ const nextConfig = {
         },
     },
     images: {
-        domains: [
-            "i.ibb.co",
-            "shorturl.at",
-            "img.freepik.com",
-            "drive.google.com",
-            "res.cloudinary.com",
-            "demo.proteusthemes.com",
-            "gadget.fixherotheme.com",
-            "lh3.googleusercontent.com",
-            "avatars.githubusercontent.com",
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "i.ibb.co",
+                pathname: "**",
+            },
+            {
+                protocol: "https",
+                hostname: "shorturl.at",
+                pathname: "**",
+            },
+            {
+                protocol: "https",
+                hostname: "img.freepik.com",
+                pathname: "**",
+            },
+            {
+                protocol: "https",
+                hostname: "res.cloudinary.com",
+                pathname: "**",
+            },
+            {
+                protocol: "https",
+                hostname: "demo.proteusthemes.com",
+                pathname: "**",
+            },
+            {
+                protocol: "https",
+                hostname: "gadget.fixherotheme.com",
+                pathname: "**",
+            },
+            {
+                protocol: "https",
+                hostname: "lh3.googleusercontent.com",
+                pathname: "**",
+            },
+            {
+                protocol: "https",
+                hostname: "avatars.githubusercontent.com",
+                pathname: "**",
+            },
         ],
     },
 };

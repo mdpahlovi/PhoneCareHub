@@ -26,6 +26,7 @@ export default function AdminProfile({ profile }: { profile: Admin }) {
             <Form initialValues={getAdminInitialValues(profile)} onSubmit={handleUpdate}>
                 <FormProfileUpload image={profile.image} name="image" disabled={!editing} />
                 <FormInput name="name" label="Name" disabled={!editing} />
+                <FormInput name="title" label="Admin Title" disabled={!editing} />
                 <Stack direction={{ sm: "row" }} gap={3}>
                     <FormInput type="email" name="email" label="Email" disabled={true} />
                     <FormInput name="phone" label="Phone" disabled={!editing} />

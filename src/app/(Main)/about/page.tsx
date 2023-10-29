@@ -1,20 +1,23 @@
+import { Grid } from "@mui/material";
+import { getTeamAdmin } from "../fetch";
 import About from "@/components/Main/About";
+import { threeCol } from "@/exports/constant";
 import Section from "@/components/Common/Section";
 import TeamCard from "@/components/Main/About/TeamCard";
-import { Grid } from "@mui/material";
-import { threeCol } from "@/exports/constant";
 
 export const metadata = { title: "About" };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+    const admins = await getTeamAdmin();
+
     return (
         <>
             <About />
             <Section title="Our Teams">
                 <Grid container columns={threeCol} spacing={3}>
-                    {[...Array(6)].map((a, idx) => (
+                    {admins?.data?.map((admin, idx) => (
                         <Grid item key={idx} xs={4}>
-                            <TeamCard />
+                            <TeamCard admin={admin} />
                         </Grid>
                     ))}
                 </Grid>
