@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { Link } from "@/exports/mui";
 import { signIn } from "next-auth/react";
 import Form from "@/components/Forms/Form";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import loginSchema from "@/validations/loginSchema";
 import FormInput from "@/components/Forms/FormInput";
 import type { LoginFormInput } from "@/types/global";
@@ -15,11 +15,13 @@ const initialValues = { email: "", password: "" };
 
 export default function LoginForm() {
     const { push } = useRouter();
+    const searchParams = useSearchParams();
     const [loading, setLoading] = useState(false);
+    const callbackUrl = searchParams.get("callbackUrl");
 
     const onSubmit = ({ email, password }: LoginFormInput) => {
         setLoading(true);
-        signIn("credentials", { redirect: false, email, password, callbackUrl: "/" }).then((res) => {
+        signIn("credentials", { redirect: false, email, password, callbackUrl: callbackUrl ? callbackUrl : "/" }).then((res) => {
             setLoading(false);
             if (res?.error) toast.error(res?.error);
             else push(res?.url!);

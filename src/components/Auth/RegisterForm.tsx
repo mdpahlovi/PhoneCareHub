@@ -14,7 +14,7 @@ import registerSchema from "@/validations/registerSchema";
 const initialValues = { first_name: "", last_name: "", email: "", password: "", c_password: "" };
 
 export default function RegisterForm() {
-    const { push } = useRouter();
+    const router = useRouter();
     const [loading, setLoading] = useState(false);
 
     const onSubmit = (data: RegisterFormInput) => {
@@ -23,9 +23,10 @@ export default function RegisterForm() {
 
         baseAxios
             .post("/auth/signup", payload)
-            .then((res) => {
+            .then((res: any) => {
                 setLoading(false);
-                if (res.data) push("/login");
+                router.push("/login");
+                toast.success(res.message);
             })
             .catch((error) => {
                 setLoading(false);
