@@ -1,4 +1,4 @@
-import { format, parseISO } from "date-fns";
+import dayjs from "dayjs";
 import { getServerSession } from "next-auth";
 import Table from "@/components/Table/Table";
 import Banner from "@/components/Common/Banner";
@@ -54,7 +54,7 @@ export default async function ManageOfflineAppointment({ searchParams }: SearchP
                             </TableCell>
                             <TableCell>{deviceInfo}</TableCell>
                             <TableCell>{issueDescription}</TableCell>
-                            <TableCell align="right">{format(parseISO(appointmentDate), "PPP")}</TableCell>
+                            <TableCell align="right">{dayjs(appointmentDate).format("MMMM D, YYYY")}</TableCell>
                             <TableCell align="right">
                                 <DetailButton label="See Detail" href={`mOfflineAppointments/${id}`} />
                             </TableCell>

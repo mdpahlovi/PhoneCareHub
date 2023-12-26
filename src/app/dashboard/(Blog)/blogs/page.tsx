@@ -1,5 +1,5 @@
+import dayjs from "dayjs";
 import { getAllBlog } from "@/libs/fetch";
-import { format, parseISO } from "date-fns";
 import Table from "@/components/Table/Table";
 import Banner from "@/components/Common/Banner";
 import EditButton from "@/components/Dashboard/Components/EditButton";
@@ -31,7 +31,7 @@ export default async function Blogs({ searchParams }: SearchParams) {
                             <TableCell sx={{ minWidth: 192 }}>{title}</TableCell>
                             <TableCell sx={{ minWidth: 384 }}>{content}</TableCell>
                             <TableCell>{source}</TableCell>
-                            <TableCell align="right">{format(parseISO(publishedDate), "PPP")}</TableCell>
+                            <TableCell align="right">{dayjs(publishedDate).format("MMMM D, YYYY")}</TableCell>
                             <TableCell align="right">
                                 <EditButton href={`/edit-blog/${id}`} />
                             </TableCell>

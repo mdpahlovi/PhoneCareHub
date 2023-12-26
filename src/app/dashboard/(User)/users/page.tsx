@@ -1,5 +1,5 @@
+import dayjs from "dayjs";
 import { getallusers } from "@/libs/fetch";
-import { format, parseISO } from "date-fns";
 import { getServerSession } from "next-auth";
 import Table from "@/components/Table/Table";
 import Banner from "@/components/Common/Banner";
@@ -35,7 +35,7 @@ export default async function ManageUsers({ searchParams }: SearchParams) {
                             </TableCell>
                             <TableCell>{name}</TableCell>
                             <TableCell>{email}</TableCell>
-                            <TableCell>{birthdate && format(parseISO(birthdate), "PPP")}</TableCell>
+                            <TableCell>{birthdate && dayjs(birthdate).format("MMMM D, YYYY")}</TableCell>
                             <TableCell align="right">{gender}</TableCell>
                             <TableCell align="right">{phone}</TableCell>
                             <TableCell align="right">

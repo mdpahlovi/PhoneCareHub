@@ -1,4 +1,4 @@
-import { parseISO } from "date-fns";
+import dayjs from "dayjs";
 import { Admin, Blog, OfflineAppointment, OnlineAppointment, Service, User } from "@/types/response";
 
 export const getUserInitialValues = (profile: User) => {
@@ -6,7 +6,7 @@ export const getUserInitialValues = (profile: User) => {
     const email = profile?.email ? profile.email : "";
     const phone = profile?.phone ? profile.phone : "";
     const address = profile?.address ? profile.address : "";
-    const birthdate = profile?.birthdate ? parseISO(profile.birthdate) : "";
+    const birthdate = profile?.birthdate ? dayjs(profile.birthdate) : "";
     const gender = profile?.gender ? profile.gender : "";
 
     return { name, email, phone, address, birthdate, gender };
@@ -25,7 +25,7 @@ export const getBlogInitialValues = (blog: Blog) => {
     const title = blog?.title ? blog.title : "";
     const content = blog?.content ? blog.content : "";
     const source = blog?.source ? blog.source : "";
-    const publishedDate = blog?.publishedDate ? parseISO(blog.publishedDate) : "";
+    const publishedDate = blog?.publishedDate ? dayjs(blog.publishedDate) : "";
 
     return { title, content, source, publishedDate };
 };
@@ -42,7 +42,7 @@ export const getOnlineAppointmentInitialValues = (appointment: OnlineAppointment
     const status = appointment?.status ? appointment.status : "";
     const paymentAmount = appointment?.paymentAmount ? appointment.paymentAmount : null;
     const issueDetected = appointment?.issueDetected ? appointment.issueDetected : [""];
-    const deliveryDate = appointment?.deliveryDate ? parseISO(appointment.deliveryDate) : "";
+    const deliveryDate = appointment?.deliveryDate ? dayjs(appointment.deliveryDate) : "";
 
     return { status, paymentAmount, issueDetected, deliveryDate };
 };

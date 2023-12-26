@@ -1,5 +1,5 @@
+import dayjs from "dayjs";
 import { Blog } from "@/types/response";
-import { format, parseISO } from "date-fns";
 import { StyledTypography } from "@/components/Common/StyledTypography";
 import { Card, CardMedia, CardContent, Typography, Chip, Button, CardActions } from "@mui/material";
 
@@ -15,7 +15,7 @@ export default function BlogCard({ blog }: { blog: Blog }) {
             />
             <CardContent sx={{ ml: { sm: "224px" } }}>
                 <Chip size="small" label={source} color="secondary" />
-                <Typography mt={0.5}>{format(parseISO(publishedDate), "PPP")}</Typography>
+                <Typography mt={0.5}>{dayjs(publishedDate).format("MMMM D, YYYY")}</Typography>
                 <Typography variant="h6" fontWeight={600} lineHeight={1.25}>
                     {title}
                 </Typography>

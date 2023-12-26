@@ -31,7 +31,11 @@ export default function Footer() {
                 <Stack direction={{ xs: "column", sm: "row" }} alignItems="center" justifyContent="space-between" gap={1.5}>
                     <Copyright />
                     <Stack direction="row" gap={2}>
-                        {footer_social.map(({ link, icon }, idx) => createElement(icon, { key: idx }))}
+                        {footer_social.map(({ link, icon }, idx) => (
+                            <a href={link} target="_blank" key={idx}>
+                                {createElement(icon)}
+                            </a>
+                        ))}
                     </Stack>
                 </Stack>
             </Container>

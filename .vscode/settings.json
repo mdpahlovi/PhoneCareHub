@@ -1,12 +1,14 @@
 {
     "files.exclude": {
-        ".next": true,
-        "node_modules": true,
-        ".eslintrc.json": true,
-        ".gitignore": true,
-        "next-env.d.ts": true,
-        "README.md": true,
-        "tsconfig.json": true,
-        "yarn.lock": true
+        // ".next": true,
+        // ".yarn": true,
+        // "node_modules": true,
+        // ".eslintrc.json": true,
+        // ".gitignore": true,
+        // ".yarnrc.yml": true,
+        // "next-env.d.ts": true,
+        // "README.md": true,
+        // "tsconfig.json": true,
+        // "yarn.lock": true
     }
 }

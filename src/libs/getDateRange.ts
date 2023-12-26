@@ -1,10 +1,9 @@
-import { addDays, format, parseISO } from "date-fns";
+import dayjs from "dayjs";
 
 export default function getDateRange(deliveryDate: string | null) {
     if (deliveryDate) {
-        const date = parseISO(deliveryDate);
-        const addTwoDate = addDays(date, 2);
-        return `${format(date, "PP")} - ${format(addTwoDate, "PP")}`;
+        const date = dayjs(deliveryDate);
+        return `${date.format("MMMM D, YYYY")} - ${date.add(2, "d").format("MMMM D, YYYY")}`;
     } else {
         return null;
     }

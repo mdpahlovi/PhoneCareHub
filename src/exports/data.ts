@@ -1,5 +1,5 @@
+import PhoneIcon from "@mui/icons-material/Phone";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
@@ -29,24 +29,24 @@ export const footer_links = [
 
 export const footer_social = [
     {
-        link: "",
+        link: "tel:+8801736817612",
+        icon: PhoneIcon,
+    },
+    {
+        link: "mailto:mdpahlovi07@gmail.com",
         icon: AlternateEmailIcon,
     },
     {
-        link: "",
+        link: "https://www.facebook.com/pahlovi07",
         icon: FacebookIcon,
     },
     {
-        link: "",
+        link: "https://www.linkedin.com/in/mdpahlovi/",
         icon: LinkedInIcon,
     },
     {
-        link: "",
+        link: "https://github.com/mdpahlovi",
         icon: GitHubIcon,
-    },
-    {
-        link: "",
-        icon: TwitterIcon,
     },
 ];
 
