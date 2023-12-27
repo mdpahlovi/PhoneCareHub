@@ -14,7 +14,7 @@ const fake_reviews = [
         comment: "Amazing service! They fixed my iPhone X quickly. I'm impressed!",
         user: {
             name: "Emily Johnson",
-            image: "https://shorturl.at/abcdef",
+            image: "/reviews/1-image.jpg",
         },
     },
     {
@@ -23,7 +23,7 @@ const fake_reviews = [
         comment: "Good job! Repaired my Google Pixel 4a's screen, but it took longer than expected.",
         user: {
             name: "Michael Smith",
-            image: "https://shorturl.at/ghijk",
+            image: "/reviews/4-image.jpg",
         },
     },
     {
@@ -32,7 +32,7 @@ const fake_reviews = [
         comment: "Decent service. They fixed my OnePlus 7T's battery issue, but the price was a bit high.",
         user: {
             name: "Sophia Williams",
-            image: "https://shorturl.at/klmno",
+            image: "/reviews/5-image.jpg",
         },
     },
     {
@@ -41,7 +41,7 @@ const fake_reviews = [
         comment: "Exceptional! Repaired my iPhone 11 screen, and it looks brand new. Highly recommended!",
         user: {
             name: "David Brown",
-            image: "https://shorturl.at/pqrst",
+            image: "/reviews/6-image.jpg",
         },
     },
     {
@@ -50,7 +50,7 @@ const fake_reviews = [
         comment: "Average service. Fixed my Motorola G6, but it had some minor issues after the repair.",
         user: {
             name: "Olivia Davis",
-            image: "https://shorturl.at/uvwx1",
+            image: "/reviews/9-image.jpg",
         },
     },
     {
@@ -59,7 +59,7 @@ const fake_reviews = [
         comment: "Incredible! They resolved the charging issue on my LG V60 promptly. Top-notch service!",
         user: {
             name: "Daniel Wilson",
-            image: "https://shorturl.at/efgh1",
+            image: "/reviews/10-image.jpg",
         },
     },
 ];

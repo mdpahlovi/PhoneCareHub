@@ -5,12 +5,10 @@ import { StyledWhyChooseUs } from "./Styled";
 import { Box, Stack, Typography, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 
 export default function WhyChooseUs() {
-    const src = "https://gadget.fixherotheme.com/wp-content/uploads/2023/08/about_img_1.png";
-
     return (
         <StyledWhyChooseUs>
             <Box display={{ xs: "none", md: "block" }} mr="auto">
-                <Image src={src} alt="" style={{ width: "100%" }} width={500} height={500} />
+                <Image src="/about_img.png" alt="" style={{ width: "100%" }} width={500} height={500} />
             </Box>
             <Stack>
                 <Typography variant="body1" textTransform="uppercase" fontWeight={600} color="secondary.main">
