@@ -1,9 +1,9 @@
 import { SessionProvider } from "@/exports";
+import ThemeRegistry from "./ThemeRegistry";
 import ToastProvider from "./ToastProvider";
 import ReviewDialog from "./Dialogs/ReviewDialog";
 import CourierDialog from "./Dialogs/CourierDialog";
 import PaymentDialog from "./Dialogs/PaymentDialog";
-import ThemeRegistry from "./ThemeRegistry/ThemeRegistry";
 import ConfirmDeleteDialog from "./Dialogs/ConfirmDeleteDialog";
 import ChangePasswordDialog from "./Dialogs/ChangePasswordDialog";
 
