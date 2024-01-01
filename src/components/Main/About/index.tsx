@@ -22,7 +22,7 @@ export default function About() {
                 </Typography>
             </Stack>
             <Box display={{ xs: "none", md: "block" }} ml="auto">
-                <Image src="/images/about.jpg" alt="" style={{ width: "100%" }} width={400} height={400} />
+                <Image src="/images/about/page.jpg" alt="" style={{ width: "100%" }} width={400} height={400} />
             </Box>
         </StyledAbout>
     );

@@ -48,7 +48,7 @@ export const authOptions: NextAuthOptions = {
             },
         }),
     ],
-    pages: { signIn: "/login" },
+    pages: { signIn: "/login", error: "/error" },
     callbacks: {
         async signIn({ user, account }) {
             if (account?.type === "oauth") {

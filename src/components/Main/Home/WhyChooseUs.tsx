@@ -8,7 +8,7 @@ export default function WhyChooseUs() {
     return (
         <StyledWhyChooseUs>
             <Box display={{ xs: "none", md: "block" }} mr="auto">
-                <Image src="/about_img.png" alt="" style={{ width: "100%" }} width={500} height={500} />
+                <Image src="/images/about/section.png" alt="" style={{ width: "100%" }} width={500} height={500} />
             </Box>
             <Stack>
                 <Typography variant="body1" textTransform="uppercase" fontWeight={600} color="secondary.main">

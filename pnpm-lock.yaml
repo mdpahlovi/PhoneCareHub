@@ -35,9 +35,6 @@ dependencies:
   '@mui/material-nextjs':
     specifier: 5.15.0
     version: 5.15.0(@emotion/cache@11.11.0)(@mui/material@5.15.2)(@types/react@18.2.46)(next@14.0.3)(react@18.2.0)
-  '@mui/system':
-    specifier: 5.15.2
-    version: 5.15.2(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.46)(react@18.2.0)
   '@mui/x-date-pickers':
     specifier: 6.18.6
     version: 6.18.6(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@mui/material@5.15.2)(@mui/system@5.15.2)(@types/react@18.2.46)(dayjs@1.11.10)(react-dom@18.2.0)(react@18.2.0)
