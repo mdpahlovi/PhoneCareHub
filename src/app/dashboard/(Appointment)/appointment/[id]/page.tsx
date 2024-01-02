@@ -25,7 +25,7 @@ export default async function AppointmentDetails({ params }: { params: { id: str
             ActionButton = <CourierButton onlineAppointmentId={id} type="Shipping" />;
             break;
         case "payment":
-            ActionButton = <PaymentButton onlineAppointmentId={id} amount={paymentAmount} />;
+            ActionButton = <PaymentButton onlineAppointmentId={id} />;
             break;
         case "received":
             ActionButton = <ReviewButton userId={userId} serviceId={serviceId} />;

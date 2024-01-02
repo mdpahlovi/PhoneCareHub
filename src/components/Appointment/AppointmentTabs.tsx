@@ -44,9 +44,7 @@ export default function AppointmentTabs({ type, appointment }: AppointmentTabsPr
                                 {type === "online" && status === "pending" ? (
                                     <CourierButton onlineAppointmentId={id} type="Shipping" />
                                 ) : null}
-                                {type === "online" && status === "payment" ? (
-                                    <PaymentButton amount={paymentAmount} onlineAppointmentId={id} />
-                                ) : null}
+                                {type === "online" && status === "payment" ? <PaymentButton onlineAppointmentId={id} /> : null}
                                 {status === "received" || status === "completed" ? (
                                     <ReviewButton userId={userId} serviceId={serviceId} />
                                 ) : null}

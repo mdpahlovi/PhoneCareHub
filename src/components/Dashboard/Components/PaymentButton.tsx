@@ -1,15 +1,21 @@
 "use client";
 
+import toast from "react-hot-toast";
 import { Button } from "@mui/material";
-import usePaymentDialogStore from "@/hooks/zustand/usePaymentDialogStore";
+import useAxiosRequest from "@/hooks/useAxiosRequest";
 
-type PaymentButtonProps = { onlineAppointmentId: string; amount: number | null };
+export default function PaymentButton({ onlineAppointmentId }: { onlineAppointmentId: string }) {
+    const axios = useAxiosRequest();
 
-export default function PaymentButton({ onlineAppointmentId, amount }: PaymentButtonProps) {
-    const { onOpen } = usePaymentDialogStore();
+    const handlePaymentInit = () => {
+        axios
+            .post(`/payment/init/${onlineAppointmentId}`)
+            .then((res) => window.open(res.data, "_blank"))
+            .catch((error) => toast.error(error.message));
+    };
 
     return (
-        <Button size="small" onClick={() => onOpen(onlineAppointmentId, amount)} sx={{ whiteSpace: "nowrap" }}>
+        <Button size="small" onClick={handlePaymentInit} sx={{ whiteSpace: "nowrap" }}>
             Pay Now
         </Button>
     );
