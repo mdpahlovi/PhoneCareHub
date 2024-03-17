@@ -19,13 +19,11 @@ export default async function ManageAdmins({ searchParams }: SearchParams) {
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const admins = await getalladmins(session?.token, search, page, size);
-    const pagination = { total: admins?.meta?.total!, size, page };
-    const searchProps = { search, label: "Admin" };
 
     return (
         <>
             <Banner>All Admin</Banner>
-            <Table columns={columns} pagination={pagination} search={searchProps}>
+            <Table columns={columns} pagination={{ total: admins?.meta?.total!, size, page }} search={{ search, label: "Admin" }}>
                 <TableBody>
                     {admins?.data?.map(({ id, image, name, email, phone }, idx) => (
                         <TableRow key={idx} hover>

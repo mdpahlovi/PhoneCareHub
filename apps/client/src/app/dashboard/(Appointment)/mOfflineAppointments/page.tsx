@@ -27,7 +27,6 @@ export default async function ManageOfflineAppointment({ searchParams }: SearchP
     const status = searchParams?.status ? searchParams.status : "pending";
     const appointmentDate = searchParams?.appointmentDate ? searchParams.appointmentDate : undefined;
     const offlineAppointment = await getallOfflineAppointment(session?.token, search, size, page, status);
-    const pagination = { total: offlineAppointment?.meta?.total!, size, page };
 
     return (
         <>
@@ -36,7 +35,7 @@ export default async function ManageOfflineAppointment({ searchParams }: SearchP
                 <SearchField search={search} />
                 <StatusFilter status={status} items={[...getStatus("offline", true), "cancelled"]} />
             </Stack>
-            <Table columns={columns} pagination={pagination}>
+            <Table columns={columns} pagination={{ total: offlineAppointment?.meta?.total!, size, page }}>
                 <TableBody>
                     {offlineAppointment?.data?.map(({ id, user, deviceInfo, issueDescription, appointmentDate }) => (
                         <TableRow key={id} hover>

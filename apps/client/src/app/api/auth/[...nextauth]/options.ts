@@ -1,9 +1,14 @@
+import { compare } from "bcrypt";
 import { encode } from "next-auth/jwt";
-import { baseAxios } from "@/exports/axios";
+import { exclude } from "@/libs/exclude";
 import type { NextAuthOptions } from "next-auth";
+import { PrismaClient, Provider } from "@prisma/client";
 import GithubProvider, { type GithubProfile } from "next-auth/providers/github";
 import GoogleProvider, { type GoogleProfile } from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
+
+const prisma = new PrismaClient({ errorFormat: "minimal" });
+const select = { id: true, name: true, role: true, image: true, email: true, password: true };
 
 export const authOptions: NextAuthOptions = {
     providers: [
@@ -39,12 +44,19 @@ export const authOptions: NextAuthOptions = {
             async authorize(credentials, req) {
                 const { email, password } = credentials as { email: string; password: string };
 
-                try {
-                    const res = await baseAxios.post("/auth/signin", { email, password });
-                    return res.data;
-                } catch (error: any) {
-                    throw new Error(error.message);
+                let isUserExist;
+                const user = await prisma.user.findUnique({ where: { email }, select });
+                const admin = await prisma.admin.findUnique({ where: { email }, select });
+
+                if (!user && !admin) throw new Error("User doesn't exist...");
+                if (user || admin) isUserExist = admin || user;
+
+                if (!isUserExist?.password || !(await compare(password, isUserExist.password))) {
+                    throw new Error("Password doesn't match...!");
                 }
+
+                const result = exclude(isUserExist, ["password"]);
+                return result;
             },
         }),
     ],
@@ -52,15 +64,13 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         async signIn({ user, account }) {
             if (account?.type === "oauth") {
-                const payload = { name: user?.name!, image: user?.image!, email: user?.email!, provider: account?.provider };
+                const payload = { name: user?.name!, image: user?.image!, email: user?.email!, provider: account?.provider as Provider };
 
-                try {
-                    const res = await baseAxios.post("/auth/social-signin", payload);
-                    user.id = res.data.id;
-                    return true;
-                } catch (error: any) {
-                    throw new Error(error.message);
-                }
+                let result = await prisma.user.findUnique({ where: { email: payload.email }, select });
+                if (!result) result = await prisma.user.create({ data: { ...payload }, select });
+
+                user.id = result.id;
+                return true;
             } else {
                 return true;
             }

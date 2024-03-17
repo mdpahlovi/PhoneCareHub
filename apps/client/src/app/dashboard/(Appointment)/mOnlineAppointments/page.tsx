@@ -1,5 +1,6 @@
 import { getServerSession } from "next-auth";
 import Table from "@/components/Table/Table";
+import { getStatus } from "@/exports/constant";
 import Banner from "@/components/Common/Banner";
 import { getallOnlineAppointment } from "@/libs/fetch";
 import SearchField from "@/components/Common/SearchField";
@@ -8,7 +9,6 @@ import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import StatusFilter from "@/components/Dashboard/Components/StatusFilter";
 import DetailButton from "@/components/Dashboard/Components/DetailButton";
 import { Avatar, TableBody, TableCell, TableRow, Typography, Stack, Box } from "@mui/material";
-import { getStatus } from "@/exports/constant";
 
 export const metadata = { title: "Manage Online Appointment" };
 
@@ -23,7 +23,6 @@ export default async function ManageOnlineAppointment({ searchParams }: SearchPa
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const status = searchParams?.status ? searchParams.status : "pending";
     const onlineAppointment = await getallOnlineAppointment(session?.token, search, size, page, status);
-    const pagination = { total: onlineAppointment?.meta?.total!, size, page };
 
     return (
         <>
@@ -32,7 +31,7 @@ export default async function ManageOnlineAppointment({ searchParams }: SearchPa
                 <SearchField search={search} />
                 <StatusFilter status={status} items={[...getStatus("online", true), "cancelled"]} />
             </Stack>
-            <Table columns={columns} pagination={pagination}>
+            <Table columns={columns} pagination={{ total: onlineAppointment?.meta?.total!, size, page }}>
                 <TableBody>
                     {onlineAppointment?.data?.map(({ id, user, deviceInfo, issueDescription }) => (
                         <TableRow key={id} hover>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { GenericErrorResponse } from "@/types/global";
 
-export const BASE_URL = "https://phonecarehub.onrender.com/api/v1";
+export const BASE_URL = "http://localhost:5000/api/v1";
 export const baseAxios = axios.create({ baseURL: BASE_URL, timeout: 60000 });
 
 baseAxios.interceptors.response.use(
