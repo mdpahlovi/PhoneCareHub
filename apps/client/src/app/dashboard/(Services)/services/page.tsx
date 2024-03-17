@@ -4,13 +4,10 @@ import EditButton from "@/components/Dashboard/Components/EditButton";
 import { Avatar, TableBody, TableCell, TableRow } from "@mui/material";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 
-type SearchParams = { searchParams: { page?: string; size?: string } };
-
-const columns = ["Image", "Name", "Description", "Estimate Time", "Edit", "Delete"];
-
 export const metadata = { title: "All Service" };
+export const columns = ["Image", "Name", "Description", "Estimate Time", "Edit", "Delete"];
 
-export default async function ManageService({ searchParams }: SearchParams) {
+export default async function ManageService({ searchParams }: { searchParams: { page?: string; size?: string } }) {
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const services = await getAllService(size, page + 1, "");

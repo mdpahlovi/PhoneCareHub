@@ -21,14 +21,9 @@ export default function Context({ faqs }: { faqs?: FAQ[] | null }) {
 
     return (
         <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-            <SortableContext
-                items={items.map(({ serial }) => {
-                    return { id: serial as UniqueIdentifier };
-                })}
-                strategy={verticalListSortingStrategy}
-            >
+            <SortableContext items={items.map(({ serial }) => ({ id: serial as UniqueIdentifier }))} strategy={verticalListSortingStrategy}>
                 {items.map((faq, idx) => (
-                    <FAQCard key={idx} faq={faq} lastItem={items?.length === idx + 1} />
+                    <FAQCard key={idx} faq={faq} firstItem={idx === 0} lastItem={items?.length === idx + 1} />
                 ))}
             </SortableContext>
         </DndContext>

@@ -7,13 +7,10 @@ import { TableRow, TableCell, TableBody, Avatar } from "@mui/material";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import ChangePasswordButton from "@/components/Dashboard/Components/ChangePasswordButton";
 
-type SearchParams = { searchParams: { search?: string; page?: string; size?: string } };
-
 export const metadata = { title: "All User" };
+export const columns = ["Image", "Name", "Email", "BirthDate", "Gender", "Phone", "Change Password", "Delete"];
 
-const columns = ["Image", "Name", "Email", "BirthDate", "Gender", "Phone", "Change Password", "Delete"];
-
-export default async function ManageUsers({ searchParams }: SearchParams) {
+export default async function ManageUsers({ searchParams }: { searchParams: { search?: string; page?: string; size?: string } }) {
     const session = await getServerSession(authOptions);
     const search = searchParams?.search ? searchParams.search : "";
     const page = Number(searchParams?.page ? searchParams.page : 0);

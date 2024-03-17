@@ -8,13 +8,14 @@ import DragHandle from "@mui/icons-material/DragHandle";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import { IconButton, Paper, Popover, Typography } from "@mui/material";
 
-export default function FAQCard({ faq, lastItem }: { faq: FAQ; lastItem?: boolean }) {
+export default function FAQCard({ faq, firstItem, lastItem }: { faq: FAQ; firstItem: boolean; lastItem: boolean }) {
     const { id, serial, answer, question } = faq;
     const [anchorEl, setAnchorEl] = useState<string | null>("");
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: serial });
 
     const style: React.CSSProperties = {
         width: "100%",
+        marginTop: firstItem ? "24px" : "",
         marginBottom: lastItem ? "0px" : "1rem",
         display: "flex",
         alignItems: "center",
@@ -24,12 +25,14 @@ export default function FAQCard({ faq, lastItem }: { faq: FAQ; lastItem?: boolea
     };
 
     return (
-        <div key={id} ref={setNodeRef} style={style}>
+        <div ref={setNodeRef} style={style}>
             <IconButton {...attributes} {...listeners}>
                 <DragHandle />
             </IconButton>
             <Paper aria-describedby={id} sx={{ width: "100%", p: 0.75 }} onClick={() => setAnchorEl(anchorEl ? null : id)}>
-                <Typography fontWeight={600}>{question}</Typography>
+                <Typography fontWeight={600} sx={{ cursor: "pointer" }}>
+                    {question}
+                </Typography>
             </Paper>
             <Popover
                 id={id}

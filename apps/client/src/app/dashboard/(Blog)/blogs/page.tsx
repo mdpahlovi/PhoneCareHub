@@ -5,13 +5,10 @@ import EditButton from "@/components/Dashboard/Components/EditButton";
 import { Avatar, TableBody, TableCell, TableRow } from "@mui/material";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 
-type SearchParams = { searchParams: { page?: string; size?: string } };
-
-const columns = ["Image", "Title", "Content", "Source", "Published Date", "Edit", "Delete"];
-
 export const metadata = { title: "All Blog" };
+export const columns = ["Image", "Title", "Content", "Source", "Published Date", "Edit", "Delete"];
 
-export default async function Blogs({ searchParams }: SearchParams) {
+export default async function Blogs({ searchParams }: { searchParams: { page?: string; size?: string } }) {
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const blogs = await getAllBlog(size, page + 1, "");
