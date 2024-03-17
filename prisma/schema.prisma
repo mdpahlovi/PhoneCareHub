@@ -1,0 +1,211 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider  = "postgresql"
+    url       = env("POSTGRES_PRISMA_URL")
+    directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model User {
+    id                  String               @id @default(uuid())
+    name                String
+    role                Role                 @default(user)
+    image               String               @default("https://shorturl.at/jnruF")
+    email               String               @unique
+    password            String?
+    phone               String?
+    address             String?
+    birthdate           DateTime?
+    gender              Gender?
+    provider            Provider             @default(credentials)
+    createdAt           DateTime             @default(now())
+    updatedAt           DateTime             @updatedAt
+    onlineAppointments  OnlineAppointment[]
+    offlineAppointments OfflineAppointment[]
+    reviews             Review[]
+
+    @@map("users")
+}
+
+model Admin {
+    id        String   @id @default(uuid())
+    name      String
+    role      Role     @default(admin)
+    title     String?
+    image     String   @default("https://shorturl.at/jnruF")
+    email     String   @unique
+    password  String?
+    phone     String?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@map("admins")
+}
+
+model Service {
+    id                  String               @id @default(uuid())
+    name                String
+    image               String
+    description         String
+    estimatetime        Int
+    createdAt           DateTime             @default(now())
+    updatedAt           DateTime             @updatedAt
+    onlineAppointments  OnlineAppointment[]
+    offlineAppointments OfflineAppointment[]
+    reviews             Review[]
+
+    @@map("services")
+}
+
+model OnlineAppointment {
+    id               String                  @id @default(uuid())
+    userId           String
+    serviceId        String
+    deviceInfo       String
+    issueDescription String
+    shippingAddress  String
+    status           OnlineAppointmentStatus @default(pending)
+    paymentAmount    Float?
+    issueDetected    String[]
+    deliveryDate     String?
+    createdAt        DateTime                @default(now())
+    updatedAt        DateTime                @updatedAt
+    user             User                    @relation(fields: [userId], references: [id])
+    service          Service                 @relation(fields: [serviceId], references: [id])
+    payment          Payment?
+    deviceShipping   DeviceShipping?
+    deviceReturned   DeviceReturned?
+
+    @@map("online_appointments")
+}
+
+model OfflineAppointment {
+    id               String                   @id @default(uuid())
+    userId           String
+    serviceId        String
+    deviceInfo       String
+    issueDescription String
+    appointmentDate  DateTime
+    status           OfflineAppointmentStatus @default(pending)
+    paymentAmount    Float?
+    issueDetected    String[]
+    createdAt        DateTime                 @default(now())
+    updatedAt        DateTime                 @updatedAt
+    user             User                     @relation(fields: [userId], references: [id])
+    service          Service                  @relation(fields: [serviceId], references: [id])
+
+    @@map("offline_appointments")
+}
+
+model DeviceShipping {
+    id                  String            @id @default(uuid())
+    onlineAppointmentId String            @unique
+    courierName         String
+    productId           String
+    receiptDate         DateTime
+    createdAt           DateTime          @default(now())
+    updatedAt           DateTime          @updatedAt
+    onlineAppointment   OnlineAppointment @relation(fields: [onlineAppointmentId], references: [id])
+
+    @@map("device_shipping")
+}
+
+model Payment {
+    id                  String            @id @default(uuid())
+    onlineAppointmentId String            @unique
+    method              String
+    amount              Float
+    transactionId       String
+    paymentDate         DateTime          @default(now())
+    onlineAppointment   OnlineAppointment @relation(fields: [onlineAppointmentId], references: [id])
+
+    @@map("payments")
+}
+
+model DeviceReturned {
+    id                  String            @id @default(uuid())
+    onlineAppointmentId String            @unique
+    courierName         String
+    productId           String
+    receiptDate         DateTime
+    createdAt           DateTime          @default(now())
+    updatedAt           DateTime          @updatedAt
+    onlineAppointment   OnlineAppointment @relation(fields: [onlineAppointmentId], references: [id])
+
+    @@map("device_returned")
+}
+
+model Review {
+    id        String   @id @default(uuid())
+    userId    String
+    serviceId String
+    rating    Float
+    comment   String
+    createdAt DateTime @default(now())
+    user      User     @relation(fields: [userId], references: [id])
+    service   Service  @relation(fields: [serviceId], references: [id])
+
+    @@map("reviews")
+}
+
+model Blog {
+    id            String   @id @default(uuid())
+    image         String
+    title         String
+    content       String
+    source        String
+    publishedDate DateTime
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+
+    @@map("blogs")
+}
+
+model FAQs {
+    id        String   @id @default(uuid())
+    serial    Int
+    question  String
+    answer    String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@map("faqs")
+}
+
+enum Role {
+    user
+    admin
+    superadmin
+}
+
+enum Provider {
+    google
+    github
+    credentials
+}
+
+enum Gender {
+    male
+    female
+    transgender
+}
+
+enum OnlineAppointmentStatus {
+    pending
+    shipping
+    receited
+    reviewing
+    payment
+    repairing
+    returned
+    received
+    cancelled
+}
+
+enum OfflineAppointmentStatus {
+    pending
+    completed
+    cancelled
+}
