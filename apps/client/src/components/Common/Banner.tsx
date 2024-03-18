@@ -5,6 +5,7 @@ import { styled } from "@mui/material/styles";
 import { usePathname } from "next/navigation";
 import { borderRounded } from "@/exports/constant";
 import { Stack, Container, Typography } from "@mui/material";
+import firstWordCapital from "@/libs/firstWordCapital";
 
 export const StyledBackground = styled("div")(({ theme }) => ({
     padding: "80px 0",
@@ -48,7 +49,7 @@ export default function Banner({ children }: React.PropsWithChildren) {
             <StyledBackground>
                 <Container sx={{ position: "relative", zIndex: 10 }}>
                     <Typography variant="h3" fontWeight={600} color="white">
-                        {children}
+                        {children ? children : firstWordCapital(pathname[1])}
                     </Typography>
                     <Breadcrumbs white />
                 </Container>

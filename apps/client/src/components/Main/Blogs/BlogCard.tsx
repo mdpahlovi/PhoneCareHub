@@ -1,10 +1,10 @@
 import dayjs from "dayjs";
 import { Blog } from "@/types/response";
 import { StyledTypography } from "@/components/Common/StyledTypography";
-import { Card, CardMedia, CardContent, Typography, Chip, Button, CardActions } from "@mui/material";
+import { Card, CardMedia, CardContent, Typography, Chip, Button } from "@mui/material";
 
 export default function BlogCard({ blog }: { blog: Blog }) {
-    const { id, source, publishedDate, content, image, title } = blog;
+    const { source, publishedDate, content, image, title } = blog;
 
     return (
         <Card sx={{ position: "relative", display: "flex", alignItems: "center" }}>
@@ -26,7 +26,6 @@ export default function BlogCard({ blog }: { blog: Blog }) {
                     Read More
                 </Button>
             </CardContent>
-            <CardActions></CardActions>
         </Card>
     );
 }

@@ -1,11 +1,11 @@
-import { v2 as cloudinary } from "cloudinary";
-import { Server } from "http";
 import app from "./app";
 import config from "./config";
+import { Server } from "http";
+import { v2 as cloudinary } from "cloudinary";
 
 async function bootstrap() {
-    const server: Server = app.listen(config.port, () => {
-        console.log(`Server running on port ${config.port}`);
+    const server: Server = app.listen(5000, () => {
+        console.log(`Server running on port ${5000}`);
     });
 
     const exitHandler = () => {
