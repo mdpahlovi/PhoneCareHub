@@ -5,7 +5,7 @@ import { Avatar, TableBody, TableCell, TableRow } from "@mui/material";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 
 export const metadata = { title: "All Service" };
-export const columns = ["Image", "Name", "Description", "Estimate Time", "Edit", "Delete"];
+const columns = ["Image", "Name", "Description", "Estimate Time", "Edit", "Delete"];
 
 export default async function ManageService({ searchParams }: { searchParams: { page?: string; size?: string } }) {
     const size = Number(searchParams?.size ? searchParams.size : 5);

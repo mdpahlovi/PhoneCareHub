@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Stack } from "@mui/material";
 import { getStatus } from "@/exports/constant";
 import Banner from "@/components/Common/Banner";
@@ -9,8 +10,12 @@ export default function MOfflineAppointmentLayout({ children }: React.PropsWithC
         <>
             <Banner>Offline Appointment</Banner>
             <Stack mb={3} direction={{ xs: "column", sm: "row" }} alignItems="end" justifyContent="end" gap={3}>
-                <SearchField />
-                <StatusFilter items={[...getStatus("offline", true), "cancelled"]} />
+                <Suspense>
+                    <SearchField />
+                </Suspense>
+                <Suspense>
+                    <StatusFilter items={[...getStatus("offline", true), "cancelled"]} />
+                </Suspense>
             </Stack>
             {children}
         </>

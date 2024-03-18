@@ -7,7 +7,7 @@ import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import ChangePasswordButton from "@/components/Dashboard/Components/ChangePasswordButton";
 
 export const metadata = { title: "All Admin" };
-export const columns = ["Image", "Name", "Email", "Phone", "Change Password", "Delete"];
+const columns = ["Image", "Name", "Email", "Phone", "Change Password", "Delete"];
 
 export default async function ManageAdmins({ searchParams }: { searchParams: { search?: string; page?: string; size?: string } }) {
     const session = await getServerSession(authOptions);

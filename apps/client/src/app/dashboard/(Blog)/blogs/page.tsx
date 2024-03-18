@@ -6,7 +6,7 @@ import { Avatar, TableBody, TableCell, TableRow } from "@mui/material";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 
 export const metadata = { title: "All Blog" };
-export const columns = ["Image", "Title", "Content", "Source", "Published Date", "Edit", "Delete"];
+const columns = ["Image", "Title", "Content", "Source", "Published Date", "Edit", "Delete"];
 
 export default async function Blogs({ searchParams }: { searchParams: { page?: string; size?: string } }) {
     const size = Number(searchParams?.size ? searchParams.size : 5);

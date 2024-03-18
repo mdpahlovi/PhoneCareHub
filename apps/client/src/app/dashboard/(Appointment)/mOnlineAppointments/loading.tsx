@@ -1,6 +1,7 @@
-import { columns } from "./page";
 import Table from "@/components/Table/Table";
 import { Skeleton, TableBody, TableCell, TableRow } from "@mui/material";
+
+const columns = ["User", "Email", "Device Info", "Issue Details", "See Detail", "Delete"];
 
 export default function MOnlineAppointmentLoading() {
     return (

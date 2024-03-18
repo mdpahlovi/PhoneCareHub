@@ -8,7 +8,7 @@ import DetailButton from "@/components/Dashboard/Components/DetailButton";
 import { Avatar, Box, Stack, TableBody, TableCell, TableRow, Typography } from "@mui/material";
 
 export const metadata = { title: "Manage Offline Appointment" };
-export const columns = ["User", "Email", "Device Info", "Issue Details", "Appointment Date", "See Detail", "Delete"];
+const columns = ["User", "Email", "Device Info", "Issue Details", "Appointment Date", "See Detail", "Delete"];
 type SearchParams = { searchParams: { search?: string; page?: string; size?: string; status?: string; email?: string } };
 
 export default async function ManageOfflineAppointment({ searchParams }: SearchParams) {

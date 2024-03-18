@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import LoginForm from "@/components/Auth/LoginForm";
 import GoogleIcon from "@mui/icons-material/Google";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -18,14 +19,20 @@ export default function Login() {
                 </Typography>
             </Stack>
             <Stack direction={{ sm: "row" }} gap={3}>
-                <AuthButton provider="google" startIcon={<GoogleIcon />}>
-                    Login With Google
-                </AuthButton>
-                <AuthButton provider="github" startIcon={<GitHubIcon />}>
-                    Login With Github
-                </AuthButton>
+                <Suspense>
+                    <AuthButton provider="google" startIcon={<GoogleIcon />}>
+                        Login With Google
+                    </AuthButton>
+                </Suspense>
+                <Suspense>
+                    <AuthButton provider="github" startIcon={<GitHubIcon />}>
+                        Login With Github
+                    </AuthButton>
+                </Suspense>
             </Stack>
-            <LoginForm />
+            <Suspense>
+                <LoginForm />
+            </Suspense>
         </>
     );
 }

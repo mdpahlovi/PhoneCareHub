@@ -8,7 +8,7 @@ import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import ChangePasswordButton from "@/components/Dashboard/Components/ChangePasswordButton";
 
 export const metadata = { title: "All User" };
-export const columns = ["Image", "Name", "Email", "BirthDate", "Gender", "Phone", "Change Password", "Delete"];
+const columns = ["Image", "Name", "Email", "BirthDate", "Gender", "Phone", "Change Password", "Delete"];
 
 export default async function ManageUsers({ searchParams }: { searchParams: { search?: string; page?: string; size?: string } }) {
     const session = await getServerSession(authOptions);

@@ -1,6 +1,7 @@
-import { columns } from "./page";
 import Table from "@/components/Table/Table";
 import { Skeleton, TableBody, TableCell, TableRow } from "@mui/material";
+
+const columns = ["Image", "Name", "Description", "Estimate Time", "Edit", "Delete"];
 
 export default function ServiceLoading() {
     return (
