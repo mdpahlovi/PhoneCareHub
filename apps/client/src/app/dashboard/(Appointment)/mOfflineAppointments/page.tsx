@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { getServerSession } from "next-auth";
 import Table from "@/components/Table/Table";
+import { getStatus } from "@/exports/constant";
 import Banner from "@/components/Common/Banner";
 import { getallOfflineAppointment } from "@/libs/fetch";
 import SearchField from "@/components/Common/SearchField";
@@ -9,15 +10,10 @@ import StatusFilter from "@/components/Dashboard/Components/StatusFilter";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import DetailButton from "@/components/Dashboard/Components/DetailButton";
 import { Avatar, Box, Stack, TableBody, TableCell, TableRow, Typography } from "@mui/material";
-import { getStatus } from "@/exports/constant";
 
 export const metadata = { title: "Manage Offline Appointment" };
-
-const columns = ["User", "Email", "Device Info", "Issue Details", "Appointment Date", "See Detail", "Delete"];
-
-type SearchParams = {
-    searchParams: { search?: string; page?: string; size?: string; status?: string; email?: string; appointmentDate?: string };
-};
+export const columns = ["User", "Email", "Device Info", "Issue Details", "Appointment Date", "See Detail", "Delete"];
+type SearchParams = { searchParams: { search?: string; page?: string; size?: string; status?: string; email?: string } };
 
 export default async function ManageOfflineAppointment({ searchParams }: SearchParams) {
     const session = await getServerSession(authOptions);
@@ -25,7 +21,6 @@ export default async function ManageOfflineAppointment({ searchParams }: SearchP
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const status = searchParams?.status ? searchParams.status : "pending";
-    const appointmentDate = searchParams?.appointmentDate ? searchParams.appointmentDate : undefined;
     const offlineAppointment = await getallOfflineAppointment(session?.token, search, size, page, status);
 
     return (
