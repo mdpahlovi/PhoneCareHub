@@ -3,9 +3,12 @@
 import useCreateQuery from "@/hooks/useCreateQuery";
 import { MenuItem, TextField } from "@mui/material";
 import firstWordCapital from "@/libs/firstWordCapital";
+import { useSearchParams } from "next/navigation";
 
-export default function StatusFilter({ status, items }: { status: string; items: string[] }) {
+export default function StatusFilter({ items }: { items: string[] }) {
     const createQuery = useCreateQuery();
+    const searchParams = useSearchParams();
+    const status = searchParams?.get("status") ? searchParams.get("status") : "pending";
 
     return (
         <TextField
