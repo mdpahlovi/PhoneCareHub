@@ -8,7 +8,7 @@ import Section from "@/components/Common/Section";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from "@mui/material";
 
-export default function FAQs({ faq }: { faq: FAQs[] }) {
+export default function FAQComp({ faq }: { faq: FAQs[] }) {
     const [expanded, setExpanded] = useState<number | boolean>(0);
 
     const handleChange = (panel: number) => (event: React.SyntheticEvent, newExpanded: boolean) => {

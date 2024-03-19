@@ -1,25 +1,34 @@
 "use client";
 
+import toast from "react-hot-toast";
+import { useTransition } from "react";
 import Form from "@/components/Forms/Form";
+import { useRouter } from "next/navigation";
 import Close from "@mui/icons-material/Close";
-import useCreateData from "@/hooks/useCreateData";
 import FormInput from "@/components/Forms/FormInput";
 import FormSubmit from "@/components/Forms/FormSubmit";
 import createCourier from "@/validations/createCourier";
 import FormDatePick from "@/components/Forms/FormDatePick";
+import { handleCourier } from "@/app/dashboard/(Appointment)/actions";
 import useCourierDialogStore from "@/hooks/zustand/useCourierDialogStore";
 import { Dialog, DialogContent, Box, IconButton, Typography, DialogTitle } from "@mui/material";
 
 const initialValue = { courierName: "", productId: "", receiptDate: "" };
 
 export default function CourierDialog() {
+    const { refresh } = useRouter();
+    const [isPending, startTransition] = useTransition();
     const { onlineAppointmentId, type, open, onClose } = useCourierDialogStore();
-    const { handleCreate, loading } = useCreateData(`device${type}`, true);
 
     const onSubmit = (data: any) => {
-        const payload = { onlineAppointmentId, ...data };
-        handleCreate(payload);
-        onClose();
+        startTransition(
+            async () =>
+                await handleCourier(type, onlineAppointmentId, data).then(() => {
+                    refresh();
+                    onClose();
+                    toast.success("Courier Added Successfully");
+                })
+        );
     };
 
     return (
@@ -39,7 +48,7 @@ export default function CourierDialog() {
                     <FormInput name="courierName" label="Courier Name" />
                     <FormInput name="productId" label="Product Id" />
                     <FormDatePick name="receiptDate" label="Receipt Date" />
-                    <FormSubmit loading={loading}>Submit</FormSubmit>
+                    <FormSubmit loading={isPending}>Submit</FormSubmit>
                 </Form>
             </DialogContent>
         </Dialog>

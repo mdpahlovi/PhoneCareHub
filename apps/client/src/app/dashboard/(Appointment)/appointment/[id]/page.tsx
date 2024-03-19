@@ -5,13 +5,12 @@ import getDateRange from "@/libs/getDateRange";
 import CurrentStatus from "@/components/Appointment/CurrentStatus";
 import ReviewComponent from "@/components/Appointment/ReviewComponent";
 import ReviewButton from "@/components/Dashboard/Components/ReviewButton";
-import CancelAppointment from "@/components/Appointment/CancelAppointment";
 import PaymentButton from "@/components/Dashboard/Components/PaymentButton";
 import CourierButton from "@/components/Dashboard/Components/CourierButton";
 import { Stack, Divider, Typography, ListItemText, List, ListItem, Box } from "@mui/material";
 
 export const metadata = { title: "Appointment Details" };
-type AppointmentDetailProps = { params: { id: string }; searchParams: { type?: string } };
+type AppointmentDetailProps = { params: { id: string }; searchParams: { type?: "online" | "offline" } };
 
 export default async function AppointmentDetails({ params, searchParams }: AppointmentDetailProps) {
     const userId = await getUserId();
@@ -45,9 +44,6 @@ export default async function AppointmentDetails({ params, searchParams }: Appoi
             break;
         case "completed":
             ActionButton = <ReviewButton userId={userId!} serviceId={serviceId} />;
-            break;
-        case "cancelled":
-            ActionButton = <CancelAppointment type="online" id={id} />;
             break;
         default:
             ActionButton = null;
