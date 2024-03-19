@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import { Service } from "@/types/response";
+import { Service } from "@prisma/client";
 import { threeCol } from "@/exports/constant";
 import ServiceCard from "@/components/Main/Services/ServiceCard";
 

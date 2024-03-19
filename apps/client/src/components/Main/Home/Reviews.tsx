@@ -1,6 +1,6 @@
 "use client";
 
-import { Review } from "@/types/response";
+import { Review } from "@prisma/client";
 import Section from "@/components/Common/Section";
 import { review_props } from "@/exports/constant";
 import { Card, CardContent } from "@mui/material";

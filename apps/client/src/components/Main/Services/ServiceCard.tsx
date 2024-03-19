@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Service } from "@/types/response";
+import { Service } from "@prisma/client";
 import { StyledTypography } from "@/components/Common/StyledTypography";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import { Card, CardMedia, CardContent, Typography, CardActions, Button } from "@mui/material";

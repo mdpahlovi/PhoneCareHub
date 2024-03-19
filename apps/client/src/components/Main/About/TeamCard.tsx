@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Admin } from "@/types/response";
+import { Admin } from "@prisma/client";
 import { Card, CardContent, Typography } from "@mui/material";
 
 export default function TeamCard({ admin }: { admin: Admin }) {

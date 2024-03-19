@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import { Blog } from "@/types/response";
+import { Blog } from "@prisma/client";
 import BlogCard from "@/components/Main/Blogs/BlogCard";
 
 export default function Blogs({ blogs }: { blogs: Blog[] }) {

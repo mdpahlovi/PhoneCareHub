@@ -1,4 +1,6 @@
-import { BASE_URL } from "@/exports/axios";
+import prisma from "@/libs/prisma";
+import { Prisma } from "@prisma/client";
+import { searchQuery } from "@/libs/searchQuery";
 import Services from "@/components/Main/Services";
 import Pagination from "@/components/Common/Pagination";
 
@@ -8,14 +10,17 @@ export default async function ServicePage({ searchParams }: { searchParams: { pa
     const search = searchParams?.search ? searchParams.search : "";
     const page = Number(searchParams?.page ? searchParams.page : 1);
 
-    const res = await fetch(`${BASE_URL}/service?page=${page}&search=${search}`);
-    if (!res.ok) throw new Error("Failed To Fetch Data");
-    const services = await res.json();
+    const andConditions = [];
+    if (search) andConditions.push(searchQuery(search, ["name"]));
+    const where: Prisma.ServiceWhereInput = { AND: andConditions };
+
+    const services = await prisma.service.findMany({ where, skip: (page - 1) / 6, take: 6 });
+    const total = await prisma.service.count({ where });
 
     return (
         <>
-            <Services services={services?.data} />
-            <Pagination page={page} count={services?.meta?.totalPage} />
+            <Services services={services} />
+            <Pagination page={page} count={Math.ceil(total / 6)} />
         </>
     );
 }

@@ -3,12 +3,12 @@
 import Image from "next/image";
 import { useState } from "react";
 import { StyledFAQ } from "./Styled";
-import { FAQ } from "@/types/response";
+import { FAQs } from "@prisma/client";
 import Section from "@/components/Common/Section";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from "@mui/material";
 
-export default function FAQs({ faq }: { faq: FAQ[] }) {
+export default function FAQs({ faq }: { faq: FAQs[] }) {
     const [expanded, setExpanded] = useState<number | boolean>(0);
 
     const handleChange = (panel: number) => (event: React.SyntheticEvent, newExpanded: boolean) => {

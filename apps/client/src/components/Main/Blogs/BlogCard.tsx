@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { Blog } from "@/types/response";
+import { Blog } from "@prisma/client";
 import { StyledTypography } from "@/components/Common/StyledTypography";
 import { Card, CardMedia, CardContent, Typography, Chip, Button } from "@mui/material";
 

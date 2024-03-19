@@ -1,3 +1,4 @@
+import prisma from "@/libs/prisma";
 import Blogs from "@/components/Main/Blogs";
 import Hero from "@/components/Main/Home/Hero";
 import FAQs from "@/components/Main/Home/FAQs";
@@ -9,28 +10,27 @@ import Partners from "@/components/Main/Home/Partners";
 import WhyChooseUs from "@/components/Main/Home/WhyChooseUs";
 import SeeAllButton from "@/components/Main/Home/SeeAllButton";
 import ServiceProcess from "@/components/Main/Home/ServiceProcess";
-import { getAllService, getAllReview, getAllFAQ, getAllBlog } from "./fetch";
 
 export default async function Home() {
-    const services = await getAllService(6);
-    const reviews = await getAllReview();
-    const faqs = await getAllFAQ();
-    const blogs = await getAllBlog(2);
+    const services = await prisma.service.findMany({ take: 6 });
+    const reviews = await prisma.review.findMany();
+    const faqs = await prisma.fAQs.findMany({ orderBy: { serial: "asc" } });
+    const blogs = await prisma.blog.findMany({ take: 2 });
 
     return (
         <>
             <Hero />
             <Section title="Our Services">
-                <Services services={services?.data!} />
+                <Services services={services} />
                 <SeeAllButton href="service" />
             </Section>
             <ServiceProcess />
             <WhyChooseUs />
             <Survey />
-            <Reviews reviews={reviews?.data!} />
-            <FAQs faq={faqs?.data!} />
+            <Reviews reviews={reviews} />
+            <FAQs faq={faqs} />
             <Section title="Our Latest Blogs">
-                <Blogs blogs={blogs?.data!} />
+                <Blogs blogs={blogs} />
                 <SeeAllButton href="blog" />
             </Section>
 
