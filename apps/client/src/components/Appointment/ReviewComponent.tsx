@@ -1,6 +1,6 @@
 "use client";
 
-import { Review } from "@/types/response";
+import { Review } from "@prisma/client";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteButton from "../Dashboard/Components/DeleteButton";
 import useReviewDialogStore from "@/hooks/zustand/useReviewDialogStore";

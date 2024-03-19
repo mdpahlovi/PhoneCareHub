@@ -1,22 +1,21 @@
 /* eslint-disable react/jsx-key */
-import { getServerSession } from "next-auth";
+import prisma from "@/libs/prisma";
+import { Prisma } from "@prisma/client";
+import getUserId from "@/libs/getUserId";
 import Banner from "@/components/Common/Banner";
 import TabContext from "@/components/Common/TabContext";
-import { getallOfflineAppointment } from "@/libs/fetch";
-import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import AppointmentTabs from "@/components/Appointment/AppointmentTabs";
 
 export const metadata = { title: "Offline Appointment" };
 
-type SearchParams = { searchParams: { page?: string; size?: string; status?: string } };
+export default async function OfflineAppointment({ searchParams }: { searchParams: { status?: string } }) {
+    const userId = await getUserId();
 
-export default async function OfflineAppointment({ searchParams }: SearchParams) {
-    const session = await getServerSession(authOptions);
-    const size = Number(searchParams?.size ? searchParams.size : 5);
-    const page = Number(searchParams?.page ? searchParams.page : 0);
     const status = searchParams?.status ? searchParams.status : "appointments";
-    const offlineAppointment = await getallOfflineAppointment(session?.token, "", size, page, status);
-    const pagination = { total: offlineAppointment?.meta?.total!, size, page };
+    const offlineAppointments = await prisma.offlineAppointment.findMany({
+        where: { AND: [{ userId }, { OR: getOfflineStatus(status) }] },
+        include: { service: { select: { name: true } } },
+    });
 
     return (
         <>
@@ -26,11 +25,21 @@ export default async function OfflineAppointment({ searchParams }: SearchParams)
                 value={status}
                 values={["appointments", "completed", "cancelled"]}
                 tabs={[
-                    <AppointmentTabs type="offline" appointment={offlineAppointment.data!} pagination={pagination} />,
-                    <AppointmentTabs type="offline" appointment={offlineAppointment.data!} pagination={pagination} />,
-                    <AppointmentTabs type="offline" appointment={offlineAppointment.data!} pagination={pagination} />,
+                    <AppointmentTabs type="offline" tab={status} appointment={offlineAppointments} />,
+                    <AppointmentTabs type="offline" tab={status} appointment={offlineAppointments} />,
+                    <AppointmentTabs type="offline" tab={status} appointment={offlineAppointments} />,
                 ]}
             />
         </>
     );
 }
+
+const getOfflineStatus = (status: string): Prisma.OfflineAppointmentWhereInput[] => {
+    if (status === "appointments") {
+        return [{ status: { equals: "pending" } }];
+    } else if (status === "completed") {
+        return [{ status: { equals: "completed" } }];
+    } else {
+        return [{ status: { equals: "cancelled" } }];
+    }
+};

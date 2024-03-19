@@ -1,22 +1,18 @@
 "use client";
 
+import toast from "react-hot-toast";
 import { Button } from "@mui/material";
-import useUpdateData from "@/hooks/useUpdateData";
+import { handleCancel } from "@/app/dashboard/(Appointment)/actions";
 
 export default function CancelAppointment({ type, id }: { type: "online" | "offline"; id: string }) {
-    let path: string;
-    switch (type) {
-        case "online":
-            path = `/onlineAppointment`;
-            break;
-        case "offline":
-            path = `/offlineAppointment`;
-            break;
-    }
+    const handleCancelAppointment = async () => {
+        await handleCancel(id, type)
+            .then(() => toast.success("Appointment Canceled Successfully"))
+            .catch(() => toast.error("Failed To Appointment Canceled "));
+    };
 
-    const { handleUpdate } = useUpdateData(`${path}/${id}`, `${path}s/?type=cancelled`);
     return (
-        <Button size="small" color="error" onClick={() => handleUpdate({ status: "cancelled" })}>
+        <Button size="small" color="error" onClick={handleCancelAppointment}>
             Cancel
         </Button>
     );

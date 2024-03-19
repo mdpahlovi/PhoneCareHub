@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Review } from "@/types/response";
+import { Review } from "@prisma/client";
 
 interface ReviewDialogStore {
     isEdit: boolean;

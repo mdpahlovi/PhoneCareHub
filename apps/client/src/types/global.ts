@@ -88,9 +88,3 @@ export type TableProps = {
 export type OfflineAppointmentTableProps = { appointment: OfflineAppointment[]; pagination: TablePaginationProps };
 
 export type OnlineAppointmentTableProps = { appointment: OnlineAppointment[]; pagination: TablePaginationProps };
-
-export type AppointmentTabsProps = {
-    type: "online" | "offline";
-    appointment: OnlineAppointment[] | OfflineAppointment[];
-    pagination: { total: number; page: number; size: number };
-};

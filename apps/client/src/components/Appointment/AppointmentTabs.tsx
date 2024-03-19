@@ -1,22 +1,22 @@
-"use client";
-
 import CurrentStatus from "./CurrentStatus";
 import ActionButtons from "./ActionButtons";
-import { useSearchParams } from "next/navigation";
 import CancelAppointment from "./CancelAppointment";
-import { AppointmentTabsProps } from "@/types/global";
+import ReviewButton from "../Dashboard/Components/ReviewButton";
 import CourierButton from "../Dashboard/Components/CourierButton";
 import PaymentButton from "../Dashboard/Components/PaymentButton";
+import { OnlineAppointment, OfflineAppointment } from "@prisma/client";
 import { Card, CardContent, Grid, Stack, Typography } from "@mui/material";
-import ReviewButton from "../Dashboard/Components/ReviewButton";
 
-export default function AppointmentTabs({ type, appointment }: AppointmentTabsProps) {
-    const searchParams = useSearchParams();
-    const tab = searchParams.get("status") ? searchParams.get("status") : "appointments";
+type AppointmentTabsProps = {
+    tab: string;
+    type: "online" | "offline";
+    appointment: ({ service: { name: string } } & OnlineAppointment)[] | ({ service: { name: string } } & OfflineAppointment)[];
+};
 
+export default function AppointmentTabs({ type, tab, appointment }: AppointmentTabsProps) {
     return (
         <Grid container columns={{ xs: 4, md: 8 }} spacing={3}>
-            {appointment.map(({ id, userId, serviceId, service, deviceInfo, issueDescription, status, paymentAmount }) => (
+            {appointment.map(({ id, userId, serviceId, service, deviceInfo, issueDescription, status }) => (
                 <Grid item key={id} xs={4}>
                     <Card>
                         <CardContent>

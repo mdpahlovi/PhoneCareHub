@@ -1,8 +1,7 @@
-import { getServerSession } from "next-auth";
-import { getAppointment } from "@/libs/fetch";
+import prisma from "@/libs/prisma";
+import getUserId from "@/libs/getUserId";
+import { notFound } from "next/navigation";
 import getDateRange from "@/libs/getDateRange";
-import { OnlineAppointment } from "@/types/response";
-import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import CurrentStatus from "@/components/Appointment/CurrentStatus";
 import ReviewComponent from "@/components/Appointment/ReviewComponent";
 import ReviewButton from "@/components/Dashboard/Components/ReviewButton";
@@ -12,15 +11,29 @@ import CourierButton from "@/components/Dashboard/Components/CourierButton";
 import { Stack, Divider, Typography, ListItemText, List, ListItem, Box } from "@mui/material";
 
 export const metadata = { title: "Appointment Details" };
+type AppointmentDetailProps = { params: { id: string }; searchParams: { type?: string } };
 
-export default async function AppointmentDetails({ params }: { params: { id: string; type: string } }) {
-    const session = await getServerSession(authOptions);
-    const appointment = await getAppointment(params?.id, params?.type, session?.token);
-    if (!appointment?.data) throw new Error("Failed To Fetch Data");
-    const { id, userId, serviceId, deviceInfo, issueDescription, status, paymentAmount, issueDetected } = appointment?.data;
+export default async function AppointmentDetails({ params, searchParams }: AppointmentDetailProps) {
+    const userId = await getUserId();
+
+    let appointment;
+    if (searchParams?.type === "online") {
+        appointment = await prisma.onlineAppointment.findUnique({
+            where: { id: params?.id, userId },
+            include: { service: { include: { reviews: true } } },
+        });
+    } else {
+        appointment = await prisma.offlineAppointment.findUnique({
+            where: { id: params?.id, userId },
+            include: { service: { include: { reviews: true } } },
+        });
+    }
+
+    if (!appointment) notFound();
+    const { id, serviceId, deviceInfo, issueDescription, status, paymentAmount, issueDetected, service } = appointment;
 
     let ActionButton;
-    switch (appointment?.data?.status) {
+    switch (appointment.status) {
         case "pending":
             ActionButton = <CourierButton onlineAppointmentId={id} type="Shipping" />;
             break;
@@ -28,10 +41,10 @@ export default async function AppointmentDetails({ params }: { params: { id: str
             ActionButton = <PaymentButton onlineAppointmentId={id} />;
             break;
         case "received":
-            ActionButton = <ReviewButton userId={userId} serviceId={serviceId} />;
+            ActionButton = <ReviewButton userId={userId!} serviceId={serviceId} />;
             break;
         case "completed":
-            ActionButton = <ReviewButton userId={userId} serviceId={serviceId} />;
+            ActionButton = <ReviewButton userId={userId!} serviceId={serviceId} />;
             break;
         case "cancelled":
             ActionButton = <CancelAppointment type="online" id={id} />;
@@ -56,9 +69,11 @@ export default async function AppointmentDetails({ params }: { params: { id: str
                 <ListItem>
                     <ListItemText primary="Issue Description" secondary={issueDescription} />
                 </ListItem>
-                {(appointment.data as OnlineAppointment)?.shippingAddress ? (
+                {/* @ts-ignore */}
+                {appointment?.shippingAddress ? (
                     <ListItem>
-                        <ListItemText primary="Shipping Address" secondary={(appointment.data as OnlineAppointment)?.shippingAddress} />
+                        {/* @ts-ignore */}
+                        <ListItemText primary="Shipping Address" secondary={appointment?.shippingAddress} />
                     </ListItem>
                 ) : null}
             </List>
@@ -82,17 +97,16 @@ export default async function AppointmentDetails({ params }: { params: { id: str
                             }
                         />
                     </ListItem>
-                    {(appointment.data as OnlineAppointment)?.deliveryDate ? (
+                    {/* @ts-ignore */}
+                    {appointment?.deliveryDate ? (
                         <ListItem>
-                            <ListItemText
-                                primary="Delivery Date"
-                                secondary={getDateRange((appointment.data as OnlineAppointment)?.deliveryDate)}
-                            />
+                            {/* @ts-ignore */}
+                            <ListItemText primary="Delivery Date" secondary={getDateRange(appointment?.deliveryDate)} />
                         </ListItem>
                     ) : null}
                     {status === "received" || status === "completed" ? (
                         <ListItem>
-                            <ListItemText primary="Reviews" secondary={<ReviewComponent reviews={appointment?.data?.service?.reviews} />} />
+                            <ListItemText primary="Reviews" secondary={<ReviewComponent reviews={service?.reviews} />} />
                         </ListItem>
                     ) : null}
                 </List>
