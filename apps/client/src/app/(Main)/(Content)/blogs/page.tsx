@@ -14,7 +14,12 @@ export default async function BlogPage({ searchParams }: { searchParams: { page?
     if (search) andConditions.push(searchQuery(search, ["title", "content", "source"]));
     const where: Prisma.BlogWhereInput = { AND: andConditions };
 
-    const blogs = await prisma.blog.findMany({ where, skip: (page - 1) / 4, take: 4 });
+    const blogs = await prisma.blog.findMany({
+        where,
+        select: { id: true, image: true, source: true, publishedDate: true, title: true, content: true },
+        skip: (page - 1) / 4,
+        take: 4,
+    });
     const total = await prisma.blog.count({ where });
 
     return (

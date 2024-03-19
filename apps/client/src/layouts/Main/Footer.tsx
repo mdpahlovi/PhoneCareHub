@@ -32,7 +32,7 @@ export default function Footer() {
                     <Copyright />
                     <Stack direction="row" gap={2}>
                         {footer_social.map(({ link, icon }, idx) => (
-                            <a href={link} target="_blank" key={idx}>
+                            <a href={link} target="_blank" key={idx} style={{ color: "black" }}>
                                 {createElement(icon)}
                             </a>
                         ))}

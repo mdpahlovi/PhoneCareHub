@@ -14,7 +14,12 @@ export default async function ServicePage({ searchParams }: { searchParams: { pa
     if (search) andConditions.push(searchQuery(search, ["name"]));
     const where: Prisma.ServiceWhereInput = { AND: andConditions };
 
-    const services = await prisma.service.findMany({ where, skip: (page - 1) / 6, take: 6 });
+    const services = await prisma.service.findMany({
+        where,
+        select: { id: true, image: true, name: true, description: true },
+        skip: (page - 1) / 6,
+        take: 6,
+    });
     const total = await prisma.service.count({ where });
 
     return (
