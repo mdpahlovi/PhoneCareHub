@@ -1,10 +1,10 @@
 import Context from "./context";
-import { getAllFAQ } from "@/libs/fetch";
+import prisma from "@/libs/prisma";
 
 export const metadata = { title: "FAQs" };
 
 export default async function FAQs() {
-    const faqs = await getAllFAQ();
+    const faqs = await prisma.fAQs.findMany({ orderBy: { serial: "asc" } });
 
-    return <Context faqs={faqs?.data} />;
+    return <Context faqs={faqs} />;
 }

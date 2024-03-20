@@ -9,7 +9,7 @@ import FormInput from "@/components/Forms/FormInput";
 import createReview from "@/validations/createReview";
 import FormSubmit from "@/components/Forms/FormSubmit";
 import FormRatting from "@/components/Forms/FormRatting";
-import { handleReview } from "@/app/dashboard/(Appointment)/actions";
+import { handleReview } from "@/app/dashboard/(appointment)/actions";
 import useReviewDialogStore from "@/hooks/zustand/useReviewDialogStore";
 import { Dialog, DialogContent, Box, IconButton, Typography, DialogTitle } from "@mui/material";
 
@@ -21,14 +21,15 @@ export default function ReviewDialog() {
     const onSubmit = (formData: any) => {
         const data = { userId, serviceId, ...formData };
 
-        startTransition(
-            async () =>
-                await handleReview(isEdit, data, review?.id).then(() => {
+        startTransition(async () => {
+            await handleReview(isEdit, data, review?.id)
+                .then(() => {
                     refresh();
                     onClose();
                     toast.success(isEdit ? "Review Updated Successfully" : "Review Added Successfully");
                 })
-        );
+                .catch(() => toast.error("Something went wrong!"));
+        });
     };
 
     let initialValue = { rating: isEdit ? review?.rating : 0, comment: isEdit ? review?.comment : "" };

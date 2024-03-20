@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { getAllBlog } from "@/libs/fetch";
+import prisma from "@/libs/prisma";
 import Table from "@/components/Table/Table";
 import EditButton from "@/components/Dashboard/Components/EditButton";
 import { Avatar, TableBody, TableCell, TableRow } from "@mui/material";
@@ -11,12 +11,14 @@ const columns = ["Image", "Title", "Content", "Source", "Published Date", "Edit"
 export default async function Blogs({ searchParams }: { searchParams: { page?: string; size?: string } }) {
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
-    const blogs = await getAllBlog(size, page + 1, "");
+
+    const blogs = await prisma.blog.findMany({ skip: size * page, take: size });
+    const total = await prisma.blog.count();
 
     return (
-        <Table columns={columns} pagination={{ total: blogs?.meta?.total!, size, page }}>
+        <Table columns={columns} pagination={{ total, size, page }}>
             <TableBody>
-                {blogs?.data?.map(({ id, image, title, content, source, publishedDate }, idx) => (
+                {blogs.map(({ id, image, title, content, source, publishedDate }, idx) => (
                     <TableRow key={idx} hover>
                         <TableCell>
                             <Avatar src={image} alt="" />

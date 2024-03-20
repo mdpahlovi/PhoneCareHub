@@ -1,5 +1,5 @@
+import prisma from "@/libs/prisma";
 import Table from "@/components/Table/Table";
-import { getAllService } from "@/libs/fetch";
 import EditButton from "@/components/Dashboard/Components/EditButton";
 import { Avatar, TableBody, TableCell, TableRow } from "@mui/material";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
@@ -10,12 +10,14 @@ const columns = ["Image", "Name", "Description", "Estimate Time", "Edit", "Delet
 export default async function ManageService({ searchParams }: { searchParams: { page?: string; size?: string } }) {
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
-    const services = await getAllService(size, page + 1, "");
+
+    const services = await prisma.service.findMany({ skip: size * page, take: size });
+    const total = await prisma.service.count();
 
     return (
-        <Table columns={columns} pagination={{ total: services?.meta?.total!, size, page }}>
+        <Table columns={columns} pagination={{ total, size, page }}>
             <TableBody>
-                {services?.data?.map(({ id, image, name, estimatetime, description }, idx) => (
+                {services.map(({ id, image, name, estimatetime, description }, idx) => (
                     <TableRow key={idx} hover>
                         <TableCell>
                             <Avatar src={image} alt="" />

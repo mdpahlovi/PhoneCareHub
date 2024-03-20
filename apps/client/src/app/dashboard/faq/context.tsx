@@ -2,11 +2,11 @@
 
 import FAQCard from "./cards";
 import { useState } from "react";
-import { FAQ } from "@/types/response";
+import { FAQs } from "@prisma/client";
 import { DndContext, DragEndEvent, UniqueIdentifier, closestCenter } from "@dnd-kit/core";
 import { SortableContext, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
 
-export default function Context({ faqs }: { faqs?: FAQ[] | null }) {
+export default function Context({ faqs }: { faqs?: FAQs[] | null }) {
     const [items, setItems] = useState(faqs ? faqs : []);
 
     const handleDragEnd = ({ active, over }: DragEndEvent) => {

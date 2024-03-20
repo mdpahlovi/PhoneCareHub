@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { FAQ } from "@/types/response";
+import { FAQs } from "@prisma/client";
 import { CSS } from "@dnd-kit/utilities";
 import { useSortable } from "@dnd-kit/sortable";
 import DragHandle from "@mui/icons-material/DragHandle";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import { IconButton, Paper, Popover, Typography } from "@mui/material";
 
-export default function FAQCard({ faq, firstItem, lastItem }: { faq: FAQ; firstItem: boolean; lastItem: boolean }) {
+export default function FAQCard({ faq, firstItem, lastItem }: { faq: FAQs; firstItem: boolean; lastItem: boolean }) {
     const { id, serial, answer, question } = faq;
     const [anchorEl, setAnchorEl] = useState<string | null>("");
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: serial });

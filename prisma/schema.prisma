@@ -165,7 +165,7 @@ model Blog {
 
 model FAQs {
     id        String   @id @default(uuid())
-    serial    Int
+    serial    Int      @default(autoincrement())
     question  String
     answer    String
     createdAt DateTime @default(now())

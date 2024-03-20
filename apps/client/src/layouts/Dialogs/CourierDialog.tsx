@@ -9,7 +9,7 @@ import FormInput from "@/components/Forms/FormInput";
 import FormSubmit from "@/components/Forms/FormSubmit";
 import createCourier from "@/validations/createCourier";
 import FormDatePick from "@/components/Forms/FormDatePick";
-import { handleCourier } from "@/app/dashboard/(Appointment)/actions";
+import { handleCourier } from "@/app/dashboard/(appointment)/actions";
 import useCourierDialogStore from "@/hooks/zustand/useCourierDialogStore";
 import { Dialog, DialogContent, Box, IconButton, Typography, DialogTitle } from "@mui/material";
 
@@ -21,14 +21,15 @@ export default function CourierDialog() {
     const { onlineAppointmentId, type, open, onClose } = useCourierDialogStore();
 
     const onSubmit = (data: any) => {
-        startTransition(
-            async () =>
-                await handleCourier(type, onlineAppointmentId, data).then(() => {
+        startTransition(async () => {
+            await handleCourier(type, onlineAppointmentId, data)
+                .then(() => {
                     refresh();
                     onClose();
-                    toast.success("Courier Added Successfully");
+                    toast.success("Courier added successfully");
                 })
-        );
+                .catch(() => toast.error("Something went wrong!"));
+        });
     };
 
     return (

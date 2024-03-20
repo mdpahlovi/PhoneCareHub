@@ -17,7 +17,7 @@ export default async function BlogPage({ searchParams }: { searchParams: { page?
     const blogs = await prisma.blog.findMany({
         where,
         select: { id: true, image: true, source: true, publishedDate: true, title: true, content: true },
-        skip: (page - 1) / 4,
+        skip: (page - 1) * 4,
         take: 4,
     });
     const total = await prisma.blog.count({ where });
