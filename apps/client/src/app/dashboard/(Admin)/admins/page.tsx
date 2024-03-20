@@ -1,7 +1,7 @@
-import { getalladmins } from "@/libs/fetch";
-import { getServerSession } from "next-auth";
+import prisma from "@/libs/prisma";
+import { Prisma } from "@prisma/client";
 import Table from "@/components/Table/Table";
-import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import { searchQuery } from "@/libs/searchQuery";
 import { TableRow, TableCell, TableBody, Avatar } from "@mui/material";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import ChangePasswordButton from "@/components/Dashboard/Components/ChangePasswordButton";
@@ -10,16 +10,21 @@ export const metadata = { title: "All Admin" };
 const columns = ["Image", "Name", "Email", "Phone", "Change Password", "Delete"];
 
 export default async function ManageAdmins({ searchParams }: { searchParams: { search?: string; page?: string; size?: string } }) {
-    const session = await getServerSession(authOptions);
     const search = searchParams?.search ? searchParams.search : "";
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const size = Number(searchParams?.size ? searchParams.size : 5);
-    const admins = await getalladmins(session?.token, search, page, size);
+
+    const andConditions = [];
+    if (search) andConditions.push(searchQuery(search, ["name", "email"]));
+    const where: Prisma.AdminWhereInput = { AND: andConditions };
+
+    const admins = await prisma.admin.findMany({ where, skip: size * page, take: size });
+    const total = await prisma.admin.count({ where });
 
     return (
-        <Table columns={columns} pagination={{ total: admins?.meta?.total!, size, page }} search={{ search, label: "Admin" }}>
+        <Table columns={columns} pagination={{ total, size, page }} search={{ search, label: "Admin" }}>
             <TableBody>
-                {admins?.data?.map(({ id, image, name, email, phone }, idx) => (
+                {admins.map(({ id, image, name, email, phone }, idx) => (
                     <TableRow key={idx} hover>
                         <TableCell>
                             <Avatar src={image} alt="" />
