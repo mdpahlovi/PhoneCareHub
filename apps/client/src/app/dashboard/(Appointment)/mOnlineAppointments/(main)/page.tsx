@@ -1,27 +1,31 @@
-import { getServerSession } from "next-auth";
+import prisma from "@/libs/prisma";
 import Table from "@/components/Table/Table";
-import { getallOnlineAppointment } from "@/libs/fetch";
-import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import { OnlineAppointmentStatus } from "@prisma/client";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import DetailButton from "@/components/Dashboard/Components/DetailButton";
 import { Avatar, TableBody, TableCell, TableRow, Typography, Stack, Box } from "@mui/material";
 
 export const metadata = { title: "Manage Online Appointment" };
 const columns = ["User", "Email", "Device Info", "Issue Details", "See Detail", "Delete"];
-type SearchParams = { searchParams: { search?: string; page?: string; size?: string; status?: string; email?: string } };
+type SearchParams = { searchParams: { search?: string; page?: string; size?: string; status?: OnlineAppointmentStatus; email?: string } };
 
 export default async function ManageOnlineAppointment({ searchParams }: SearchParams) {
-    const session = await getServerSession(authOptions);
-    const search = searchParams?.search ? searchParams.search : "";
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const status = searchParams?.status ? searchParams.status : "pending";
-    const onlineAppointment = await getallOnlineAppointment(session?.token, search, size, page, status);
+
+    const onlineAppointment = await prisma.onlineAppointment.findMany({
+        where: { status },
+        include: { user: true },
+        skip: size * page,
+        take: size,
+    });
+    const total = await prisma.onlineAppointment.count();
 
     return (
-        <Table columns={columns} pagination={{ total: onlineAppointment?.meta?.total!, size, page }}>
+        <Table columns={columns} pagination={{ total, size, page }}>
             <TableBody>
-                {onlineAppointment?.data?.map(({ id, user, deviceInfo, issueDescription }) => (
+                {onlineAppointment.map(({ id, user, deviceInfo, issueDescription }) => (
                     <TableRow key={id} hover>
                         <TableCell>
                             <Stack direction="row" alignItems="center" gap={1}>

@@ -1,28 +1,32 @@
 import dayjs from "dayjs";
-import { getServerSession } from "next-auth";
+import prisma from "@/libs/prisma";
 import Table from "@/components/Table/Table";
-import { getallOfflineAppointment } from "@/libs/fetch";
-import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import { OfflineAppointmentStatus } from "@prisma/client";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import DetailButton from "@/components/Dashboard/Components/DetailButton";
 import { Avatar, Box, Stack, TableBody, TableCell, TableRow, Typography } from "@mui/material";
 
 export const metadata = { title: "Manage Offline Appointment" };
 const columns = ["User", "Email", "Device Info", "Issue Details", "Appointment Date", "See Detail", "Delete"];
-type SearchParams = { searchParams: { search?: string; page?: string; size?: string; status?: string; email?: string } };
+type SearchParams = { searchParams: { search?: string; page?: string; size?: string; status?: OfflineAppointmentStatus; email?: string } };
 
 export default async function ManageOfflineAppointment({ searchParams }: SearchParams) {
-    const session = await getServerSession(authOptions);
-    const search = searchParams?.search ? searchParams.search : "";
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const status = searchParams?.status ? searchParams.status : "pending";
-    const offlineAppointment = await getallOfflineAppointment(session?.token, search, size, page, status);
+
+    const offlineAppointment = await prisma.offlineAppointment.findMany({
+        where: { status },
+        include: { user: true },
+        skip: size * page,
+        take: size,
+    });
+    const total = await prisma.offlineAppointment.count();
 
     return (
-        <Table columns={columns} pagination={{ total: offlineAppointment?.meta?.total!, size, page }}>
+        <Table columns={columns} pagination={{ total, size, page }}>
             <TableBody>
-                {offlineAppointment?.data?.map(({ id, user, deviceInfo, issueDescription, appointmentDate }) => (
+                {offlineAppointment.map(({ id, user, deviceInfo, issueDescription, appointmentDate }) => (
                     <TableRow key={id} hover>
                         <TableCell>
                             <Stack direction="row" alignItems="center" gap={1}>

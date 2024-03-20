@@ -1,16 +1,16 @@
 import Link from "next/link";
+import prisma from "@/libs/prisma";
 import Banner from "@/components/Common/Banner";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/options";
-import { getOnlineAppointment } from "@/libs/fetch";
-import { Button, Paper, Typography } from "@mui/material";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import { Button, Paper, Typography } from "@mui/material";
 
 export default async function PaymentCancel({ params }: { params: { id: string } }) {
-    const session = await getServerSession(authOptions);
-    const appointment = await getOnlineAppointment(params?.id, session?.token);
+    const appointment = await prisma.onlineAppointment.findUnique({
+        where: { id: params?.id },
+        select: { service: { select: { name: true } }, issueDescription: true, issueDetected: true },
+    });
 
-    const { service, issueDescription, issueDetected } = appointment.data!;
+    const { service, issueDescription, issueDetected } = appointment!;
     return (
         <>
             <Banner>Payment Canceled</Banner>

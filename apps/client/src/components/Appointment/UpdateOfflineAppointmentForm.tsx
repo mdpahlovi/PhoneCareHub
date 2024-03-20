@@ -6,8 +6,8 @@ import FormSelect from "../Forms/FormSelect";
 import FormSubmit from "../Forms/FormSubmit";
 import { getStatus } from "@/exports/constant";
 import useUpdateData from "@/hooks/useUpdateData";
+import { OfflineAppointment } from "@prisma/client";
 import FormMultiInput from "../Forms/FormMultiInput";
-import { OfflineAppointment } from "@/types/response";
 import { getOfflineAppointmentInitialValues } from "@/libs/initialValues";
 
 export default function UpdateOfflineAppointmentForm({ appointment }: { appointment: OfflineAppointment }) {

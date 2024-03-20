@@ -1,11 +1,10 @@
-import { getServerSession } from "next-auth";
-import { getOnlineAppointment } from "@/libs/fetch";
-import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import prisma from "@/libs/prisma";
+import { notFound } from "next/navigation";
 import UpdateOnlineAppointmentForm from "@/components/Appointment/UpdateOnlineAppointmentForm";
 
 export default async function SetOnlineAppointment({ params }: { params: { id: string } }) {
-    const session = await getServerSession(authOptions);
-    const appointment = await getOnlineAppointment(params?.id, session?.token);
+    const appointment = await prisma.onlineAppointment.findUnique({ where: { id: params?.id } });
+    if (!appointment) notFound();
 
-    return <UpdateOnlineAppointmentForm appointment={appointment?.data!} />;
+    return <UpdateOnlineAppointmentForm appointment={appointment} />;
 }

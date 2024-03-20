@@ -1,15 +1,15 @@
 "use client";
 
 import Form from "@/components/Forms/Form";
-import FormSelect from "../Forms/FormSelect";
 import FormInput from "../Forms/FormInput";
+import FormSelect from "../Forms/FormSelect";
 import FormSubmit from "../Forms/FormSubmit";
-import FormMultiInput from "../Forms/FormMultiInput";
-import FormDatePick from "../Forms/FormDatePick";
-import { OnlineAppointment } from "@/types/response";
-import { getOnlineAppointmentInitialValues } from "@/libs/initialValues";
-import useUpdateData from "@/hooks/useUpdateData";
 import { getStatus } from "@/exports/constant";
+import FormDatePick from "../Forms/FormDatePick";
+import useUpdateData from "@/hooks/useUpdateData";
+import { OnlineAppointment } from "@prisma/client";
+import FormMultiInput from "../Forms/FormMultiInput";
+import { getOnlineAppointmentInitialValues } from "@/libs/initialValues";
 
 export default function UpdateOnlineAppointmentForm({ appointment }: { appointment: OnlineAppointment }) {
     const { handleUpdate, loading } = useUpdateData(`/onlineAppointment/${appointment?.id}`, "mOnlineAppointments");

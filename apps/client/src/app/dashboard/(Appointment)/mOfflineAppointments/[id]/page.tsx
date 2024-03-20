@@ -1,11 +1,10 @@
-import { getServerSession } from "next-auth";
-import { getOfflineAppointment } from "@/libs/fetch";
-import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import prisma from "@/libs/prisma";
+import { notFound } from "next/navigation";
 import UpdateOfflineAppointmentForm from "@/components/Appointment/UpdateOfflineAppointmentForm";
 
 export default async function SetOfflineAppointment({ params }: { params: { id: string } }) {
-    const session = await getServerSession(authOptions);
-    const appointment = await getOfflineAppointment(params?.id, session?.token);
+    const appointment = await prisma.offlineAppointment.findUnique({ where: { id: params?.id } });
+    if (!appointment) notFound();
 
-    return <UpdateOfflineAppointmentForm appointment={appointment?.data!} />;
+    return <UpdateOfflineAppointmentForm appointment={appointment} />;
 }
