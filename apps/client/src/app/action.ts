@@ -52,3 +52,12 @@ export async function deleteAction(id: string, path: DeletePath) {
             break;
     }
 }
+
+export async function changePasswordAction(id: string, password: string, path: "user" | "admin") {
+    switch (path) {
+        case "user":
+            await prisma.user.update({ where: { id }, data: { password } });
+        case "admin":
+            await prisma.admin.update({ where: { id }, data: { password } });
+    }
+}

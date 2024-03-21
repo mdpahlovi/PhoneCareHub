@@ -7,11 +7,14 @@ export default async function FAQLayout({ children }: React.PropsWithChildren) {
     async function action(data: any) {
         "use server";
 
-        const faq = await prisma.fAQs.create({ data });
-        if (!faq) return { success: false, message: "Something went wrong!" };
+        try {
+            await prisma.fAQs.create({ data });
 
-        revalidatePath("/dashboard/faq/page", "page");
-        return { success: true, message: "FAQ Created Successfully" };
+            revalidatePath("/dashboard/faq/page", "page");
+            return { success: true, message: "FAQ Created Successfully" };
+        } catch (error) {
+            return { success: false, message: "Something went wrong!" };
+        }
     }
 
     return (

@@ -3,7 +3,6 @@ import ThemeRegistry from "./ThemeRegistry";
 import ToastProvider from "./ToastProvider";
 import ReviewDialog from "./Dialogs/ReviewDialog";
 import CourierDialog from "./Dialogs/CourierDialog";
-import PaymentDialog from "./Dialogs/PaymentDialog";
 import ConfirmDeleteDialog from "./Dialogs/ConfirmDeleteDialog";
 import ChangePasswordDialog from "./Dialogs/ChangePasswordDialog";
 
@@ -15,7 +14,6 @@ export default function Provider({ children }: React.PropsWithChildren) {
                 <ReviewDialog />
                 <ToastProvider />
                 <CourierDialog />
-                <PaymentDialog />
                 <ConfirmDeleteDialog />
                 <ChangePasswordDialog />
             </ThemeRegistry>

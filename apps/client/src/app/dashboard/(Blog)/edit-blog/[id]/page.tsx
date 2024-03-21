@@ -11,10 +11,12 @@ export default async function EditBlog({ params }: { params: { id: string } }) {
     async function action(data: any) {
         "use server";
 
-        const blog = await prisma.service.update({ where: { id: params?.id }, data });
-        if (!blog) return { success: false, message: "Something went wrong!" };
-
-        return { success: true, message: "Blog Updated Successfully", redirect: "/dashboard/blogs" };
+        try {
+            await prisma.blog.update({ where: { id: params?.id }, data });
+            return { success: true, message: "Blog Updated Successfully", redirect: "/dashboard/blogs" };
+        } catch (error) {
+            return { success: false, message: "Something went wrong!" };
+        }
     }
 
     return <EditBlogForm blog={blog} action={action} />;

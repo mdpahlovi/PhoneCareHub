@@ -1,8 +1,10 @@
 "use client";
 
+import toast from "react-hot-toast";
+import { useTransition } from "react";
 import Form from "@/components/Forms/Form";
 import Close from "@mui/icons-material/Close";
-import useUpdateData from "@/hooks/useUpdateData";
+import { changePasswordAction } from "@/app/action";
 import FormInput from "@/components/Forms/FormInput";
 import FormSubmit from "@/components/Forms/FormSubmit";
 import changePasswordSchema from "@/validations/changePasswordSchema";
@@ -12,12 +14,17 @@ import { Dialog, DialogContent, Box, IconButton, Typography, DialogTitle } from 
 const initialValue = { password: "", c_password: "" };
 
 export default function ChangePasswordDialog() {
+    const [isPending, startTransition] = useTransition();
     const { id, path, open, onClose } = useChangePasswordStore();
-    const { handleUpdate, loading } = useUpdateData(path === "profile" ? "/profile" : `/${path}/${id}`);
 
-    const onSubmit = (data: { password: string; c_password: string }) => {
-        handleUpdate({ password: data.password });
-        onClose();
+    const onSubmit = ({ password }: any) => {
+        if (path) {
+            startTransition(async () => {
+                await changePasswordAction(id, password, path)
+                    .then(() => toast.success("Password Changed Successfully"))
+                    .catch(() => toast.error("Something wants wrong"));
+            });
+        }
     };
 
     return (
@@ -36,7 +43,7 @@ export default function ChangePasswordDialog() {
                 <Form initialValues={initialValue} validationSchema={changePasswordSchema} onSubmit={onSubmit}>
                     <FormInput type="password" name="password" label="New Password" />
                     <FormInput type="password" name="c_password" label="Confirm Password" />
-                    <FormSubmit loading={loading}>Submit</FormSubmit>
+                    <FormSubmit loading={isPending}>Submit</FormSubmit>
                 </Form>
             </DialogContent>
         </Dialog>

@@ -3,9 +3,9 @@ import { create } from "zustand";
 interface ChangePasswordStore {
     id: string;
     open: boolean;
-    path: string;
+    path: "user" | "admin" | "";
     onClose: () => void;
-    onOpen: (id: string, path: "user" | "admin" | "profile") => void;
+    onOpen: (id: string, path: "user" | "admin") => void;
 }
 
 const useChangePasswordStore = create<ChangePasswordStore>((set) => ({

@@ -11,7 +11,7 @@ export default async function ManageService({ searchParams }: { searchParams: { 
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
 
-    const services = await prisma.service.findMany({ skip: size * page, take: size });
+    const services = await prisma.service.findMany({ skip: size * page, take: size, orderBy: { createdAt: "desc" } });
     const total = await prisma.service.count();
 
     return (

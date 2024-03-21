@@ -22,7 +22,7 @@ export default function AdminProfile({ profile, action }: { profile: Admin } & A
                 <Button sx={{ width: "max-content" }} onClick={() => setEditing(!editing)}>
                     {editing ? "Cancel" : "Edit"}
                 </Button>
-                <ChangePasswordButton id={profile.id} path="profile" />
+                <ChangePasswordButton id={profile.id} path="admin" />
             </Stack>
             <Form initialValues={getAdminInitialValues(profile)} onSubmit={handleSubmit}>
                 <FormProfileUpload image={profile.image} name="image" disabled={!editing} />

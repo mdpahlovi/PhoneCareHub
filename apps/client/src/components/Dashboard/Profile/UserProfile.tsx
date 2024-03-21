@@ -24,7 +24,7 @@ export default function UserProfile({ profile, action }: { profile: User } & Act
                 <Button sx={{ width: "max-content" }} onClick={() => setEditing(!editing)}>
                     {editing ? "Cancel" : "Edit"}
                 </Button>
-                <ChangePasswordButton id={profile.id} path="profile" />
+                <ChangePasswordButton id={profile.id} path="user" />
             </Stack>
             <Form initialValues={getUserInitialValues(profile)} onSubmit={handleSubmit}>
                 <FormProfileUpload image={profile.image} name="image" disabled={!editing} />

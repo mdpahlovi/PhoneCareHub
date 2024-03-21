@@ -27,18 +27,20 @@ export default async function Profile() {
     async function action(data: any) {
         "use server";
 
-        if (session?.user?.role === "user") {
-            const user = await prisma.user.update({ where: { id: userId }, data });
-            if (!user) return { success: false, message: "Something went wrong!" };
+        try {
+            if (session?.user?.role === "user") {
+                await prisma.user.update({ where: { id: userId }, data });
 
-            revalidatePath("/dashboard/profile");
-            return { success: true, message: "User Updated Successfully" };
-        } else {
-            const admin = await prisma.admin.update({ where: { id: userId }, data });
-            if (!admin) return { success: false, message: "Something went wrong!" };
+                revalidatePath("/dashboard/profile");
+                return { success: true, message: "User Updated Successfully" };
+            } else {
+                await prisma.admin.update({ where: { id: userId }, data });
 
-            revalidatePath("/dashboard/profile");
-            return { success: true, message: "Admin Updated Successfully" };
+                revalidatePath("/dashboard/profile");
+                return { success: true, message: "Admin Updated Successfully" };
+            }
+        } catch (error) {
+            return { success: false, message: "Something went wrong!" };
         }
     }
 

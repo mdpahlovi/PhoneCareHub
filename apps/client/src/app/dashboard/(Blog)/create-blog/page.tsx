@@ -8,15 +8,17 @@ export default function CreateBlog() {
     async function action(data: any) {
         "use server";
 
-        const blog = await prisma.service.create({ data });
-        if (!blog) return { success: false, message: "Something went wrong!" };
-
-        return { success: true, message: "Blog Created Successfully", redirect: "/dashboard/blogs" };
+        try {
+            await prisma.blog.create({ data });
+            return { success: true, message: "Blog Created Successfully", redirect: "/dashboard/blogs" };
+        } catch (error) {
+            return { success: false, message: "Something went wrong!" };
+        }
     }
 
     return (
         <>
-            <Banner>Create Service</Banner>
+            <Banner>Create Blog</Banner>
             <CreateBlogForm action={action} />
         </>
     );

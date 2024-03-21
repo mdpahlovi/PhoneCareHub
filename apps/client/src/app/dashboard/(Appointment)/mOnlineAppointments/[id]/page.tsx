@@ -9,14 +9,17 @@ export default async function SetOnlineAppointment({ params }: { params: { id: s
     async function action(data: any) {
         "use server";
 
-        const appointment = await prisma.onlineAppointment.update({ where: { id: params?.id }, data });
-        if (!appointment) return { success: false, message: "Something went wrong!" };
+        try {
+            await prisma.onlineAppointment.update({ where: { id: params?.id }, data });
 
-        return {
-            success: true,
-            message: "Appointment Updated Successfully",
-            redirect: `/dashboard/mOnlineAppointments?status=${appointment?.status}`,
-        };
+            return {
+                success: true,
+                message: "Appointment Updated Successfully",
+                redirect: `/dashboard/mOnlineAppointments?status=${appointment?.status}`,
+            };
+        } catch (error) {
+            return { success: false, message: "Something went wrong!" };
+        }
     }
 
     return <UpdateOnlineAppointmentForm appointment={appointment} action={action} />;

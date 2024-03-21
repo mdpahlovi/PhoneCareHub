@@ -12,7 +12,7 @@ export default async function Blogs({ searchParams }: { searchParams: { page?: s
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
 
-    const blogs = await prisma.blog.findMany({ skip: size * page, take: size });
+    const blogs = await prisma.blog.findMany({ skip: size * page, take: size, orderBy: { createdAt: "desc" } });
     const total = await prisma.blog.count();
 
     return (

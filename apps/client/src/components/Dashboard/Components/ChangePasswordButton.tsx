@@ -3,7 +3,7 @@
 import { Button } from "@mui/material";
 import useChangePasswordStore from "@/hooks/zustand/useChangePasswordStore";
 
-export default function ChangePasswordButton({ id, path }: { id: string; path: "user" | "admin" | "profile" }) {
+export default function ChangePasswordButton({ id, path }: { id: string; path: "user" | "admin" }) {
     const { onOpen } = useChangePasswordStore();
 
     return (

@@ -8,10 +8,12 @@ export default function CreateService() {
     async function action(data: any) {
         "use server";
 
-        const service = await prisma.service.create({ data });
-        if (!service) return { success: false, message: "Something went wrong!" };
-
-        return { success: true, message: "Service Created Successfully", redirect: "/dashboard/services" };
+        try {
+            await prisma.service.create({ data });
+            return { success: true, message: "Service Created Successfully", redirect: "/dashboard/services" };
+        } catch (error) {
+            return { success: false, message: "Something went wrong!" };
+        }
     }
 
     return (

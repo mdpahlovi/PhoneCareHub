@@ -1,28 +1,24 @@
 "use client";
 
+import { ActionProps } from "@/types";
 import Form from "@/components/Forms/Form";
-import useCreateData from "@/hooks/useCreateData";
 import FormInput from "@/components/Forms/FormInput";
 import FormSubmit from "@/components/Forms/FormSubmit";
+import useHandleActions from "@/hooks/useHandleAction";
 import FormDatePicker from "@/components/Forms/FormDatePick";
 import createOfflineAppointment from "@/validations/createOfflineAppointment";
 
 const initialValues = { deviceInfo: "", issueDescription: "", appointmentDate: "" };
 
-export default function OfflineAppointmentForm({ serviceId }: { serviceId: string }) {
-    const { handleCreate, loading } = useCreateData("offlineAppointment");
-
-    const onSubmit = (values: any) => {
-        values.serviceId = serviceId;
-        handleCreate(values);
-    };
+export default function OfflineAppointmentForm({ action }: ActionProps) {
+    const { isPending, handleSubmit } = useHandleActions({ action });
 
     return (
-        <Form initialValues={initialValues} validationSchema={createOfflineAppointment} onSubmit={onSubmit}>
+        <Form initialValues={initialValues} validationSchema={createOfflineAppointment} onSubmit={handleSubmit}>
             <FormInput name="deviceInfo" label="Device Info" />
             <FormInput name="issueDescription" label="Issue Description" />
             <FormDatePicker name="appointmentDate" label="Appointment Date" />
-            <FormSubmit loading={loading}>Submit</FormSubmit>
+            <FormSubmit loading={isPending}>Submit</FormSubmit>
         </Form>
     );
 }
