@@ -18,7 +18,7 @@ export default async function ManageAdmins({ searchParams }: { searchParams: { s
     if (search) andConditions.push(searchQuery(search, ["name", "email"]));
     const where: Prisma.AdminWhereInput = { AND: andConditions };
 
-    const admins = await prisma.admin.findMany({ where, skip: size * page, take: size });
+    const admins = await prisma.admin.findMany({ where, skip: size * page, take: size, orderBy: { createdAt: "desc" } });
     const total = await prisma.admin.count({ where });
 
     return (

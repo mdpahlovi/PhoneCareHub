@@ -19,7 +19,7 @@ export default async function ManageUsers({ searchParams }: { searchParams: { se
     if (search) andConditions.push(searchQuery(search, ["name", "email"]));
     const where: Prisma.UserWhereInput = { AND: andConditions };
 
-    const users = await prisma.user.findMany({ where, skip: size * page, take: size });
+    const users = await prisma.user.findMany({ where, skip: size * page, take: size, orderBy: { createdAt: "desc" } });
     const total = await prisma.user.count({ where });
 
     return (

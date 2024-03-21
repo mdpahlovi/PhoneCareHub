@@ -1,5 +1,6 @@
 "use server";
 
+import { hash } from "bcrypt";
 import prisma from "@/libs/prisma";
 import { DeletePath } from "@/types";
 import { revalidatePath } from "next/cache";
@@ -56,8 +57,8 @@ export async function deleteAction(id: string, path: DeletePath) {
 export async function changePasswordAction(id: string, password: string, path: "user" | "admin") {
     switch (path) {
         case "user":
-            await prisma.user.update({ where: { id }, data: { password } });
+            await prisma.user.update({ where: { id }, data: { password: await hash(password, 12) } });
         case "admin":
-            await prisma.admin.update({ where: { id }, data: { password } });
+            await prisma.admin.update({ where: { id }, data: { password: await hash(password, 12) } });
     }
 }

@@ -48,7 +48,7 @@ export const authOptions: NextAuthOptions = {
                 const user = await prisma.user.findUnique({ where: { email }, select });
                 const admin = await prisma.admin.findUnique({ where: { email }, select });
 
-                if (!user && !admin) throw new Error("User doesn't exist...");
+                if (!user && !admin) throw new Error("User doesn't exist...!");
                 if (user || admin) isUserExist = admin || user;
 
                 if (!isUserExist?.password || !(await compare(password, isUserExist.password))) {
