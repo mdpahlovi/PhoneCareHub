@@ -1,27 +1,27 @@
 "use client";
 
-import Close from "@mui/icons-material/Close";
 import toast from "react-hot-toast";
-import useAxiosRequest from "@/hooks/useAxiosRequest";
+import { useRouter } from "next/navigation";
+import { deleteAction } from "@/app/action";
+import Close from "@mui/icons-material/Close";
+import firstWordCapital from "@/libs/firstWordCapital";
 import DeleteSweepRounded from "@mui/icons-material/DeleteSweepRounded";
 import useConfirmDeleteStore from "@/hooks/zustand/useConfirmDeleteStore";
 import { Dialog, DialogContent, DialogActions, Button, Box, IconButton, Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
 
 export default function ConfirmDeleteDialog() {
-    const axios = useAxiosRequest();
     const { refresh } = useRouter();
     const { id, path, open, onClose } = useConfirmDeleteStore();
 
-    const onConfirm = () => {
-        axios
-            .delete(`/${path}/${id}`)
-            .then((res: any) => {
-                onClose();
-                refresh();
-                toast.success(res.message);
-            })
-            .catch((error) => toast.error(error.message));
+    const onConfirm = async () => {
+        if (path) {
+            await deleteAction(id, path)
+                .then(() => {
+                    onClose();
+                    toast.success(firstWordCapital(path) + " " + "Deleted Successfully");
+                })
+                .catch(() => toast.error("Something went wrong!"));
+        }
     };
 
     return (

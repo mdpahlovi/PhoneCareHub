@@ -1,11 +1,12 @@
 import { create } from "zustand";
+import { DeletePath } from "@/types";
 
 interface ConfirmDeleteStore {
     id: string;
-    path: string;
+    path: DeletePath | "";
     open: boolean;
     onClose: () => void;
-    onOpen: (id: string, path: string) => void;
+    onOpen: (id: string, path: DeletePath) => void;
 }
 
 const useConfirmDeleteStore = create<ConfirmDeleteStore>((set) => ({
