@@ -1,24 +1,25 @@
 "use client";
 
+import { ActionProps } from "@/types";
 import Form from "@/components/Forms/Form";
-import FormInput from "../Forms/FormInput";
-import FormSelect from "../Forms/FormSelect";
-import FormSubmit from "../Forms/FormSubmit";
 import { getStatus } from "@/exports/constant";
-import useUpdateData from "@/hooks/useUpdateData";
 import { OfflineAppointment } from "@prisma/client";
-import FormMultiInput from "../Forms/FormMultiInput";
+import FormInput from "@/components/Forms/FormInput";
+import FormSelect from "@/components/Forms/FormSelect";
+import FormSubmit from "@/components/Forms/FormSubmit";
+import useHandleActions from "@/hooks/useHandleAction";
+import FormMultiInput from "@/components/Forms/FormMultiInput";
 import { getOfflineAppointmentInitialValues } from "@/libs/initialValues";
 
-export default function UpdateOfflineAppointmentForm({ appointment }: { appointment: OfflineAppointment }) {
-    const { handleUpdate, loading } = useUpdateData(`/offlineAppointment/${appointment?.id}`, "mOfflineAppointments");
+export default function UpdateOfflineAppointmentForm({ appointment, action }: { appointment: OfflineAppointment } & ActionProps) {
+    const { isPending, handleSubmit } = useHandleActions({ action });
 
     return (
-        <Form initialValues={getOfflineAppointmentInitialValues(appointment)} onSubmit={handleUpdate}>
+        <Form initialValues={getOfflineAppointmentInitialValues(appointment)} onSubmit={handleSubmit}>
             <FormSelect items={[...getStatus("offline", true), "cancelled"]} name="status" label="Select Status" />
             <FormInput type="number" name="paymentAmount" label="Payment Amount" />
             <FormMultiInput name="issueDetected" label="Issue Didected" />
-            <FormSubmit loading={loading}>Submit</FormSubmit>
+            <FormSubmit loading={isPending}>Submit</FormSubmit>
         </Form>
     );
 }

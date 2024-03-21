@@ -1,26 +1,27 @@
 "use client";
 
+import { ActionProps } from "@/types";
 import Form from "@/components/Forms/Form";
-import FormInput from "../Forms/FormInput";
-import FormSelect from "../Forms/FormSelect";
-import FormSubmit from "../Forms/FormSubmit";
 import { getStatus } from "@/exports/constant";
-import FormDatePick from "../Forms/FormDatePick";
-import useUpdateData from "@/hooks/useUpdateData";
 import { OnlineAppointment } from "@prisma/client";
-import FormMultiInput from "../Forms/FormMultiInput";
+import FormInput from "@/components/Forms/FormInput";
+import FormSelect from "@/components/Forms/FormSelect";
+import FormSubmit from "@/components/Forms/FormSubmit";
+import useHandleActions from "@/hooks/useHandleAction";
+import FormDatePick from "@/components/Forms/FormDatePick";
+import FormMultiInput from "@/components/Forms/FormMultiInput";
 import { getOnlineAppointmentInitialValues } from "@/libs/initialValues";
 
-export default function UpdateOnlineAppointmentForm({ appointment }: { appointment: OnlineAppointment }) {
-    const { handleUpdate, loading } = useUpdateData(`/onlineAppointment/${appointment?.id}`, "mOnlineAppointments");
+export default function UpdateOnlineAppointmentForm({ appointment, action }: { appointment: OnlineAppointment } & ActionProps) {
+    const { isPending, handleSubmit } = useHandleActions({ action });
 
     return (
-        <Form initialValues={getOnlineAppointmentInitialValues(appointment)} onSubmit={handleUpdate}>
+        <Form initialValues={getOnlineAppointmentInitialValues(appointment)} onSubmit={handleSubmit}>
             <FormSelect items={[...getStatus("online", true), "cancelled"]} name="status" label="Select Status" />
             <FormInput type="number" name="paymentAmount" label="Payment Amount" />
             <FormMultiInput name="issueDetected" label="Issue Didected" />
             <FormDatePick name="deliveryDate" label="Delivery Date" />
-            <FormSubmit loading={loading}>Submit</FormSubmit>
+            <FormSubmit loading={isPending}>Submit</FormSubmit>
         </Form>
     );
 }

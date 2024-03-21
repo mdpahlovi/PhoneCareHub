@@ -1,21 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import { User } from "@/types/response";
+import { ActionProps } from "@/types";
+import { User } from "@prisma/client";
 import Form from "@/components/Forms/Form";
-import useUpdateData from "@/hooks/useUpdateData";
 import { Box, Stack, Button } from "@mui/material";
 import FormInput from "@/components/Forms/FormInput";
 import FormSubmit from "@/components/Forms/FormSubmit";
 import FormSelect from "@/components/Forms/FormSelect";
+import useHandleActions from "@/hooks/useHandleAction";
 import FormDatePick from "@/components/Forms/FormDatePick";
 import { getUserInitialValues } from "@/libs/initialValues";
 import FormProfileUpload from "@/components/Forms/FormProfileUpload";
 import ChangePasswordButton from "@/components/Dashboard/Components/ChangePasswordButton";
 
-export default function UserProfile({ profile }: { profile: User }) {
+export default function UserProfile({ profile, action }: { profile: User } & ActionProps) {
     const [editing, setEditing] = useState(false);
-    const { handleUpdate, loading } = useUpdateData("/profile");
+    const { isPending, handleSubmit } = useHandleActions({ action });
 
     return (
         <Box position="relative" my={3}>
@@ -25,7 +26,7 @@ export default function UserProfile({ profile }: { profile: User }) {
                 </Button>
                 <ChangePasswordButton id={profile.id} path="profile" />
             </Stack>
-            <Form initialValues={getUserInitialValues(profile)} onSubmit={handleUpdate}>
+            <Form initialValues={getUserInitialValues(profile)} onSubmit={handleSubmit}>
                 <FormProfileUpload image={profile.image} name="image" disabled={!editing} />
                 <FormInput name="name" label="Name" disabled={!editing} />
                 <Stack direction={{ sm: "row" }} gap={3}>
@@ -37,7 +38,7 @@ export default function UserProfile({ profile }: { profile: User }) {
                     <FormDatePick name="birthdate" label="BirthDate" disabled={!editing} />
                 </Stack>
                 <FormInput name="address" label="Address" disabled={!editing} />
-                {editing ? <FormSubmit loading={loading}>Submit</FormSubmit> : null}
+                {editing ? <FormSubmit loading={isPending}>Submit</FormSubmit> : null}
             </Form>
         </Box>
     );

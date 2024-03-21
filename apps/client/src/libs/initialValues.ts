@@ -1,6 +1,5 @@
 import dayjs from "dayjs";
-import { Admin, Blog, Service, User } from "@/types/response";
-import { OfflineAppointment, OnlineAppointment } from "@prisma/client";
+import { Admin, Blog, OfflineAppointment, OnlineAppointment, Service, User } from "@prisma/client";
 
 export const getUserInitialValues = (profile: User) => {
     const name = profile?.name ? profile.name : "";
