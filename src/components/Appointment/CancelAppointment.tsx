@@ -2,7 +2,7 @@
 
 import toast from "react-hot-toast";
 import { Button } from "@mui/material";
-import { handleCancel } from "@/app/dashboard/(Appointment)/actions";
+import { handleCancel } from "@/app/dashboard/(appointment)/actions";
 
 export default function CancelAppointment({ type, id }: { type: "online" | "offline"; id: string }) {
     const handleCancelAppointment = async () => {
