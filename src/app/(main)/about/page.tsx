@@ -11,7 +11,7 @@ export default async function AboutPage() {
     const admins = await prisma.admin.findMany({
         select: { image: true, name: true, title: true },
         take: 6,
-        orderBy: { createdAt: "asc" },
+        orderBy: { phone: "asc" },
     });
 
     return (
