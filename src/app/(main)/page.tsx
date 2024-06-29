@@ -10,11 +10,12 @@ import Partners from "@/components/Main/Home/Partners";
 import WhyChooseUs from "@/components/Main/Home/WhyChooseUs";
 import SeeAllButton from "@/components/Main/Home/SeeAllButton";
 import ServiceProcess from "@/components/Main/Home/ServiceProcess";
+import { getFaqs } from "@/libs/fetch";
 
 export default async function Home() {
     const services = await prisma.service.findMany({ select: { id: true, image: true, name: true, description: true }, take: 6 });
     const reviews = await prisma.review.findMany();
-    const faqs = await prisma.fAQs.findMany({ orderBy: { serial: "asc" } });
+    const faqs = await getFaqs();
     const blogs = await prisma.blog.findMany({
         select: { id: true, image: true, source: true, publishedDate: true, title: true, content: true },
         take: 2,
@@ -31,7 +32,7 @@ export default async function Home() {
             <WhyChooseUs />
             <Survey />
             <Reviews reviews={reviews} />
-            <FAQs faq={faqs} />
+            <FAQs faq={faqs.data} />
             <Section title="Our Latest Blogs">
                 <Blogs blogs={blogs} />
                 <SeeAllButton href="blog" />

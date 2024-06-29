@@ -3,7 +3,7 @@
 import { hash } from "bcrypt";
 import prisma from "@/libs/prisma";
 import { DeletePath } from "@/types";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function deleteAction(id: string, path: DeletePath) {
     switch (path) {
@@ -49,7 +49,7 @@ export async function deleteAction(id: string, path: DeletePath) {
             break;
         case "faq":
             await prisma.fAQs.delete({ where: { id } });
-            revalidatePath("/dashboard/faq");
+            revalidateTag("faqs");
             break;
     }
 }

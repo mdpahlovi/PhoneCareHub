@@ -1,11 +1,12 @@
 import Context from "./context";
-import prisma from "@/libs/prisma";
+import { getFaqs } from "@/libs/fetch";
+import { notFound } from "next/navigation";
 
 export const metadata = { title: "FAQs" };
-export const dynamic = "force-dynamic";
 
 export default async function FAQs() {
-    const faqs = await prisma.fAQs.findMany({ orderBy: { serial: "asc" } });
+    const data = await getFaqs();
+    if (!data || !data?.status) notFound();
 
-    return <Context faqs={faqs} />;
+    return <Context faqs={data.data} />;
 }

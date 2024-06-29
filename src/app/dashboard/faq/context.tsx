@@ -1,13 +1,15 @@
 "use client";
 
 import FAQCard from "./cards";
-import { useState } from "react";
 import { FAQs } from "@prisma/client";
+import { useEffect, useState } from "react";
 import { DndContext, DragEndEvent, UniqueIdentifier, closestCenter } from "@dnd-kit/core";
 import { SortableContext, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
 
-export default function Context({ faqs }: { faqs?: FAQs[] | null }) {
-    const [items, setItems] = useState(faqs ? faqs : []);
+export default function Context({ faqs }: { faqs: FAQs[] }) {
+    const [items, setItems] = useState<FAQs[]>([]);
+
+    useEffect(() => setItems(faqs), [faqs]);
 
     const handleDragEnd = ({ active, over }: DragEndEvent) => {
         if (active.id !== over?.id) {

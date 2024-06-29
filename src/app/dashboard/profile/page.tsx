@@ -1,12 +1,13 @@
 import prisma from "@/libs/prisma";
-import getUserId from "@/libs/getUserId";
+import { getProfile } from "@/libs/fetch";
+import { revalidateTag } from "next/cache";
+import { notFound } from "next/navigation";
 import { Admin, User } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import Banner from "@/components/Common/Banner";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import UserProfile from "@/components/Dashboard/Profile/UserProfile";
 import AdminProfile from "@/components/Dashboard/Profile/AdminProfile";
-import { revalidatePath } from "next/cache";
 
 export async function generateMetadata() {
     const session = await getServerSession(authOptions);
@@ -14,29 +15,22 @@ export async function generateMetadata() {
 }
 
 export default async function Profile() {
-    const userId = await getUserId();
-    const session = await getServerSession(authOptions);
-
-    let profile;
-    if (session?.user?.role === "user") {
-        profile = await prisma.user.findUnique({ where: { id: userId } });
-    } else {
-        profile = await prisma.admin.findUnique({ where: { id: userId } });
-    }
+    const profile = await getProfile();
+    if (!profile || !profile?.status) notFound();
 
     async function action(data: any) {
         "use server";
 
         try {
-            if (session?.user?.role === "user") {
-                await prisma.user.update({ where: { id: userId }, data });
+            if (profile?.data?.role === "user") {
+                await prisma.user.update({ where: { id: profile?.data?.id }, data });
 
-                revalidatePath("/dashboard/profile");
+                revalidateTag("profile");
                 return { success: true, message: "User Updated Successfully" };
             } else {
-                await prisma.admin.update({ where: { id: userId }, data });
+                await prisma.admin.update({ where: { id: profile?.data?.id }, data });
 
-                revalidatePath("/dashboard/profile");
+                revalidateTag("profile");
                 return { success: true, message: "Admin Updated Successfully" };
             }
         } catch (error) {
@@ -44,18 +38,18 @@ export default async function Profile() {
         }
     }
 
-    if (session?.user?.role === "user") {
+    if (profile?.data?.role === "user") {
         return (
             <>
                 <Banner>User Profile</Banner>
-                <UserProfile profile={profile as User} action={action} />
+                <UserProfile profile={profile?.data as User} action={action} />
             </>
         );
     } else {
         return (
             <>
                 <Banner>Admin Profile</Banner>
-                <AdminProfile profile={profile as Admin} action={action} />
+                <AdminProfile profile={profile?.data as Admin} action={action} />
             </>
         );
     }
