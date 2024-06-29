@@ -1,11 +1,10 @@
 import prisma from "@/libs/prisma";
-import { NextApiRequest } from "next";
 import { decode } from "next-auth/jwt";
-import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
+import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/options";
 
-export async function GET(req: NextApiRequest) {
+export async function GET(req: NextRequest) {
     try {
         const session = await getServerSession(authOptions);
         const token = await decode({ token: session?.token, secret: process.env.NEXTAUTH_SECRET });

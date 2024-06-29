@@ -1,8 +1,7 @@
 import prisma from "@/libs/prisma";
-import { NextApiRequest } from "next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextApiRequest) {
+export async function GET(req: NextRequest) {
     try {
         const faqs = await prisma.fAQs.findMany({ orderBy: { serial: "asc" } });
 
