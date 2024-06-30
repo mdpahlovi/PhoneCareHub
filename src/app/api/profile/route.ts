@@ -1,13 +1,12 @@
 import prisma from "@/libs/prisma";
-import { decode } from "next-auth/jwt";
-import { getServerSession } from "next-auth";
+import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "../auth/[...nextauth]/options";
 
 export async function GET(req: NextRequest) {
     try {
-        const session = await getServerSession(authOptions);
-        const token = await decode({ token: session?.token, secret: process.env.NEXTAUTH_SECRET });
+        const token = await getToken({ req });
+
+        return NextResponse.json({ status: false, message: token });
 
         if (token && token?.role && token?.sub) {
             if (token?.role === "user") {
