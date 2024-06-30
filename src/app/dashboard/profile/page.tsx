@@ -9,6 +9,8 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import UserProfile from "@/components/Dashboard/Profile/UserProfile";
 import AdminProfile from "@/components/Dashboard/Profile/AdminProfile";
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata() {
     const session = await getServerSession(authOptions);
     return { title: session?.user?.name };
