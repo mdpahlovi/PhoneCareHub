@@ -2,6 +2,8 @@ import Context from "./context";
 import { getFaqs } from "@/libs/fetch";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = { title: "FAQs" };
 
 export default async function FAQs() {
