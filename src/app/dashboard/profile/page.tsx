@@ -1,7 +1,5 @@
 import prisma from "@/libs/prisma";
-import { getProfile } from "@/libs/fetch";
-import { revalidateTag } from "next/cache";
-import { notFound } from "next/navigation";
+import getUserId from "@/libs/getUserId";
 import { Admin, User } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import Banner from "@/components/Common/Banner";
@@ -17,22 +15,25 @@ export async function generateMetadata() {
 }
 
 export default async function Profile() {
-    const profile = await getProfile();
-    if (!profile || !profile?.status) notFound();
+    const userId = await getUserId();
+    const session = await getServerSession(authOptions);
+
+    let profile;
+    if (session?.user?.role === "user") {
+        profile = await prisma.user.findUnique({ where: { id: userId } });
+    } else {
+        profile = await prisma.admin.findUnique({ where: { id: userId } });
+    }
 
     async function action(data: any) {
         "use server";
 
         try {
-            if (profile?.data?.role === "user") {
-                await prisma.user.update({ where: { id: profile?.data?.id }, data });
-
-                revalidateTag("profile");
+            if (session?.user?.role === "user") {
+                await prisma.user.update({ where: { id: userId }, data });
                 return { success: true, message: "User Updated Successfully" };
             } else {
-                await prisma.admin.update({ where: { id: profile?.data?.id }, data });
-
-                revalidateTag("profile");
+                await prisma.admin.update({ where: { id: userId }, data });
                 return { success: true, message: "Admin Updated Successfully" };
             }
         } catch (error) {
@@ -40,18 +41,18 @@ export default async function Profile() {
         }
     }
 
-    if (profile?.data?.role === "user") {
+    if (session?.user?.role === "user") {
         return (
             <>
                 <Banner>User Profile</Banner>
-                <UserProfile profile={profile?.data as User} action={action} />
+                <UserProfile profile={profile as User} action={action} />
             </>
         );
     } else {
         return (
             <>
                 <Banner>Admin Profile</Banner>
-                <AdminProfile profile={profile?.data as Admin} action={action} />
+                <AdminProfile profile={profile as Admin} action={action} />
             </>
         );
     }

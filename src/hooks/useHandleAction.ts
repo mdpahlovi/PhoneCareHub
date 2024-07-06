@@ -4,7 +4,7 @@ import { useTransition } from "react";
 import { FormikHelpers } from "formik";
 import { useRouter } from "next/navigation";
 
-export default function useHandleAction({ action }: ActionProps) {
+export default function useHandleAction({ action, reset = true }: ActionProps) {
     const { push } = useRouter();
     const [isPending, startTransition] = useTransition();
 
@@ -12,7 +12,7 @@ export default function useHandleAction({ action }: ActionProps) {
         startTransition(async () => {
             await action(values).then(({ success, message, redirect }) => {
                 if (success) {
-                    helpers.resetForm();
+                    reset ? helpers.resetForm() : null;
                     toast.success(message);
                     redirect ? push(redirect) : null;
                 } else {

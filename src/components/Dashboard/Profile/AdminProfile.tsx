@@ -14,7 +14,7 @@ import ChangePasswordButton from "@/components/Dashboard/Components/ChangePasswo
 
 export default function AdminProfile({ profile, action }: { profile: Admin } & ActionProps) {
     const [editing, setEditing] = useState(false);
-    const { isPending, handleSubmit } = useHandleActions({ action });
+    const { isPending, handleSubmit } = useHandleActions({ action, reset: false });
 
     return (
         <Box position="relative" my={3}>
