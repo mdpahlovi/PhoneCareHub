@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# PhoneCareHub
 
-First, run the development server:
+Phone repairing service management website with two seamless booking systems for users.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Developed search, filter, and pagination features to ensure the best browsing experience for users.
+- Integrate Stripe payment gateway to ensure secure transactions for an online service.
+- Developed a role-based permission system for securely managing users, services, and bookings.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+**Client:** TypeScript, Next.js, Material UI, Zustand, Stripe, Cloudinary, PostgreSQL, Prisma.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## User Credentials
 
-## Deploy on Vercel
+To run this project, you will need to use the following credentials.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`email:superadmin@gmail.com`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+`email:admin@gmail.com`
+
+`password:12345678`
+## Screenshots
+
+![App Screenshot](https://res.cloudinary.com/dikezpkeg/image/upload/f_auto,q_auto/v1/Github%20Screenshot/dzmk6yiqnrmwjudjn7mw)
