@@ -10,7 +10,7 @@ import FormDatePick from "@/components/Forms/FormDatePick";
 import createBlogSchema from "@/validations/createBlogSchema";
 import FormImageUpload from "@/components/Forms/FormImageUpload";
 
-const initialValues = { image: "", title: "", content: "", source: "", publishedDate: "" };
+const initialValues = { image: "", title: "", content: "", source: "", publishedDate: null };
 
 export default function CreateBlogForm({ action }: ActionProps) {
     const { isPending, handleSubmit } = useHandleActions({ action });
