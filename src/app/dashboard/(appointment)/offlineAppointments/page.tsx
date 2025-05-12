@@ -1,14 +1,15 @@
-/* eslint-disable react/jsx-key */
-import prisma from "@/libs/prisma";
-import { Prisma } from "@prisma/client";
-import getUserId from "@/libs/getUserId";
+import AppointmentTabs from "@/components/Appointment/AppointmentTabs";
 import Banner from "@/components/Common/Banner";
 import TabContext from "@/components/Common/TabContext";
-import AppointmentTabs from "@/components/Appointment/AppointmentTabs";
+import getUserId from "@/libs/getUserId";
+import prisma from "@/libs/prisma";
+import { Prisma } from "@prisma/client";
 
 export const metadata = { title: "Offline Appointment" };
+type PageProps = Promise<{ searchParams: { status?: string } }>;
 
-export default async function OfflineAppointment({ searchParams }: { searchParams: { status?: string } }) {
+export default async function OfflineAppointment(props: PageProps) {
+    const { searchParams } = await props;
     const userId = await getUserId();
 
     const status = searchParams?.status ? searchParams.status : "appointments";

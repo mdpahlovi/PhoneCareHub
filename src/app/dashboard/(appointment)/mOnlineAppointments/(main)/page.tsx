@@ -1,15 +1,18 @@
-import prisma from "@/libs/prisma";
-import Table from "@/components/Table/Table";
-import { OnlineAppointmentStatus } from "@prisma/client";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import DetailButton from "@/components/Dashboard/Components/DetailButton";
-import { Avatar, TableBody, TableCell, TableRow, Typography, Stack, Box } from "@mui/material";
+import Table from "@/components/Table/Table";
+import prisma from "@/libs/prisma";
+import { Avatar, Box, Stack, TableBody, TableCell, TableRow, Typography } from "@mui/material";
+import { OnlineAppointmentStatus } from "@prisma/client";
 
 export const metadata = { title: "Manage Online Appointment" };
 const columns = ["User", "Email", "Device Info", "Issue Details", "See Detail", "Delete"];
-type SearchParams = { searchParams: { search?: string; page?: string; size?: string; status?: OnlineAppointmentStatus; email?: string } };
+type PageProps = Promise<{
+    searchParams: { search?: string; page?: string; size?: string; status?: OnlineAppointmentStatus; email?: string };
+}>;
 
-export default async function ManageOnlineAppointment({ searchParams }: SearchParams) {
+export default async function ManageOnlineAppointment(props: PageProps) {
+    const { searchParams } = await props;
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const status = searchParams?.status ? searchParams.status : "pending";

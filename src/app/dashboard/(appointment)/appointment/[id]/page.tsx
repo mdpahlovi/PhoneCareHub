@@ -1,18 +1,19 @@
-import prisma from "@/libs/prisma";
-import getUserId from "@/libs/getUserId";
-import { notFound } from "next/navigation";
-import getDateRange from "@/libs/getDateRange";
 import CurrentStatus from "@/components/Appointment/CurrentStatus";
 import ReviewComponent from "@/components/Appointment/ReviewComponent";
-import ReviewButton from "@/components/Dashboard/Components/ReviewButton";
-import PaymentButton from "@/components/Dashboard/Components/PaymentButton";
 import CourierButton from "@/components/Dashboard/Components/CourierButton";
-import { Stack, Divider, Typography, ListItemText, List, ListItem, Box } from "@mui/material";
+import PaymentButton from "@/components/Dashboard/Components/PaymentButton";
+import ReviewButton from "@/components/Dashboard/Components/ReviewButton";
+import getDateRange from "@/libs/getDateRange";
+import getUserId from "@/libs/getUserId";
+import prisma from "@/libs/prisma";
+import { Box, Divider, List, ListItem, ListItemText, Stack, Typography } from "@mui/material";
+import { notFound } from "next/navigation";
 
 export const metadata = { title: "Appointment Details" };
-type AppointmentDetailProps = { params: { id: string }; searchParams: { type?: "online" | "offline" } };
+type PageProps = Promise<{ params: { id: string }; searchParams: { type?: "online" | "offline" } }>;
 
-export default async function AppointmentDetails({ params, searchParams }: AppointmentDetailProps) {
+export default async function AppointmentDetails(props: PageProps) {
+    const { params, searchParams } = await props;
     const userId = await getUserId();
 
     let appointment;

@@ -1,16 +1,19 @@
-import dayjs from "dayjs";
-import prisma from "@/libs/prisma";
-import Table from "@/components/Table/Table";
-import { OfflineAppointmentStatus } from "@prisma/client";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import DetailButton from "@/components/Dashboard/Components/DetailButton";
+import Table from "@/components/Table/Table";
+import prisma from "@/libs/prisma";
 import { Avatar, Box, Stack, TableBody, TableCell, TableRow, Typography } from "@mui/material";
+import { OfflineAppointmentStatus } from "@prisma/client";
+import dayjs from "dayjs";
 
 export const metadata = { title: "Manage Offline Appointment" };
 const columns = ["User", "Email", "Device Info", "Issue Details", "Appointment Date", "See Detail", "Delete"];
-type SearchParams = { searchParams: { search?: string; page?: string; size?: string; status?: OfflineAppointmentStatus; email?: string } };
+type PageProps = Promise<{
+    searchParams: { search?: string; page?: string; size?: string; status?: OfflineAppointmentStatus; email?: string };
+}>;
 
-export default async function ManageOfflineAppointment({ searchParams }: SearchParams) {
+export default async function ManageOfflineAppointment(props: PageProps) {
+    const { searchParams } = await props;
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const status = searchParams?.status ? searchParams.status : "pending";

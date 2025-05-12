@@ -1,13 +1,15 @@
-/* eslint-disable react/jsx-key */
+import OfflineAppointmentForm from "@/components/Appointment/OfflineAppointmentForm";
+import OnlineAppointmentForm from "@/components/Appointment/OnlineAppointmentForm";
+import Banner from "@/components/Common/Banner";
+import TabContext from "@/components/Common/TabContext";
 import prisma from "@/libs/prisma";
 import { Container } from "@mui/material";
 import { notFound } from "next/navigation";
-import Banner from "@/components/Common/Banner";
-import TabContext from "@/components/Common/TabContext";
-import OnlineAppointmentForm from "@/components/Appointment/OnlineAppointmentForm";
-import OfflineAppointmentForm from "@/components/Appointment/OfflineAppointmentForm";
 
-export default async function Appointment({ params, searchParams }: { params: { id: string }; searchParams: { type: string } }) {
+type PageProps = Promise<{ params: { id: string }; searchParams: { type: string } }>;
+
+export default async function Appointment(props: PageProps) {
+    const { params, searchParams } = await props;
     const value = searchParams?.type ? searchParams.type : "online";
     const service = await prisma.service.findUnique({ where: { id: params?.id }, select: { id: true, name: true } });
     if (!service) notFound();

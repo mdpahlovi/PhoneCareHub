@@ -1,8 +1,11 @@
+import UpdateOnlineAppointmentForm from "@/components/Appointment/UpdateOnlineAppointmentForm";
 import prisma from "@/libs/prisma";
 import { notFound } from "next/navigation";
-import UpdateOnlineAppointmentForm from "@/components/Appointment/UpdateOnlineAppointmentForm";
 
-export default async function SetOnlineAppointment({ params }: { params: { id: string } }) {
+type PageProps = Promise<{ params: { id: string } }>;
+
+export default async function SetOnlineAppointment(props: PageProps) {
+    const { params } = await props;
     const appointment = await prisma.onlineAppointment.findUnique({ where: { id: params?.id } });
     if (!appointment) notFound();
 

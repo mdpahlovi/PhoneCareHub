@@ -1,10 +1,10 @@
 "use client";
 
-import { Review } from "@prisma/client";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteButton from "../Dashboard/Components/DeleteButton";
 import useReviewDialogStore from "@/hooks/zustand/useReviewDialogStore";
+import EditIcon from "@mui/icons-material/Edit";
 import { Card, CardContent, Grid, IconButton, Rating, Stack, Typography } from "@mui/material";
+import { Review } from "@prisma/client";
+import DeleteButton from "../Dashboard/Components/DeleteButton";
 
 export default function ReviewComponent({ reviews }: { reviews: Review[] }) {
     const { onEdit } = useReviewDialogStore();
@@ -17,7 +17,7 @@ export default function ReviewComponent({ reviews }: { reviews: Review[] }) {
                 const { id, rating, comment } = review;
 
                 return (
-                    <Grid item key={id} xs={4}>
+                    <Grid size={{ xs: 4 }} key={id}>
                         <Card>
                             <CardContent>
                                 <Stack direction="row" justifyContent="space-between" alignItems="center">

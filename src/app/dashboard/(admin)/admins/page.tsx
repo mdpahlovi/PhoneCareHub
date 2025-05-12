@@ -1,15 +1,17 @@
-import prisma from "@/libs/prisma";
-import { Prisma } from "@prisma/client";
-import Table from "@/components/Table/Table";
-import { searchQuery } from "@/libs/searchQuery";
-import { TableRow, TableCell, TableBody, Avatar } from "@mui/material";
-import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
 import ChangePasswordButton from "@/components/Dashboard/Components/ChangePasswordButton";
+import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
+import Table from "@/components/Table/Table";
+import prisma from "@/libs/prisma";
+import { searchQuery } from "@/libs/searchQuery";
+import { Avatar, TableBody, TableCell, TableRow } from "@mui/material";
+import { Prisma } from "@prisma/client";
 
 export const metadata = { title: "All Admin" };
 const columns = ["Image", "Name", "Email", "Phone", "Change Password", "Delete"];
+type PageProps = Promise<{ searchParams: { search?: string; page?: string; size?: string } }>;
 
-export default async function ManageAdmins({ searchParams }: { searchParams: { search?: string; page?: string; size?: string } }) {
+export default async function ManageAdmins(props: PageProps) {
+    const { searchParams } = await props;
     const search = searchParams?.search ? searchParams.search : "";
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const size = Number(searchParams?.size ? searchParams.size : 5);

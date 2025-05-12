@@ -1,10 +1,12 @@
+import EditServiceForm from "@/components/Dashboard/EditService/EditServiceForm";
 import prisma from "@/libs/prisma";
 import { notFound } from "next/navigation";
-import EditServiceForm from "@/components/Dashboard/EditService/EditServiceForm";
 
 export const metadata = { title: "Edit Service" };
+type PageProps = Promise<{ params: { id: string } }>;
 
-export default async function EditService({ params }: { params: { id: string } }) {
+export default async function EditService(props: PageProps) {
+    const { params } = await props;
     const service = await prisma.service.findUnique({ where: { id: params?.id } });
     if (!service) notFound();
 

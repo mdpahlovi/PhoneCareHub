@@ -1,12 +1,15 @@
-import prisma from "@/libs/prisma";
-import { Prisma } from "@prisma/client";
-import { searchQuery } from "@/libs/searchQuery";
-import Services from "@/components/Main/Services";
 import Pagination from "@/components/Common/Pagination";
+import Services from "@/components/Main/Services";
+import prisma from "@/libs/prisma";
+import { searchQuery } from "@/libs/searchQuery";
+import { Prisma } from "@prisma/client";
 
 export const metadata = { title: "Services" };
+type PageProps = Promise<{ searchParams: { page?: string; search?: string } }>;
 
-export default async function ServicePage({ searchParams }: { searchParams: { page?: string; search?: string } }) {
+export default async function ServicePage(props: PageProps) {
+    const { searchParams } = await props;
+
     const search = searchParams?.search ? searchParams.search : "";
     const page = Number(searchParams?.page ? searchParams.page : 1);
 

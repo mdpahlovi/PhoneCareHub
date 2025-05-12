@@ -1,14 +1,14 @@
-import dayjs from "dayjs";
 import { StyledTypography } from "@/components/Common/StyledTypography";
 import { Button, Card, CardContent, CardMedia, Chip, Grid, Typography } from "@mui/material";
+import dayjs from "dayjs";
 
 type Blog = { id: string; image: string; source: string; publishedDate: Date; title: string; content: string };
 
 export default function Blogs({ blogs }: { blogs: Blog[] }) {
     return (
         <Grid container columns={{ xs: 4, md: 8 }} spacing={3}>
-            {blogs.map(({ id, image, source, publishedDate, title, content }, idx) => (
-                <Grid item key={id} xs={4}>
+            {blogs.map(({ id, image, source, publishedDate, title, content }) => (
+                <Grid size={{ xs: 4 }} key={id}>
                     <Card sx={{ position: "relative", display: "flex", alignItems: "center" }}>
                         <CardMedia
                             component="img"

@@ -1,8 +1,11 @@
-import Link from "next/link";
-import Image from "next/image";
 import { Button, Stack, Typography } from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
 
-export default function AuthError({ searchParams }: { searchParams: { error?: string } }) {
+type PageProps = Promise<{ searchParams: { error?: string } }>;
+
+export default async function AuthError(props: PageProps) {
+    const { searchParams } = await props;
     return (
         <Stack style={{ minHeight: "100vh" }} justifyContent="center" alignItems="center">
             <Image src="/images/errors/auth-error.png" alt="" width={384} height={384} />

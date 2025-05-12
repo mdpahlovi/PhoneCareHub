@@ -1,13 +1,15 @@
-import prisma from "@/libs/prisma";
-import Table from "@/components/Table/Table";
-import EditButton from "@/components/Dashboard/Components/EditButton";
-import { Avatar, TableBody, TableCell, TableRow } from "@mui/material";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
+import EditButton from "@/components/Dashboard/Components/EditButton";
+import Table from "@/components/Table/Table";
+import prisma from "@/libs/prisma";
+import { Avatar, TableBody, TableCell, TableRow } from "@mui/material";
 
 export const metadata = { title: "All Service" };
 const columns = ["Image", "Name", "Description", "Estimate Time", "Edit", "Delete"];
+type PageProps = Promise<{ searchParams: { page?: string; size?: string } }>;
 
-export default async function ManageService({ searchParams }: { searchParams: { page?: string; size?: string } }) {
+export default async function ManageService(props: PageProps) {
+    const { searchParams } = await props;
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
 

@@ -1,9 +1,9 @@
-import Image from "next/image";
-import prisma from "@/libs/prisma";
-import { StyledAbout } from "./client";
-import { threeCol } from "@/exports/constant";
 import Section from "@/components/Common/Section";
+import { threeCol } from "@/exports/constant";
+import prisma from "@/libs/prisma";
 import { Box, Card, CardContent, Grid, Stack, Typography } from "@mui/material";
+import Image from "next/image";
+import { StyledAbout } from "./client";
 
 export const metadata = { title: "About" };
 
@@ -40,7 +40,7 @@ export default async function AboutPage() {
             <Section title="Our Teams">
                 <Grid container columns={threeCol} spacing={3}>
                     {admins.map(({ image, name, title }, idx) => (
-                        <Grid item key={idx} xs={4}>
+                        <Grid size={{ xs: 4 }} key={idx}>
                             <Card>
                                 <CardContent
                                     sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}

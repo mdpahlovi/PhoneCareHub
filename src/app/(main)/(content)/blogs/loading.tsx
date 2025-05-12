@@ -4,7 +4,7 @@ export default function BlogsLoading() {
     return (
         <Grid container columns={{ xs: 4, md: 8 }} spacing={3}>
             {[...Array(4)].map((_, idx) => (
-                <Grid item key={idx} xs={4}>
+                <Grid size={{ xs: 4 }} key={idx}>
                     <Card sx={{ position: "relative", display: "flex", alignItems: "center" }}>
                         <Skeleton
                             variant="rectangular"

@@ -1,15 +1,15 @@
-import prisma from "@/libs/prisma";
-import Blogs from "@/components/Main/Blogs";
-import Hero from "@/components/Main/Home/Hero";
-import FAQs from "@/components/Main/Home/FAQs";
 import Section from "@/components/Common/Section";
-import Services from "@/components/Main/Services";
-import Survey from "@/components/Main/Home/Survey";
-import Reviews from "@/components/Main/Home/Reviews";
+import Blogs from "@/components/Main/Blogs";
+import FAQs from "@/components/Main/Home/FAQs";
+import Hero from "@/components/Main/Home/Hero";
 import Partners from "@/components/Main/Home/Partners";
-import WhyChooseUs from "@/components/Main/Home/WhyChooseUs";
+import Reviews from "@/components/Main/Home/Reviews";
 import SeeAllButton from "@/components/Main/Home/SeeAllButton";
 import ServiceProcess from "@/components/Main/Home/ServiceProcess";
+import Survey from "@/components/Main/Home/Survey";
+import WhyChooseUs from "@/components/Main/Home/WhyChooseUs";
+import Services from "@/components/Main/Services";
+import prisma from "@/libs/prisma";
 
 export default async function Home() {
     const services = await prisma.service.findMany({ select: { id: true, image: true, name: true, description: true }, take: 6 });

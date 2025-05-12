@@ -1,12 +1,12 @@
-import { threeCol } from "@/exports/constant";
 import { StyledTypography } from "@/components/Common/StyledTypography";
+import { threeCol } from "@/exports/constant";
 import { Card, CardActions, CardContent, Grid, Skeleton, Typography } from "@mui/material";
 
 export default function ServicesLoading() {
     return (
         <Grid container columns={threeCol} spacing={3}>
             {[...Array(6)].map((_, idx) => (
-                <Grid item key={idx} xs={4}>
+                <Grid size={{ xs: 4 }} key={idx}>
                     <Card>
                         <Skeleton variant="rectangular" height={160} />
                         <CardContent>

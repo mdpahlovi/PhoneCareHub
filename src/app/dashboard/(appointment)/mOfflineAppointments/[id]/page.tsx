@@ -1,8 +1,11 @@
+import UpdateOfflineAppointmentForm from "@/components/Appointment/UpdateOfflineAppointmentForm";
 import prisma from "@/libs/prisma";
 import { notFound } from "next/navigation";
-import UpdateOfflineAppointmentForm from "@/components/Appointment/UpdateOfflineAppointmentForm";
 
-export default async function SetOfflineAppointment({ params }: { params: { id: string } }) {
+type PageProps = Promise<{ params: { id: string } }>;
+
+export default async function SetOfflineAppointment(props: PageProps) {
+    const { params } = await props;
     const appointment = await prisma.offlineAppointment.findUnique({ where: { id: params?.id } });
     if (!appointment) notFound();
 

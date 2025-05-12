@@ -1,14 +1,16 @@
-import dayjs from "dayjs";
-import prisma from "@/libs/prisma";
-import Table from "@/components/Table/Table";
-import EditButton from "@/components/Dashboard/Components/EditButton";
-import { Avatar, TableBody, TableCell, TableRow } from "@mui/material";
 import DeleteButton from "@/components/Dashboard/Components/DeleteButton";
+import EditButton from "@/components/Dashboard/Components/EditButton";
+import Table from "@/components/Table/Table";
+import prisma from "@/libs/prisma";
+import { Avatar, TableBody, TableCell, TableRow } from "@mui/material";
+import dayjs from "dayjs";
 
 export const metadata = { title: "All Blog" };
 const columns = ["Image", "Title", "Content", "Source", "Published Date", "Edit", "Delete"];
+type PageProps = Promise<{ searchParams: { page?: string; size?: string } }>;
 
-export default async function Blogs({ searchParams }: { searchParams: { page?: string; size?: string } }) {
+export default async function Blogs(props: PageProps) {
+    const { searchParams } = await props;
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
 

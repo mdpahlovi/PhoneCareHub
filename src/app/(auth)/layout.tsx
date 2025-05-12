@@ -1,8 +1,8 @@
-import Image from "next/image";
-import { Copyright } from "@/exports/mui";
-import { Divider, Grid } from "@mui/material";
 import LayoutTitle from "@/components/Auth/LayoutTitle";
 import ThemedLogo from "@/components/Common/ThemedLogo";
+import { Copyright } from "@/exports/mui";
+import { Divider, Grid } from "@mui/material";
+import Image from "next/image";
 
 export default function AuthLayout({ children }: React.PropsWithChildren) {
     const gap = { xs: 3, sm: 8, md: 4, lg: 6 };
@@ -10,12 +10,12 @@ export default function AuthLayout({ children }: React.PropsWithChildren) {
 
     return (
         <Grid container alignItems="center" flexWrap="nowrap" gap={gap} px={gap} sx={{ minHeight: "100vh" }}>
-            <Grid md={5} lg={6} display={mdHidden} direction="column" alignItems="center" gap={4}>
+            <Grid size={{ md: 5, lg: 6 }} display={mdHidden} direction="column" alignItems="center" gap={4}>
                 <LayoutTitle />
                 <Image src="/images/auth.png" alt="" width={480} height={360} />
             </Grid>
             <Divider orientation="vertical" flexItem sx={{ display: mdHidden }} />
-            <Grid xs={12} md={7} lg={6} my={4} display="flex" direction="column" gap={4}>
+            <Grid size={{ xs: 12, md: 7, lg: 6 }} my={4} display="flex" direction="column" gap={4}>
                 <ThemedLogo />
                 {children}
                 <Copyright />

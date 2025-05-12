@@ -1,11 +1,11 @@
-import CurrentStatus from "./CurrentStatus";
-import ActionButtons from "./ActionButtons";
-import CancelAppointment from "./CancelAppointment";
-import ReviewButton from "../Dashboard/Components/ReviewButton";
+import { Card, CardContent, Grid, Stack, Typography } from "@mui/material";
+import { OfflineAppointment, OnlineAppointment } from "@prisma/client";
 import CourierButton from "../Dashboard/Components/CourierButton";
 import PaymentButton from "../Dashboard/Components/PaymentButton";
-import { OnlineAppointment, OfflineAppointment } from "@prisma/client";
-import { Card, CardContent, Grid, Stack, Typography } from "@mui/material";
+import ReviewButton from "../Dashboard/Components/ReviewButton";
+import ActionButtons from "./ActionButtons";
+import CancelAppointment from "./CancelAppointment";
+import CurrentStatus from "./CurrentStatus";
 
 type AppointmentTabsProps = {
     tab: string;
@@ -17,7 +17,7 @@ export default function AppointmentTabs({ type, tab, appointment }: AppointmentT
     return (
         <Grid container columns={{ xs: 4, md: 8 }} spacing={3}>
             {appointment.map(({ id, userId, serviceId, service, deviceInfo, issueDescription, status }) => (
-                <Grid item key={id} xs={4}>
+                <Grid size={{ xs: 4 }} key={id}>
                     <Card>
                         <CardContent>
                             <Stack direction="row" alignItems="center" justifyContent="space-between" gap={3}>
