@@ -6,10 +6,12 @@ import prisma from "@/libs/prisma";
 import { Container } from "@mui/material";
 import { notFound } from "next/navigation";
 
-type PageProps = Promise<{ params: { id: string }; searchParams: { type: string } }>;
+type PageProps = { params: Promise<{ id: string }>; searchParams: Promise<{ type: string }> };
 
 export default async function Appointment(props: PageProps) {
-    const { params, searchParams } = await props;
+    const params = await props.params;
+    const searchParams = await props.searchParams;
+
     const value = searchParams?.type ? searchParams.type : "online";
     const service = await prisma.service.findUnique({ where: { id: params?.id }, select: { id: true, name: true } });
     if (!service) notFound();
@@ -38,7 +40,10 @@ export default async function Appointment(props: PageProps) {
                     query="type"
                     value={value}
                     values={["online", "offline"]}
-                    tabs={[<OnlineAppointmentForm action={action} />, <OfflineAppointmentForm action={action} />]}
+                    tabs={[
+                        <OnlineAppointmentForm key="online" action={action} />,
+                        <OfflineAppointmentForm key="offline" action={action} />,
+                    ]}
                 />
             </Container>
         </>

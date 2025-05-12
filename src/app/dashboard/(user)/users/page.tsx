@@ -9,10 +9,11 @@ import dayjs from "dayjs";
 
 export const metadata = { title: "All User" };
 const columns = ["Image", "Name", "Email", "BirthDate", "Gender", "Phone", "Change Password", "Delete"];
-type PageProps = Promise<{ searchParams: { search?: string; page?: string; size?: string } }>;
+type PageProps = { searchParams: Promise<{ search?: string; page?: string; size?: string }> };
 
 export default async function ManageUsers(props: PageProps) {
-    const { searchParams } = await props;
+    const searchParams = await props.searchParams;
+
     const search = searchParams?.search ? searchParams.search : "";
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const size = Number(searchParams?.size ? searchParams.size : 5);

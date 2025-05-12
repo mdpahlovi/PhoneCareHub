@@ -7,10 +7,11 @@ import dayjs from "dayjs";
 
 export const metadata = { title: "All Blog" };
 const columns = ["Image", "Title", "Content", "Source", "Published Date", "Edit", "Delete"];
-type PageProps = Promise<{ searchParams: { page?: string; size?: string } }>;
+type PageProps = { searchParams: Promise<{ page?: string; size?: string }> };
 
 export default async function Blogs(props: PageProps) {
-    const { searchParams } = await props;
+    const searchParams = await props.searchParams;
+
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
 

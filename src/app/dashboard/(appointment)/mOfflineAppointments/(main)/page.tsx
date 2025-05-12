@@ -8,12 +8,13 @@ import dayjs from "dayjs";
 
 export const metadata = { title: "Manage Offline Appointment" };
 const columns = ["User", "Email", "Device Info", "Issue Details", "Appointment Date", "See Detail", "Delete"];
-type PageProps = Promise<{
-    searchParams: { search?: string; page?: string; size?: string; status?: OfflineAppointmentStatus; email?: string };
-}>;
+type PageProps = {
+    searchParams: Promise<{ search?: string; page?: string; size?: string; status?: OfflineAppointmentStatus; email?: string }>;
+};
 
 export default async function ManageOfflineAppointment(props: PageProps) {
-    const { searchParams } = await props;
+    const searchParams = await props.searchParams;
+
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const status = searchParams?.status ? searchParams.status : "pending";

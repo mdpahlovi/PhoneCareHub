@@ -4,16 +4,18 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import { Button, Paper, Typography } from "@mui/material";
 import Link from "next/link";
 
-type PageProps = Promise<{ params: { id: string } }>;
+type PageProps = { params: Promise<{ id: string }> };
 
 export default async function PaymentCancel(props: PageProps) {
-    const { params } = await props;
+    const params = await props.params;
+
     const appointment = await prisma.onlineAppointment.findUnique({
         where: { id: params?.id },
         select: { service: { select: { name: true } }, issueDescription: true, issueDetected: true },
     });
 
     const { service, issueDescription, issueDetected } = appointment!;
+
     return (
         <>
             <Banner>Payment Canceled</Banner>

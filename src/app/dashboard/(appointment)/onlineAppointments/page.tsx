@@ -6,10 +6,11 @@ import prisma from "@/libs/prisma";
 import { Prisma } from "@prisma/client";
 
 export const metadata = { title: "Online Appointment" };
-type PageProps = Promise<{ searchParams: { status?: string } }>;
+type PageProps = { searchParams: Promise<{ status?: string }> };
 
 export default async function OnlineAppointment(props: PageProps) {
-    const { searchParams } = await props;
+    const searchParams = await props.searchParams;
+
     const userId = await getUserId();
 
     const status = searchParams?.status ? searchParams.status : "appointments";
@@ -26,9 +27,9 @@ export default async function OnlineAppointment(props: PageProps) {
                 value={status}
                 values={["appointments", "completed", "cancelled"]}
                 tabs={[
-                    <AppointmentTabs type="online" tab={status} appointment={onlineAppointments} />,
-                    <AppointmentTabs type="online" tab={status} appointment={onlineAppointments} />,
-                    <AppointmentTabs type="online" tab={status} appointment={onlineAppointments} />,
+                    <AppointmentTabs key="appointments" type="online" tab={status} appointment={onlineAppointments} />,
+                    <AppointmentTabs key="completed" type="online" tab={status} appointment={onlineAppointments} />,
+                    <AppointmentTabs key="cancelled" type="online" tab={status} appointment={onlineAppointments} />,
                 ]}
             />
         </>

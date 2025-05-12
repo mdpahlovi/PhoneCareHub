@@ -3,10 +3,11 @@ import prisma from "@/libs/prisma";
 import { notFound } from "next/navigation";
 
 export const metadata = { title: "Edit Blog" };
-type PageProps = Promise<{ params: { id: string } }>;
+type PageProps = { params: Promise<{ id: string }> };
 
 export default async function EditBlog(props: PageProps) {
-    const { params } = await props;
+    const params = await props.params;
+
     const blog = await prisma.blog.findUnique({ where: { id: params?.id } });
     if (!blog) notFound();
 

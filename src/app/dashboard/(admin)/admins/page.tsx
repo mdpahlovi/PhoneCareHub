@@ -8,10 +8,11 @@ import { Prisma } from "@prisma/client";
 
 export const metadata = { title: "All Admin" };
 const columns = ["Image", "Name", "Email", "Phone", "Change Password", "Delete"];
-type PageProps = Promise<{ searchParams: { search?: string; page?: string; size?: string } }>;
+type PageProps = { searchParams: Promise<{ search?: string; page?: string; size?: string }> };
 
 export default async function ManageAdmins(props: PageProps) {
-    const { searchParams } = await props;
+    const searchParams = await props.searchParams;
+
     const search = searchParams?.search ? searchParams.search : "";
     const page = Number(searchParams?.page ? searchParams.page : 0);
     const size = Number(searchParams?.size ? searchParams.size : 5);

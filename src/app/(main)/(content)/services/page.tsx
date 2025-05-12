@@ -5,10 +5,10 @@ import { searchQuery } from "@/libs/searchQuery";
 import { Prisma } from "@prisma/client";
 
 export const metadata = { title: "Services" };
-type PageProps = Promise<{ searchParams: { page?: string; search?: string } }>;
+type PageProps = { searchParams: Promise<{ page?: string; search?: string }> };
 
 export default async function ServicePage(props: PageProps) {
-    const { searchParams } = await props;
+    const searchParams = await props.searchParams;
 
     const search = searchParams?.search ? searchParams.search : "";
     const page = Number(searchParams?.page ? searchParams.page : 1);

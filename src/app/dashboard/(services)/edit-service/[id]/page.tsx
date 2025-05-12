@@ -3,10 +3,11 @@ import prisma from "@/libs/prisma";
 import { notFound } from "next/navigation";
 
 export const metadata = { title: "Edit Service" };
-type PageProps = Promise<{ params: { id: string } }>;
+type PageProps = { params: Promise<{ id: string }> };
 
 export default async function EditService(props: PageProps) {
-    const { params } = await props;
+    const params = await props.params;
+
     const service = await prisma.service.findUnique({ where: { id: params?.id } });
     if (!service) notFound();
 

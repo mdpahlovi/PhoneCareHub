@@ -10,10 +10,12 @@ import { Box, Divider, List, ListItem, ListItemText, Stack, Typography } from "@
 import { notFound } from "next/navigation";
 
 export const metadata = { title: "Appointment Details" };
-type PageProps = Promise<{ params: { id: string }; searchParams: { type?: "online" | "offline" } }>;
+type PageProps = { params: Promise<{ id: string }>; searchParams: Promise<{ type?: "online" | "offline" }> };
 
 export default async function AppointmentDetails(props: PageProps) {
-    const { params, searchParams } = await props;
+    const params = await props.params;
+    const searchParams = await props.searchParams;
+
     const userId = await getUserId();
 
     let appointment;

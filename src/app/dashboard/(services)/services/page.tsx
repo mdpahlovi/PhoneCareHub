@@ -6,10 +6,11 @@ import { Avatar, TableBody, TableCell, TableRow } from "@mui/material";
 
 export const metadata = { title: "All Service" };
 const columns = ["Image", "Name", "Description", "Estimate Time", "Edit", "Delete"];
-type PageProps = Promise<{ searchParams: { page?: string; size?: string } }>;
+type PageProps = { searchParams: Promise<{ page?: string; size?: string }> };
 
 export default async function ManageService(props: PageProps) {
-    const { searchParams } = await props;
+    const searchParams = await props.searchParams;
+
     const size = Number(searchParams?.size ? searchParams.size : 5);
     const page = Number(searchParams?.page ? searchParams.page : 0);
 
